@@ -545,7 +545,7 @@ function locate() {
 // ===== Démarrage =====
 async function start() {
   initMap();
-  const mail = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club para : proposer un club ou signaler une erreur");
+  const mail = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club handisport: proposer un club ou signaler une erreur");
   $("suggest").href = mail; $("navSuggest").href = mail;
   ["q", "sport", "dep"].forEach(id => $(id).addEventListener("input", render));
   document.querySelectorAll("#handicaps input").forEach(i => i.addEventListener("change", render));

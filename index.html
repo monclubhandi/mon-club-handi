@@ -195,6 +195,7 @@
   /* Carte */
   .pin { width: 34px; height: 34px; border-radius: 50% 50% 50% 0; background: var(--accent); transform: rotate(-45deg); border: 3px solid #fff; box-shadow: 0 3px 8px rgba(0,0,0,.3); }
   .pin.me { border-radius: 50%; background: #1F2A37; width: 20px; height: 20px; transform: none; }
+    .leaflet-tile-pane { filter: saturate(0.45) brightness(1.04); }
   .leaflet-popup-content-wrapper { border-radius: 12px; }
   .leaflet-popup-content { font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 1rem; margin: .9rem 1rem; }
   .leaflet-popup-content .btn { min-height: 2.5rem; margin-top: .6rem; padding: .4rem .9rem; color: #fff; }
@@ -473,9 +474,9 @@ const meIcon = L.divIcon({ className: "", html: '<div class="pin me"></div>', ic
 
 function initMap() {
   map = L.map("map", { scrollWheelZoom: false, zoomControl: true }).setView([48.8566, 2.3522], 10);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-    maxZoom: 19, subdomains: "abcd",
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
 }
 

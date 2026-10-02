@@ -86,7 +86,7 @@
     padding: .7rem 1.15rem; border: 1.5px solid var(--accent); background: var(--accent); color: #fff;
     text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; white-space: nowrap;
   }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #0E1A19; } }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn:not(.outline):not(.quiet) { color: #0E1A19; } }
   .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
   .btn.big { min-height: 3.5rem; border-radius: var(--r-md); padding: .8rem 1.4rem; }
   .btn.outline { background: transparent; color: var(--accent); }
@@ -257,6 +257,9 @@
             <label class="chip"><input type="checkbox" value="auditif"><span>Auditif</span></label>
             <label class="chip"><input type="checkbox" value="moteur"><span>Moteur</span></label>
             <label class="chip"><input type="checkbox" value="mental"><span>Mental</span></label>
+            <label class="chip"><input type="checkbox" value="psychique"><span>Psychique</span></label>
+            <label class="chip"><input type="checkbox" value="autisme"><span>Autisme</span></label>
+            <label class="chip"><input type="checkbox" value="polyhandicap"><span>Polyhandicap</span></label>
           </div>
         </fieldset>
         <button type="button" class="reset" id="reset">Effacer les filtres</button>
@@ -446,8 +449,8 @@ function cardHtml(c, i) {
           ${c.acces ? `<h3 style="margin-top:.9rem">Accès</h3><p>${esc(c.acces)}</p>` : ""}
         </div>
       </div>
-      <div class="links">${links.join("")}</div>
-    </details>
+          </details>
+    <div class="links">${links.join("")}</div>
     ${c.verifie ? `<p class="checked">${ico("check")}Infos vérifiées le ${esc(c.verifie)}</p>` : ""}
   </li>`;
 }

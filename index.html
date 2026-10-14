@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mon club handisport – Trouve un club parasport près de chez toi !</title>
 <meta name="description" content="Trouve un club de sport qui accueille les personnes en situation de handicap près de chez toi : handisport, sport adapté, créneaux, accessibilité, contact.">
+<link rel="canonical" href="https://monclubhandi.github.io/mon-club-handi/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mon club handisport">
+<meta property="og:description" content="Trouve un club de sport qui accueille les personnes en situation de handicap en Île-de-France : créneaux, accessibilité, contact.">
+<meta property="og:url" content="https://monclubhandi.github.io/mon-club-handi/">
+<meta property="og:image" content="https://monclubhandi.github.io/mon-club-handi/icon-512.png">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -175,6 +181,7 @@
   .slots { margin: 0; padding: 0; list-style: none; display: grid; gap: .3rem; }
   .slots li { padding-left: .8rem; border-left: 3px solid var(--accent-tint); }
   .links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.25rem; }
+  .more { display: flex; justify-content: center; list-style: none; padding: .5rem 0 1rem; }
   .checked { font-size: .9rem; color: var(--muted); margin: 1rem 0 0; display: flex; align-items: center; gap: .35rem; }
 
   .state { background: var(--soft); border-radius: var(--r-md); padding: 2rem 1.5rem; text-align: center; }
@@ -303,7 +310,7 @@
       </div>
       <a class="btn big cta" id="suggest" href="#"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Proposer un club</a>
     </div>
-    <p class="fine">Les informations sont vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance pour confirmer les horaires.</p>
+    <p class="fine">Les informations sont vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance pour confirmer les horaires. Une partie des clubs provient du <a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a> du ministère des Sports.</p>
   </div>
 </footer>
 
@@ -317,7 +324,10 @@ const CONTACT_EMAIL = "soner.gunebakan0@gmail.com"; // à remplacer par ton adre
 const DEPARTEMENTS = { "75": "Paris (75)", "77": "Seine-et-Marne (77)", "78": "Yvelines (78)", "91": "Essonne (91)", "92": "Hauts-de-Seine (92)", "93": "Seine-Saint-Denis (93)", "94": "Val-de-Marne (94)", "95": "Val-d'Oise (95)" };
 const PRATIQUES = { "handisport": "Handisport", "sport adapte": "Sport adapté", "les deux": "Handisport et sport adapté" };
 
+const PAGE = 30; // nombre de fiches affichées avant le bouton « Voir plus »
+
 let clubs = [];
+let shown = PAGE;
 let userPos = null, meMarker = null;
 let map, markers = new Map();
 
@@ -326,6 +336,8 @@ const norm = s => (s || "").toString().normalize("NFD").replace(/[\u0300-\u036f]
 const yes = s => ["oui", "yes", "x", "1", "vrai"].includes(norm(s));
 const esc = s => (s || "").toString().replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+const safeUrl = s => { const u = (s || "").trim(); if (!u) return ""; if (/^[a-z][a-z0-9+.-]*:(?!\d)/i.test(u) && !/^https?:\/\//i.test(u)) return ""; const full = /^https?:\/\//i.test(u) ? u : "https://" + u; return /^https?:\/\/[^\s"'<>]+$/i.test(full) ? full : ""; };
+const num = s => { const n = parseFloat((s || "").toString().replace(",", ".")); return isFinite(n) ? n : null; };
 const ico = (id, cls = "icon") => `<svg class="${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 
 function km(a, b) {
@@ -374,7 +386,8 @@ function toClub(row) {
     creneaux: (r["creneaux"] || "").split(";").map(s => s.trim()).filter(Boolean),
     acces: r["accessibilite"], tel: r["telephone"], email: r["email"], site: r["site"], label: r["label"],
     paraClub: yes(r["para sportifs au club"]), encadrant: yes(r["encadrant forme"]), verifie: r["verifie le"],
-    pos: null
+    essai: r["essai"],
+    pos: (num(r["latitude"]) != null && num(r["longitude"]) != null) ? { lat: num(r["latitude"]), lon: num(r["longitude"]) } : null
   };
 }
 const trust = c => (c.label ? 1 : 0) + (c.paraClub ? 1 : 0) + (c.encadrant ? 1 : 0);
@@ -426,7 +439,7 @@ function cardHtml(c, i) {
   const links = [`<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddr)}" target="_blank" rel="noopener">${ico("route")}Itinéraire</a>`];
   if (c.tel) links.push(`<a class="btn outline" href="tel:${esc(c.tel.replace(/\s/g, ""))}">${ico("phone")}${esc(c.tel)}</a>`);
   if (c.email) links.push(`<a class="btn quiet" href="mailto:${esc(c.email)}">${ico("mail")}Écrire</a>`);
-  if (c.site) links.push(`<a class="btn quiet" href="${esc(c.site)}" target="_blank" rel="noopener">${ico("globe")}Site</a>`);
+  if (safeUrl(c.site)) links.push(`<a class="btn quiet" href="${esc(safeUrl(c.site))}" target="_blank" rel="noopener">${ico("globe")}Site</a>`);
 
   return `
   <li class="club" id="club-${i}">
@@ -449,6 +462,7 @@ function cardHtml(c, i) {
         <div><h3>Adresse</h3><p>${esc(fullAddr)}</p>
           ${c.acces ? `<h3 style="margin-top:.9rem">Accès</h3><p>${esc(c.acces)}</p>` : ""}
         </div>
+        ${c.essai ? `<div><h3>Séance d'essai</h3><p>${esc(c.essai)}</p></div>` : ""}
       </div>
           </details>
     <div class="links">${links.join("")}</div>
@@ -456,7 +470,8 @@ function cardHtml(c, i) {
   </li>`;
 }
 
-function render() {
+function render(keepPage) {
+  if (keepPage !== true) shown = PAGE;
   const list = filtered();
   const n = list.length;
   const sports = new Set(list.map(c => norm(c.sport))).size;
@@ -464,7 +479,8 @@ function render() {
     : `${n} club${n > 1 ? "s" : ""} trouvé${n > 1 ? "s" : ""}<small>${sports} sport${sports > 1 ? "s" : ""}${userPos ? ", distances depuis ta position" : ""}</small>`;
   $("list").innerHTML = n === 0
     ? `<li class="state"><p><strong>Aucun club ne correspond à ces filtres.</strong></p><p>Retire un filtre pour élargir la recherche, ou propose un club que tu connais.</p><button type="button" class="btn outline" onclick="resetFilters()">Effacer les filtres</button></li>`
-    : list.map(c => cardHtml(c, clubs.indexOf(c))).join("");
+    : list.slice(0, shown).map(c => cardHtml(c, clubs.indexOf(c))).join("")
+      + (n > shown ? `<li class="more"><button type="button" class="btn outline" onclick="showMore()">Voir plus de clubs (${n - shown} restants)</button></li>` : "");
   renderMarkers(list);
 }
 
@@ -496,8 +512,17 @@ function renderMarkers(list) {
   if (pts.length) map.fitBounds(pts, { padding: [40, 40], maxZoom: 14 });
 }
 
+function showMore() { shown += PAGE; render(true); }
+
 function showClub(i) {
   setView("liste");
+  if (!document.getElementById("club-" + i)) {
+    // La fiche est plus bas dans la liste : on affiche assez de fiches pour l'atteindre
+    const pos = filtered().indexOf(clubs[i]);
+    if (pos < 0) return;
+    shown = Math.ceil((pos + 1) / PAGE) * PAGE;
+    render(true);
+  }
   const el = document.getElementById("club-" + i);
   if (!el) return;
   document.querySelectorAll(".club.focus").forEach(e => e.classList.remove("focus"));
@@ -563,8 +588,17 @@ async function start() {
   }
   fillSelects();
   render();
-  for (const c of clubs) c.pos = await geocode([c.adresse, c.cp, c.ville].filter(Boolean).join(" "));
-  render();
+  // Les clubs sans Latitude/Longitude dans le tableau sont géocodés, 6 à la fois
+  const todo = clubs.filter(c => !c.pos);
+  let next = 0;
+  const worker = async () => {
+    while (next < todo.length) {
+      const c = todo[next++];
+      c.pos = await geocode([c.adresse, c.cp, c.ville].filter(Boolean).join(" "));
+    }
+  };
+  await Promise.all(Array.from({ length: 6 }, worker));
+  render(true);
 }
 start();
 </script>

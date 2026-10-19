@@ -26,9 +26,6 @@ import urllib.parse
 import urllib.request
 import urllib.robotparser
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "supabase"))
-from csv_vers_sql import convertir  # noqa: E402  (même conversion que pour l'import des 34 clubs)
-
 # ===== Réglages =====
 # Base Supabase de l'appli (clé publique : lecture seule), pour ne pas reprendre les clubs déjà présents
 SUPABASE_URL = "https://aogcjrfrfdasxesntlpk.supabase.co"
@@ -40,7 +37,7 @@ USER_AGENT = "MonClubHandi/2.0 (annuaire parasport benevole ; https://monclubhan
 PAUSE = 3  # secondes entre deux fiches (ne pas descendre en dessous)
 PROGRESSION = ".progression.json"
 
-# Colonnes produites (mêmes titres que l'ancien Google Sheets, converties pour Supabase par csv_vers_sql.py)
+# Colonnes produites (titres du fichier CSV) et colonne correspondante dans la table clubs de Supabase
 COLONNES = [
     "Sport", "Nom", "Adresse", "Code postal", "Ville", "Handicaps", "Pratique", "Creneaux",
     "Accessibilite", "Telephone", "Email", "Site", "Label", "Para sportifs au club",
@@ -388,10 +385,37 @@ def sauver_progression(p):
     os.replace(tmp, PROGRESSION)
 
 
+COLONNES_SQL = [
+    "sport", "nom", "adresse", "code_postal", "ville", "handicaps", "pratique", "creneaux",
+    "accessibilite", "telephone", "email", "site", "label", "para_sportifs",
+    "encadrant_forme", "verifie_le", "essai", "latitude", "longitude", "source",
+]
+
+
+def vers_sql(lignes):
+    """Lignes du scraper -> requête à coller dans Supabase (SQL Editor → New query → Run)."""
+    def val(col, v):
+        v = (v or "").strip()
+        if col in ("para_sportifs", "encadrant_forme"):
+            return "true" if v == "oui" else "false"
+        if not v:
+            return "null"
+        if col in ("latitude", "longitude"):
+            return str(float(v))
+        if col == "sport":
+            v = v.lower()
+        return "'" + v.replace("'", "''") + "'"
+    if not lignes:
+        return "-- aucun nouveau club\n"
+    valeurs = ["  (" + ", ".join(val(c, x) for c, x in zip(COLONNES_SQL, l)) + ")" for l in lignes]
+    return (f"-- {len(valeurs)} lignes venant du Handiguide des sports\n"
+            f"insert into public.clubs ({', '.join(COLONNES_SQL)}) values\n" + ",\n".join(valeurs) + ";\n")
+
+
 def ecrire_sorties(lignes, base):
     propre = lambda x: (x or "").replace("\t", " ").replace("\r", " ").replace("\n", " ").strip()
     with open(base + ".sql", "w", encoding="utf-8") as f:
-        f.write(convertir([dict(zip(COLONNES, [propre(x) for x in l])) for l in lignes], "le Handiguide des sports"))
+        f.write(vers_sql([[propre(x) for x in l] for l in lignes]))
     with open(base + ".csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(COLONNES)

@@ -1,5 +1,5 @@
 // Service worker : réseau d'abord (données toujours à jour), copie de secours hors connexion
-const CACHE = "mon-club-handi-v2";
+const CACHE = "mon-club-handi-v3";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
@@ -14,12 +14,12 @@ self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  // Les pages du site, les bibliothèques et le tableau des clubs : réseau d'abord, sinon dernière copie
+  // Les pages du site, les bibliothèques et la base des clubs : réseau d'abord, sinon dernière copie
   const isPage = url.origin === location.origin;
   const isLib = url.hostname === "cdnjs.cloudflare.com";
-  const isSheet = url.hostname.endsWith("docs.google.com") || url.hostname.endsWith("googleusercontent.com");
-  if (!isPage && !isLib && !isSheet) return;
-  const key = isSheet ? "clubs.csv" : req;
+  const isData = url.hostname.endsWith(".supabase.co") && url.pathname.startsWith("/rest/v1/clubs");
+  if (!isPage && !isLib && !isData) return;
+  const key = req;
   e.respondWith(
     fetch(req, { cache: "no-cache" }).then(res => {
       if (res.ok) {
@@ -27,6 +27,6 @@ self.addEventListener("fetch", e => {
         caches.open(CACHE).then(c => c.put(key, copy));
       }
       return res;
-    }).catch(() => caches.match(key).then(r => r || (isPage ? caches.match("./index.html") : Response.error())))
+    }).catch(() => caches.match(key, { ignoreVary: true }).then(r => r || (isPage ? caches.match("./index.html") : Response.error())))
   );
 });

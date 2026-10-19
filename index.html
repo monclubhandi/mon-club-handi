@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
 <style>
   :root {
     --white: #FFFFFF;
@@ -201,6 +202,7 @@
 
   /* Carte */
   .pin { width: 34px; height: 34px; border-radius: 50% 50% 50% 0; background: var(--accent); transform: rotate(-45deg); border: 3px solid #fff; box-shadow: 0 3px 8px rgba(0,0,0,.3); }
+  .cluster { width: 42px; height: 42px; border-radius: 50%; background: var(--accent); color: #fff; border: 3px solid #fff; box-shadow: 0 3px 8px rgba(0,0,0,.3); display: grid; place-items: center; font-weight: 700; font-family: "Atkinson Hyperlegible", Arial, sans-serif; }
   .pin.me { border-radius: 50%; background: #1F2A37; width: 20px; height: 20px; transform: none; }
     .leaflet-tile-pane { filter: saturate(0.45) brightness(1.04); }
   .leaflet-popup-content-wrapper { border-radius: 12px; }
@@ -314,11 +316,13 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
 <script>
 // ===== Réglages =====
-const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQz-ugGlBCJSTIIAm0AKPuc1B4RIIx_DUQ1bvOPl18B6BSdjPAg4W_5-oR25TFIxa4cnUcU-PRq4Tn/pub?gid=0&single=true&output=csv";
+// Base de données Supabase : l'adresse du projet et la clé publique (lecture seule grâce aux règles de sécurité)
+const SUPABASE_URL = "https://aogcjrfrfdasxesntlpk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_ZNohzowK1cNBG_-qukzemQ_KAG9EX-Z";
 const CONTACT_EMAIL = "soner.gunebakan0@gmail.com"; // à remplacer par ton adresse
 
 const DEPARTEMENTS = { "75": "Paris (75)", "77": "Seine-et-Marne (77)", "78": "Yvelines (78)", "91": "Essonne (91)", "92": "Hauts-de-Seine (92)", "93": "Seine-Saint-Denis (93)", "94": "Val-de-Marne (94)", "95": "Val-d'Oise (95)" };
@@ -329,7 +333,7 @@ const PAGE = 30; // nombre de fiches affichées avant le bouton « Voir plus »
 let clubs = [];
 let shown = PAGE;
 let userPos = null, meMarker = null;
-let map, markers = new Map();
+let map, cluster, markers = new Map();
 
 const $ = id => document.getElementById(id);
 const norm = s => (s || "").toString().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
@@ -375,27 +379,37 @@ async function geocode(query) {
 }
 
 // ===== Données =====
-function toClub(row) {
-  const r = {};
-  for (const k in row) r[norm(k)] = (row[k] || "").trim();
-  const cp = r["code postal"] || "";
+const frDate = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : (d || ""); };
+
+// Une ligne de la table « clubs » de Supabase -> un club pour l'appli
+function toClub(r) {
+  const t = k => (r[k] == null ? "" : String(r[k])).trim();
+  const cp = t("code_postal");
   return {
-    sport: r["sport"], nom: r["nom"], adresse: r["adresse"], cp, ville: r["ville"], dep: cp.slice(0, 2),
-    handicaps: (r["handicaps"] || "").split(/[,;]/).map(norm).filter(Boolean),
-    pratique: r["pratique"],
-    creneaux: (r["creneaux"] || "").split(";").map(s => s.trim()).filter(Boolean),
-    acces: r["accessibilite"], tel: r["telephone"], email: r["email"], site: r["site"], label: r["label"],
-    paraClub: yes(r["para sportifs au club"]), encadrant: yes(r["encadrant forme"]), verifie: r["verifie le"],
-    essai: r["essai"],
-    pos: (num(r["latitude"]) != null && num(r["longitude"]) != null) ? { lat: num(r["latitude"]), lon: num(r["longitude"]) } : null
+    id: r.id, sport: t("sport"), nom: t("nom"), adresse: t("adresse"), cp, ville: t("ville"), dep: cp.slice(0, 2),
+    handicaps: t("handicaps").split(/[,;]/).map(norm).filter(Boolean),
+    pratique: t("pratique"),
+    creneaux: t("creneaux").split(";").map(s => s.trim()).filter(Boolean),
+    acces: t("accessibilite"), tel: t("telephone"), email: t("email"), site: t("site"), label: t("label"),
+    paraClub: r.para_sportifs === true, encadrant: r.encadrant_forme === true, verifie: frDate(t("verifie_le")),
+    essai: t("essai"),
+    pos: (num(r.latitude) != null && num(r.longitude) != null) ? { lat: num(r.latitude), lon: num(r.longitude) } : null
   };
 }
 const trust = c => (c.label ? 1 : 0) + (c.paraClub ? 1 : 0) + (c.encadrant ? 1 : 0);
 
-function loadCsv() {
-  return new Promise((resolve, reject) => {
-    Papa.parse(CSV_URL + "&t=" + Date.now(), { download: true, header: true, skipEmptyLines: true, complete: res => resolve(res.data), error: reject });
-  });
+// Lit tous les clubs publiés (par paquets de 1000, la limite de Supabase)
+async function loadClubs() {
+  const rows = [];
+  for (let from = 0; ; from += 1000) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/clubs?select=*&order=nom.asc,id.asc&offset=${from}&limit=1000`, {
+      headers: { apikey: SUPABASE_KEY }
+    });
+    if (!r.ok) throw new Error("Supabase " + r.status);
+    const page = await r.json();
+    rows.push(...page);
+    if (page.length < 1000) return rows;
+  }
 }
 
 // ===== Filtres et tri =====
@@ -490,20 +504,26 @@ const meIcon = L.divIcon({ className: "", html: '<div class="pin me"></div>', ic
 
 function initMap() {
   map = L.map("map", { scrollWheelZoom: false, zoomControl: true }).setView([48.8566, 2.3522], 10);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  // Les clubs proches sont regroupés en une bulle avec leur nombre ; un clic zoome dessus
+  cluster = L.markerClusterGroup({
+    showCoverageOnHover: false, maxClusterRadius: 45, spiderfyOnMaxZoom: true,
+    iconCreateFunction: g => L.divIcon({ className: "", html: `<div class="cluster">${g.getChildCount()}</div>`, iconSize: [42, 42] })
   }).addTo(map);
 }
 
 function renderMarkers(list) {
-  markers.forEach(m => m.remove());
+  cluster.clearLayers();
   markers.clear();
   const pts = [];
   list.forEach(c => {
     if (!c.pos) return;
     const i = clubs.indexOf(c);
-    const m = L.marker([c.pos.lat, c.pos.lon], { icon: pinIcon, title: c.nom, alt: c.nom }).addTo(map);
+    const m = L.marker([c.pos.lat, c.pos.lon], { icon: pinIcon, title: c.nom, alt: c.nom });
+    cluster.addLayer(m);
     m.bindPopup(`<strong>${esc(c.nom)}</strong><br>${esc(cap(c.sport))}, ${esc(c.ville)}<br><button type="button" class="btn" onclick="showClub(${i})">Voir la fiche</button>`);
     markers.set(i, m);
     pts.push([c.pos.lat, c.pos.lon]);
@@ -580,7 +600,7 @@ async function start() {
   document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => setView(b.dataset.view)));
 
   try {
-    clubs = (await loadCsv()).map(toClub).filter(c => c.nom);
+    clubs = (await loadClubs()).map(toClub).filter(c => c.nom);
   } catch (e) {
     $("count").textContent = "Impossible de charger les clubs";
     $("list").innerHTML = `<li class="state"><p><strong>La liste des clubs n'a pas pu être chargée.</strong></p><p>Vérifie ta connexion internet, puis recharge la page.</p><button type="button" class="btn" onclick="location.reload()">Recharger la page</button></li>`;
@@ -588,7 +608,7 @@ async function start() {
   }
   fillSelects();
   render();
-  // Les clubs sans Latitude/Longitude dans le tableau sont géocodés, 6 à la fois
+  // Les clubs sans latitude/longitude dans la base sont géocodés, 6 à la fois
   const todo = clubs.filter(c => !c.pos);
   let next = 0;
   const worker = async () => {

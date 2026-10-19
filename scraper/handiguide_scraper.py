@@ -444,6 +444,11 @@ def main(argv=None):
         with open(a.fichier, encoding="utf-8") as f:
             blocs = re.split(r"(?im)^fiche\s*\d+\s*[:;]?", f.read())
         lignes = [l for b in blocs if b.strip() for l in parse_fiche(b)]
+        deja = cles_deja_presentes()
+        avant = len(lignes)
+        lignes = [l for l in lignes if l[1] and cle(l[1]) not in deja]
+        if avant > len(lignes):
+            print(f"{avant - len(lignes)} ligne(s) ignorée(s) : club déjà dans ta base ou fiche illisible.")
         if not a.sans_geo:
             for l in lignes:
                 l[17], l[18] = geocoder(l[2], l[3], l[4])

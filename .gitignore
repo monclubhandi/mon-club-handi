@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+scraper/.progression.json*
+scraper/nouveaux_clubs.*
+scraper/debug_recherche.html
+scraper/debug_fiches/

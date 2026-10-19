@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://monclubhandi.github.io/mon-club-handi/sitemap.xml

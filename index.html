@@ -619,7 +619,7 @@
           </div>
           <div><h4>Le site</h4><ul><li><a href="#annuaire" data-goto="liste">Trouver un club</a></li><li><a href="#comment">Comment ça marche</a></li><li><a href="#apropos">À propos</a></li></ul></div>
           <div><h4>Contribuer</h4><ul><li><a class="suggest" href="#">Proposer un club</a></li><li><a class="contact" href="#">Signaler une erreur</a></li></ul></div>
-          <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.data.gouv.fr/datasets/annuaire-des-associations-et-clubs-proposant-une-activite-parasportive" target="_blank" rel="noopener">Département du Doubs, plateforme Oz (ODbL)</a></li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
+          <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.data.gouv.fr/datasets/annuaire-des-associations-et-clubs-proposant-une-activite-parasportive" target="_blank" rel="noopener">Département du Doubs, plateforme Oz (ODbL)</a></li><li><a href="https://cotesdarmor.fr/sites/default/files/2021-03/Guide_Spt_Handicaps_2019_2021_BATWeb.pdf" target="_blank" rel="noopener">Département des Côtes-d'Armor (guide 2019-2021)</a></li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
         </div>
         <p class="fine"><span>© <span id="year">2026</span> Mon club handisport · Projet bénévole</span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
       </div>
@@ -762,6 +762,8 @@ for (const [reg, list] of Object.entries(REGIONS)) list.split("|").forEach(d => 
 });
 // Code postal -> département (outre-mer sur 3 chiffres, Corse 2A / 2B)
 function depOf(cp) {
+  cp = (cp || "").toUpperCase();
+  if (DEPARTEMENTS[cp]) return cp;               // certaines sources ne donnent que le département (ex. « 22 »)
   if (!/^\d{5}$/.test(cp)) return "";
   if (cp.startsWith("97")) return cp.slice(0, 3);
   if (cp.startsWith("20")) return +cp.slice(0, 3) < 202 ? "2A" : "2B";
@@ -803,13 +805,19 @@ function toast(msg) {
 }
 
 // Géocodage via la base d'adresses officielle (IGN / BAN), avec cache sur l'appareil
-async function geocode(query) {
-  const key = "geo:" + norm(query);
+// Texte à géocoder pour un club : son adresse, ou seulement sa commune quand la source ne donne que le département
+function geoQuery(c) {
+  if (/^\d{5}$/.test(c.cp) || c.adresse) return { q: [c.adresse, c.cp, c.ville].filter(Boolean).join(" ") };
+  const dep = (DEPARTEMENTS[c.dep] || "").replace(/\s*\(.*\)$/, "");
+  return { q: [c.ville, dep].filter(Boolean).join(" "), commune: true };
+}
+async function geocode(query, commune) {
+  const key = "geo:" + (commune ? "c:" : "") + norm(query);
   const cached = storeGet(key);
   if (cached) return cached;
   for (const url of ["https://data.geopf.fr/geocodage/search?limit=1&q=", "https://api-adresse.data.gouv.fr/search/?limit=1&q="]) {
     try {
-      const r = await fetch(url + encodeURIComponent(query));
+      const r = await fetch(url + encodeURIComponent(query) + (commune ? "&type=municipality" : ""));
       if (!r.ok) continue;
       const f = (await r.json()).features?.[0];
       if (f) { const pos = { lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] }; storeSet(key, pos); return pos; }
@@ -1199,7 +1207,7 @@ function locate(focusMap) {
 }
 
 // ===== Formulaire « Inscrire un club » : écrit directement dans Supabase (club masqué, à valider) =====
-const CP_FR = cp => !!DEPARTEMENTS[depOf(cp)];
+const CP_FR = cp => /^\d{5}$/.test(cp) && !!DEPARTEMENTS[depOf(cp)];
 function openPropose() {
   const f = $("proposeForm");
   if (f.dataset.done) { delete f.dataset.done; f.innerHTML = f.dataset.html; fillPropose(); }
@@ -1387,7 +1395,8 @@ async function start() {
   const worker = async () => {
     while (next < todo.length) {
       const c = todo[next++];
-      c.pos = await geocode([c.adresse, c.cp, c.ville].filter(Boolean).join(" "));
+      const g = geoQuery(c);
+      c.pos = await geocode(g.q, g.commune);
       if (c.pos && userPos) c.dist = km(userPos, c.pos);
     }
   };

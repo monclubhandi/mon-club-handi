@@ -1,5 +1,5 @@
 // Service worker : réseau d'abord (données toujours à jour), copie de secours hors connexion
-const CACHE = "mon-club-handi-v9";
+const CACHE = "mon-club-handi-v10";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {

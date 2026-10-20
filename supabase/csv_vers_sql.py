@@ -45,19 +45,24 @@ def sql(col, v):
     return "'" + v.replace("'", "''") + "'"
 
 
-def main(chemin):
-    with open(chemin, encoding="utf-8-sig") as f:
-        lignes = list(csv.DictReader(f))
-    titres = {t: COLONNES[norm(t)] for t in lignes[0] if norm(t) in COLONNES}
+def convertir(lignes, nom_source=""):
+    """Liste de dictionnaires {titre de colonne: valeur} -> requête SQL d'import dans la table clubs."""
+    if not lignes:
+        return "-- aucune ligne à importer\n"
+    titres = {t: COLONNES[norm(t)] for t in lignes[0] if t and norm(t) in COLONNES}
     cols = list(titres.values())
     valeurs = []
     for l in lignes:
-        if not (l.get("Nom") or "").strip():
+        if not (l.get("Nom") or l.get("nom") or "").strip():
             continue
         valeurs.append("  (" + ", ".join(sql(c, l.get(t)) for t, c in titres.items()) + ")")
-    print(f"-- {len(valeurs)} lignes importées depuis {chemin.split('/')[-1]}")
-    print(f"insert into public.clubs ({', '.join(cols)}) values")
-    print(",\n".join(valeurs) + ";")
+    return (f"-- {len(valeurs)} lignes importées depuis {nom_source}\n"
+            f"insert into public.clubs ({', '.join(cols)}) values\n" + ",\n".join(valeurs) + ";\n")
+
+
+def main(chemin):
+    with open(chemin, encoding="utf-8-sig") as f:
+        print(convertir(list(csv.DictReader(f)), chemin.replace("\\", "/").split("/")[-1]), end="")
 
 
 if __name__ == "__main__":

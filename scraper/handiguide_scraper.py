@@ -7,8 +7,8 @@ Utilisation :
     python handiguide_scraper.py --aide                                    (toutes les options)
 
 Résultats :
-    nouveaux_clubs.tsv  lignes sans titres, à coller dans la première ligne vide du Google Sheets
-    nouveaux_clubs.csv  même contenu avec les titres de colonnes, pour vérifier dans un tableur
+    nouveaux_clubs.sql  à coller dans Supabase (SQL Editor → New query → Run) pour ajouter les clubs
+    nouveaux_clubs.csv  même contenu, à ouvrir dans un tableur pour vérifier avant l'import
 
 Si la collecte est interrompue (Ctrl+C, coupure), relance la même commande :
 elle reprend là où elle s'était arrêtée grâce au fichier .progression.json.
@@ -16,7 +16,6 @@ elle reprend là où elle s'était arrêtée grâce au fichier .progression.json
 
 import argparse
 import csv
-import io
 import json
 import os
 import re
@@ -28,7 +27,9 @@ import urllib.request
 import urllib.robotparser
 
 # ===== Réglages =====
-SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQz-ugGlBCJSTIIAm0AKPuc1B4RIIx_DUQ1bvOPl18B6BSdjPAg4W_5-oR25TFIxa4cnUcU-PRq4Tn/pub?gid=0&single=true&output=csv"
+# Base Supabase de l'appli (clé publique : lecture seule), pour ne pas reprendre les clubs déjà présents
+SUPABASE_URL = "https://aogcjrfrfdasxesntlpk.supabase.co"
+SUPABASE_KEY = "sb_publishable_ZNohzowK1cNBG_-qukzemQ_KAG9EX-Z"
 BASE = "https://www.handiguide.sports.gouv.fr"
 # Base Adresse Nationale : géocodeur de l'IGN, et l'ancienne adresse en secours
 GEOCODEURS = ["https://data.geopf.fr/geocodage/search?limit=1&q=", "https://api-adresse.data.gouv.fr/search/?limit=1&q="]
@@ -36,7 +37,7 @@ USER_AGENT = "MonClubHandi/2.0 (annuaire parasport benevole ; https://monclubhan
 PAUSE = 3  # secondes entre deux fiches (ne pas descendre en dessous)
 PROGRESSION = ".progression.json"
 
-# Colonnes du Google Sheets, dans l'ordre (A à T)
+# Colonnes produites (titres du fichier CSV) et colonne correspondante dans la table clubs de Supabase
 COLONNES = [
     "Sport", "Nom", "Adresse", "Code postal", "Ville", "Handicaps", "Pratique", "Creneaux",
     "Accessibilite", "Telephone", "Email", "Site", "Label", "Para sportifs au club",
@@ -63,6 +64,11 @@ PAS_DES_FICHES = ("recherche-structure", "inscription-structure", "login", "aide
 def norm(s):
     s = unicodedata.normalize("NFD", s or "")
     return "".join(c for c in s if unicodedata.category(c) != "Mn").lower().strip()
+
+
+def cle(s):
+    """Clé de comparaison des noms : "Saint-Ouen Handibasket" et "Saint Ouen handibasket" sont le même club."""
+    return re.sub(r"[^a-z0-9]", "", norm(s))
 
 
 def decoller(s, sep=". "):
@@ -193,7 +199,7 @@ def site_web(liens):
 
 
 def parse_fiche(texte, url="", liens=None):
-    """Transforme le texte d'une fiche en lignes prêtes pour le Google Sheets (une par sport et par lieu).
+    """Transforme le texte d'une fiche en lignes prêtes pour la base (une par sport et par lieu).
     `liens` : adresses des liens de la fiche (sinon, lues dans le texte s'il vient d'un copier-coller Markdown)."""
     if liens is None:
         liens = re.findall(r"\]\((https?://[^)\s]+)\)", texte) + re.findall(r"(?<!\()\bhttps?://[^\s)\]]+", texte)
@@ -255,18 +261,21 @@ def lire_url(url, timeout=20):
 
 
 def cles_deja_presentes():
-    """Les clubs déjà dans ton Google Sheets, repérés par nom + code postal (et nom seul)."""
+    """Les noms des clubs déjà dans ta base Supabase."""
+    noms = set()
     try:
-        lignes = list(csv.DictReader(io.StringIO(lire_url(SHEET_CSV))))
+        for debut in range(0, 100000, 1000):
+            req = urllib.request.Request(
+                f"{SUPABASE_URL}/rest/v1/clubs?select=nom&offset={debut}&limit=1000",
+                headers={"apikey": SUPABASE_KEY, "User-Agent": USER_AGENT})
+            with urllib.request.urlopen(req, timeout=20) as r:
+                page = json.loads(r.read().decode("utf-8"))
+            noms |= {cle(l["nom"]) for l in page if l.get("nom")}
+            if len(page) < 1000:
+                break
     except Exception as e:
-        print(f"Impossible de lire ton Google Sheets ({e}) : aucun doublon ne sera filtré.")
-        return set()
-    cles = set()
-    for l in lignes:
-        l = {norm(k): v for k, v in l.items() if k}
-        if l.get("nom"):
-            cles.add(norm(l["nom"]))
-    return cles
+        print(f"Impossible de lire ta base Supabase ({e}) : aucun doublon ne sera filtré.")
+    return noms
 
 
 def geocoder(rue, cp, ville):
@@ -376,11 +385,37 @@ def sauver_progression(p):
     os.replace(tmp, PROGRESSION)
 
 
+COLONNES_SQL = [
+    "sport", "nom", "adresse", "code_postal", "ville", "handicaps", "pratique", "creneaux",
+    "accessibilite", "telephone", "email", "site", "label", "para_sportifs",
+    "encadrant_forme", "verifie_le", "essai", "latitude", "longitude", "source",
+]
+
+
+def vers_sql(lignes):
+    """Lignes du scraper -> requête à coller dans Supabase (SQL Editor → New query → Run)."""
+    def val(col, v):
+        v = (v or "").strip()
+        if col in ("para_sportifs", "encadrant_forme"):
+            return "true" if v == "oui" else "false"
+        if not v:
+            return "null"
+        if col in ("latitude", "longitude"):
+            return str(float(v))
+        if col == "sport":
+            v = v.lower()
+        return "'" + v.replace("'", "''") + "'"
+    if not lignes:
+        return "-- aucun nouveau club\n"
+    valeurs = ["  (" + ", ".join(val(c, x) for c, x in zip(COLONNES_SQL, l)) + ")" for l in lignes]
+    return (f"-- {len(valeurs)} lignes venant du Handiguide des sports\n"
+            f"insert into public.clubs ({', '.join(COLONNES_SQL)}) values\n" + ",\n".join(valeurs) + ";\n")
+
+
 def ecrire_sorties(lignes, base):
     propre = lambda x: (x or "").replace("\t", " ").replace("\r", " ").replace("\n", " ").strip()
-    with open(base + ".tsv", "w", encoding="utf-8", newline="") as f:
-        for l in lignes:
-            f.write("\t".join(propre(x) for x in l) + "\n")
+    with open(base + ".sql", "w", encoding="utf-8") as f:
+        f.write(vers_sql([[propre(x) for x in l] for l in lignes]))
     with open(base + ".csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(COLONNES)
@@ -409,11 +444,16 @@ def main(argv=None):
         with open(a.fichier, encoding="utf-8") as f:
             blocs = re.split(r"(?im)^fiche\s*\d+\s*[:;]?", f.read())
         lignes = [l for b in blocs if b.strip() for l in parse_fiche(b)]
+        deja = cles_deja_presentes()
+        avant = len(lignes)
+        lignes = [l for l in lignes if l[1] and cle(l[1]) not in deja]
+        if avant > len(lignes):
+            print(f"{avant - len(lignes)} ligne(s) ignorée(s) : club déjà dans ta base ou fiche illisible.")
         if not a.sans_geo:
             for l in lignes:
                 l[17], l[18] = geocoder(l[2], l[3], l[4])
         ecrire_sorties(lignes, a.sortie)
-        print(f"{len(lignes)} lignes écrites dans {a.sortie}.tsv et {a.sortie}.csv")
+        print(f"{len(lignes)} lignes écrites dans {a.sortie}.sql et {a.sortie}.csv")
         return
 
     if not a.url:
@@ -438,7 +478,7 @@ def main(argv=None):
     faites = set(prog["faites"])
     if faites:
         print(f"Reprise : {len(faites)} fiches déjà lues lors d'un lancement précédent.")
-    noms_lus = {norm(l[1]) for l in prog["lignes"]}
+    noms_lus = {cle(l[1]) for l in prog["lignes"]}
     ignores = 0
 
     with sync_playwright() as p:
@@ -472,7 +512,7 @@ def main(argv=None):
                 nom = lignes[0][1] if lignes else ""
                 if not nom:
                     print(f"{etape} Fiche illisible : {lien} (relance avec --debug pour voir son texte)")
-                elif norm(nom) in deja or norm(nom) in noms_lus:
+                elif cle(nom) in deja or cle(nom) in noms_lus:
                     ignores += 1
                     print(f"{etape} Déjà présent : {nom}")
                 else:
@@ -480,7 +520,7 @@ def main(argv=None):
                         for l in lignes:
                             l[17], l[18] = geocoder(l[2], l[3], l[4])
                     prog["lignes"].extend(lignes)
-                    noms_lus.add(norm(nom))
+                    noms_lus.add(cle(nom))
                     print(f"{etape} OK : {nom} ({len(lignes)} ligne(s))")
                 prog["faites"].append(lien)
                 sauver_progression(prog)
@@ -492,7 +532,7 @@ def main(argv=None):
             nav.close()
 
     ecrire_sorties(prog["lignes"], a.sortie)
-    print(f"\nTerminé : {len(prog['lignes'])} lignes dans {a.sortie}.tsv et {a.sortie}.csv ({ignores} clubs déjà présents ignorés).")
+    print(f"\nTerminé : {len(prog['lignes'])} lignes dans {a.sortie}.sql et {a.sortie}.csv ({ignores} clubs déjà présents ignorés).")
 
 
 if __name__ == "__main__":

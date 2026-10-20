@@ -1,12 +1,12 @@
-# Scraper Handiguide → Google Sheets
+# Scraper Handiguide → Supabase
 
 Récupère les fiches du [Handiguide des sports](https://www.handiguide.sports.gouv.fr/) et les met au format
-du Google Sheets de **Mon club handisport** (une ligne par sport et par lieu de pratique).
+de la base Supabase de **Mon club handisport** (une ligne par sport et par lieu de pratique).
 
 ## Garde-fous intégrés
 - vérifie le fichier `robots.txt` du site avant de commencer ;
 - une fiche toutes les 3 secondes minimum (impossible de descendre plus bas) ;
-- saute les clubs déjà présents dans le Google Sheets ;
+- saute les clubs déjà présents dans ta base Supabase ;
 - reprend là où il s'était arrêté en cas d'interruption (`.progression.json`).
 
 À savoir : les fiches contiennent des contacts parfois personnels (RGPD) et la base est protégée par le droit
@@ -43,18 +43,14 @@ Options utiles :
 | `--fichier fiches.txt` | lit des fiches copiées-collées (séparées par « Fiche 1 : », « Fiche 2 : »…) sans aller sur le site |
 
 ## Résultat
-- `nouveaux_clubs.tsv` : sans titres. Ouvre-le avec un éditeur de texte, copie tout, colle dans la
-  première ligne vide du Google Sheets (case A).
-- `nouveaux_clubs.csv` : avec les titres, pour vérifier dans Excel/LibreOffice avant de coller.
+- `nouveaux_clubs.csv` : ouvre-le dans Excel ou LibreOffice pour **vérifier** les clubs avant l'import
+  (supprime les lignes douteuses si besoin, puis relance `python ../supabase/csv_vers_sql.py nouveaux_clubs.csv > nouveaux_clubs.sql`).
+- `nouveaux_clubs.sql` : ouvre-le avec un éditeur de texte, copie tout, et colle-le dans Supabase
+  (**SQL Editor → New query → Run**). Les clubs apparaissent aussitôt dans l'appli.
 
-Colonnes produites (A à T), à avoir dans cet ordre dans le Google Sheets :
-
-`Sport · Nom · Adresse · Code postal · Ville · Handicaps · Pratique · Creneaux · Accessibilite · Telephone ·
-Email · Site · Label · Para sportifs au club · Encadrant forme · Verifie le · Essai · Latitude · Longitude · Source`
-
-Les colonnes Q à T sont nouvelles : ajoute leurs titres dans le Sheets. `Latitude`/`Longitude` (calculées avec
-la Base Adresse Nationale) permettent à l'appli d'afficher la carte instantanément, même avec 800 clubs.
-`Creneaux` et `Verifie le` restent vides : c'est ta valeur ajoutée, à remplir après contact avec le club.
+Les colonnes `latitude`/`longitude` (calculées avec la Base Adresse Nationale) permettent à l'appli d'afficher
+la carte instantanément, même avec 800 clubs. `creneaux` et `verifie_le` restent vides : c'est ta valeur
+ajoutée, à remplir dans Supabase après contact avec le club.
 
 ## Tests
 ```

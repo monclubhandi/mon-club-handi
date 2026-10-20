@@ -1,7 +1,7 @@
 {
   "name": "Mon club handisport",
   "short_name": "Club handi",
-  "description": "Trouve un club de sport qui accueille les personnes en situation de handicap en Île-de-France.",
+  "description": "Trouve un club de sport qui accueille les personnes en situation de handicap, partout en France.",
   "lang": "fr",
   "start_url": "./",
   "scope": "./",

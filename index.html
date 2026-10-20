@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mon club handisport – Trouve un club parasport en Île-de-France</title>
-<meta name="description" content="Trouve un club de sport qui accueille les personnes en situation de handicap en Île-de-France : handisport, sport adapté, créneaux, accessibilité et contacts. Gratuit, sans inscription.">
+<title>Mon club handisport – Trouve un club parasport près de chez toi, partout en France</title>
+<meta name="description" content="Trouve un club de sport qui accueille les personnes en situation de handicap partout en France : handisport, sport adapté, créneaux, accessibilité et contacts. Gratuit, sans inscription.">
 <link rel="canonical" href="https://monclubhandi.github.io/mon-club-handi/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mon club handisport">
 <meta property="og:title" content="Mon club handisport – le sport, avec un club qui sait t'accueillir">
-<meta property="og:description" content="L'annuaire des clubs d'Île-de-France qui accueillent les sportifs en situation de handicap : créneaux, accès, contacts.">
+<meta property="og:description" content="L'annuaire des clubs de France qui accueillent les sportifs en situation de handicap : créneaux, accès, contacts.">
 <meta property="og:url" content="https://monclubhandi.github.io/mon-club-handi/">
 <meta property="og:image" content="https://monclubhandi.github.io/mon-club-handi/icon-512.png">
 <meta property="og:locale" content="fr_FR">
@@ -22,7 +22,7 @@
 <meta name="apple-mobile-web-app-title" content="Club handi">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Mon club handisport","url":"https://monclubhandi.github.io/mon-club-handi/","inLanguage":"fr","description":"Annuaire des clubs de sport d'Île-de-France qui accueillent les personnes en situation de handicap : handisport et sport adapté."}
+{"@context":"https://schema.org","@type":"WebSite","name":"Mon club handisport","url":"https://monclubhandi.github.io/mon-club-handi/","inLanguage":"fr","areaServed":"FR","description":"Annuaire des clubs de sport en France qui accueillent les personnes en situation de handicap : handisport et sport adapté."}
 </script>
 <script>if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js"));</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232F6F6A'/><path d='M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z' fill='white'/><circle cx='16' cy='13.5' r='2.6' fill='%232F6F6A'/></svg>">
@@ -314,6 +314,25 @@
   .slots li b { display: block; }
   .checked { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .92rem; margin: 0 0 .5rem; }
   .report { color: var(--muted); font-size: .92rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 .9rem; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .field { margin: 0 0 1rem; }
+  .field > label, .field > .label { display: block; font-weight: 700; margin: 0 0 .35rem; }
+  .field .hint { display: block; font-weight: 400; color: var(--muted); font-size: .9rem; }
+  .input, .textarea { width: 100%; min-height: 3rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel); color: var(--text); font: inherit; padding: .6rem .9rem; }
+  .textarea { min-height: 5.5rem; resize: vertical; }
+  .input:focus, .textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-tint); }
+  .input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--danger); }
+  .form-sec { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: .5rem 0 .9rem; }
+  .consent { display: flex; gap: .7rem; align-items: flex-start; padding: .9rem 1rem; border: 1px solid var(--line); border-radius: var(--r-md); cursor: pointer; }
+  .consent input { width: 1.3rem; height: 1.3rem; margin: .1rem 0 0; accent-color: var(--accent); flex: none; }
+  .form-error { color: var(--danger); font-weight: 700; margin: 0 0 1rem; }
+  .form-error:empty { display: none; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .done { text-align: center; padding: 2rem 1rem; }
+  .done .ok { width: 4rem; height: 4rem; border-radius: 50%; background: var(--accent-tint); color: var(--accent); display: grid; place-items: center; margin: 0 auto 1rem; }
+  .done .ok .icon { width: 2rem; height: 2rem; }
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
   .toast { position: fixed; left: 50%; bottom: calc(var(--tabbar) + 1rem + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--text); color: var(--bg); padding: .7rem 1.1rem; border-radius: 999px; font-weight: 700; z-index: 1000; box-shadow: var(--shadow); animation: rise .25s ease; }
   .toast[hidden] { display: none; }
 
@@ -449,7 +468,7 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Annuaire parasport · Île-de-France</span>
+          <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Annuaire parasport · Partout en France</span>
           <h1 id="heroTitle">Le sport, avec un club qui sait t'accueillir</h1>
           <p class="lead">Trouve en quelques secondes un club qui accueille les personnes en situation de handicap : créneaux, accessibilité, contacts. Gratuit et sans inscription.</p>
           <form class="hero-search" role="search" id="heroForm">
@@ -515,7 +534,7 @@
       <div class="pane-list" id="paneList">
         <div class="intro" id="intro">
           <h1>Le sport, avec un club qui sait t'accueillir</h1>
-          <p>Des clubs d'Île-de-France qui accueillent les sportifs en situation de handicap, avec leurs créneaux, leur accès et leurs contacts.</p>
+          <p>Des clubs partout en France qui accueillent les sportifs en situation de handicap, avec leurs créneaux, leur accès et leurs contacts.</p>
         </div>
         <div class="summary">
           <p class="count" id="count" aria-live="polite">Chargement des clubs…</p>
@@ -577,7 +596,7 @@
           <span class="eyebrow">À propos</span>
           <div class="section-head" style="margin-bottom:1.25rem"><h2 id="aboutTitle">Né sur les tatamis</h2></div>
           <blockquote>Trouver un club prêt à accueillir un sportif en situation de handicap ne devrait pas prendre des semaines d'appels.</blockquote>
-          <p>Mon club handisport est un projet bénévole lancé par un para judoka, champion de France. L'objectif : réunir au même endroit les clubs d'Île-de-France qui accueillent les personnes en situation de handicap, avec les informations qui comptent vraiment.</p>
+          <p>Mon club handisport est un projet bénévole lancé par un para judoka, champion de France. L'objectif : réunir au même endroit les clubs de toute la France qui accueillent les personnes en situation de handicap, avec les informations qui comptent vraiment.</p>
           <p>Les fiches sont construites à partir de sources publiques, dont le <a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a> du ministère des Sports, puis complétées et vérifiées auprès des clubs.</p>
         </div>
         <div class="cta-cards">
@@ -596,7 +615,7 @@
         <div class="foot-grid">
           <div>
             <a class="logo" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2F6F6A"/><path d="M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z" fill="#fff"/><circle cx="16" cy="13.5" r="2.6" fill="#2F6F6A"/></svg>Mon club handisport</a>
-            <p class="desc">L'annuaire des clubs d'Île-de-France qui accueillent les sportifs en situation de handicap.</p>
+            <p class="desc">L'annuaire des clubs de France qui accueillent les sportifs en situation de handicap.</p>
           </div>
           <div><h4>Le site</h4><ul><li><a href="#annuaire" data-goto="liste">Trouver un club</a></li><li><a href="#comment">Comment ça marche</a></li><li><a href="#apropos">À propos</a></li></ul></div>
           <div><h4>Contribuer</h4><ul><li><a class="suggest" href="#">Proposer un club</a></li><li><a class="contact" href="#">Signaler une erreur</a></li></ul></div>
@@ -633,13 +652,61 @@
         <label class="opt"><input type="radio" name="pratique" value="sport adapte"><span>Sport adapté</span></label>
       </div>
     </fieldset>
-    <div class="group"><label class="label" for="fDep">Département</label><select class="select" id="fDep"><option value="">Toute l'Île-de-France</option></select></div>
+    <div class="group"><label class="label" for="fReg">Région</label><select class="select" id="fReg"><option value="">Toute la France</option></select></div>
+    <div class="group"><label class="label" for="fDep">Département</label><select class="select" id="fDep"><option value="">Tous les départements</option></select></div>
     <div class="group"><label class="switch"><span><strong>Clubs expérimentés</strong><br><span style="color:var(--muted);font-size:.95rem">Uniquement ceux qui accueillent déjà des para sportifs</span></span><input type="checkbox" id="fTrust"></label></div>
   </div>
   <div class="sheet-foot">
     <button type="button" class="btn outline" id="fReset">Effacer</button>
     <button type="button" class="btn block" data-close id="fApply">Voir les clubs</button>
   </div>
+</dialog>
+
+<!-- Inscrire / proposer un club -->
+<dialog class="sheet" id="propose" aria-labelledby="proposeTitle">
+  <div class="sheet-head">
+    <div class="grabber"></div>
+    <div class="sheet-title">
+      <h2 id="proposeTitle">Inscrire un club</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Fermer"><svg class="icon"><use href="#i-close"/></svg></button>
+    </div>
+    <p style="margin:.4rem 0 0;color:var(--muted)">Club, éducateur ou sportif : ajoute un club qui accueille les personnes en situation de handicap. Il sera vérifié avant d'apparaître.</p>
+  </div>
+  <form class="sheet-body" id="proposeForm" novalidate>
+    <p class="form-sec">Le club</p>
+    <div class="form-grid">
+      <div class="field full"><label for="pNom">Nom du club *</label><input class="input" id="pNom" name="nom" required maxlength="150" autocomplete="organization"></div>
+      <div class="field full"><label for="pSport">Sport(s) proposé(s) aux personnes en situation de handicap *<span class="hint">Sépare-les par des virgules : basket fauteuil, natation</span></label><input class="input" id="pSport" name="sport" required maxlength="200" list="sportList"><datalist id="sportList"></datalist></div>
+      <div class="field full"><label for="pAdresse">Adresse du lieu de pratique<span class="hint">Numéro et rue, par exemple : 12 rue Jean Jaurès</span></label><input class="input" id="pAdresse" name="adresse" maxlength="200" autocomplete="street-address"></div>
+      <div class="field"><label for="pCp">Code postal *</label><input class="input" id="pCp" name="code_postal" required inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code"></div>
+      <div class="field"><label for="pVille">Ville *</label><input class="input" id="pVille" name="ville" required maxlength="80" autocomplete="address-level2"></div>
+    </div>
+    <p class="form-sec">L'accueil</p>
+    <fieldset class="group"><legend>Handicaps accueillis</legend><div class="opts" id="pHandicaps"></div></fieldset>
+    <fieldset class="group"><legend>Type de pratique</legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="pratique" value="handisport"><span>Handisport</span></label>
+        <label class="opt"><input type="radio" name="pratique" value="sport adapte"><span>Sport adapté</span></label>
+        <label class="opt"><input type="radio" name="pratique" value="les deux"><span>Les deux</span></label>
+      </div>
+    </fieldset>
+    <div class="field"><label for="pCreneaux">Créneaux<span class="hint">Catégorie : jours et horaires, séparés par des points-virgules. Ex. : Adultes : mardi 19h-21h ; Enfants : mercredi 14h-15h</span></label><textarea class="textarea" id="pCreneaux" name="creneaux" maxlength="1500"></textarea></div>
+    <div class="field"><label for="pAcces">Accessibilité et accès<span class="hint">Accès fauteuil, vestiaires, parking, transports…</span></label><textarea class="textarea" id="pAcces" name="accessibilite" maxlength="1000"></textarea></div>
+    <div class="field"><label for="pEssai">Séance d'essai</label><input class="input" id="pEssai" name="essai" maxlength="1000" placeholder="Ex. : 2 séances d'essai gratuites"></div>
+    <p class="form-sec">Contact du club (affiché sur la fiche)</p>
+    <div class="form-grid">
+      <div class="field"><label for="pTel">Téléphone</label><input class="input" id="pTel" name="telephone" type="tel" maxlength="30" autocomplete="tel"></div>
+      <div class="field"><label for="pEmail">Email</label><input class="input" id="pEmail" name="email" type="email" maxlength="120"></div>
+      <div class="field full"><label for="pSite">Site internet ou page Facebook</label><input class="input" id="pSite" name="site" type="url" inputmode="url" maxlength="300" placeholder="https://"></div>
+    </div>
+    <p class="form-sec">Toi (jamais affiché)</p>
+    <div class="field"><label for="pPar">Ton email<span class="hint">Facultatif, pour te recontacter si besoin</span></label><input class="input" id="pPar" name="propose_par" type="email" maxlength="120" autocomplete="email"></div>
+    <div class="field"><label for="pMsg">Un message ?</label><textarea class="textarea" id="pMsg" name="message" maxlength="1500" placeholder="Ex. : je suis l'entraîneur, j'accueille deux para judokas"></textarea></div>
+    <div class="hp" aria-hidden="true"><label>Ne pas remplir <input name="site_web" tabindex="-1" autocomplete="off"></label></div>
+    <label class="consent field"><input type="checkbox" id="pOk" required><span>Je confirme que ces informations sont exactes et que les coordonnées du club peuvent être publiées.</span></label>
+    <p class="form-error" id="pError" role="alert"></p>
+    <button type="submit" class="btn block" id="pSend">Envoyer le club</button>
+  </form>
 </dialog>
 
 <!-- Fiche club -->
@@ -671,12 +738,41 @@ const SUPABASE_URL = "https://aogcjrfrfdasxesntlpk.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ZNohzowK1cNBG_-qukzemQ_KAG9EX-Z";
 const CONTACT_EMAIL = "soner.gunebakan0@gmail.com";
 
-const DEPARTEMENTS = { "75": "Paris (75)", "77": "Seine-et-Marne (77)", "78": "Yvelines (78)", "91": "Essonne (91)", "92": "Hauts-de-Seine (92)", "93": "Seine-Saint-Denis (93)", "94": "Val-de-Marne (94)", "95": "Val-d'Oise (95)" };
+// Départements et régions de France (métropole et outre-mer)
+const REGIONS = {
+  "Auvergne-Rhône-Alpes": "01 Ain|03 Allier|07 Ardèche|15 Cantal|26 Drôme|38 Isère|42 Loire|43 Haute-Loire|63 Puy-de-Dôme|69 Rhône|73 Savoie|74 Haute-Savoie",
+  "Bourgogne-Franche-Comté": "21 Côte-d'Or|25 Doubs|39 Jura|58 Nièvre|70 Haute-Saône|71 Saône-et-Loire|89 Yonne|90 Territoire de Belfort",
+  "Bretagne": "22 Côtes-d'Armor|29 Finistère|35 Ille-et-Vilaine|56 Morbihan",
+  "Centre-Val de Loire": "18 Cher|28 Eure-et-Loir|36 Indre|37 Indre-et-Loire|41 Loir-et-Cher|45 Loiret",
+  "Corse": "2A Corse-du-Sud|2B Haute-Corse",
+  "Grand Est": "08 Ardennes|10 Aube|51 Marne|52 Haute-Marne|54 Meurthe-et-Moselle|55 Meuse|57 Moselle|67 Bas-Rhin|68 Haut-Rhin|88 Vosges",
+  "Hauts-de-France": "02 Aisne|59 Nord|60 Oise|62 Pas-de-Calais|80 Somme",
+  "Île-de-France": "75 Paris|77 Seine-et-Marne|78 Yvelines|91 Essonne|92 Hauts-de-Seine|93 Seine-Saint-Denis|94 Val-de-Marne|95 Val-d'Oise",
+  "Normandie": "14 Calvados|27 Eure|50 Manche|61 Orne|76 Seine-Maritime",
+  "Nouvelle-Aquitaine": "16 Charente|17 Charente-Maritime|19 Corrèze|23 Creuse|24 Dordogne|33 Gironde|40 Landes|47 Lot-et-Garonne|64 Pyrénées-Atlantiques|79 Deux-Sèvres|86 Vienne|87 Haute-Vienne",
+  "Occitanie": "09 Ariège|11 Aude|12 Aveyron|30 Gard|31 Haute-Garonne|32 Gers|34 Hérault|46 Lot|48 Lozère|65 Hautes-Pyrénées|66 Pyrénées-Orientales|81 Tarn|82 Tarn-et-Garonne",
+  "Pays de la Loire": "44 Loire-Atlantique|49 Maine-et-Loire|53 Mayenne|72 Sarthe|85 Vendée",
+  "Provence-Alpes-Côte d'Azur": "04 Alpes-de-Haute-Provence|05 Hautes-Alpes|06 Alpes-Maritimes|13 Bouches-du-Rhône|83 Var|84 Vaucluse",
+  "Outre-mer": "971 Guadeloupe|972 Martinique|973 Guyane|974 La Réunion|976 Mayotte"
+};
+const DEPARTEMENTS = {}, REGION_OF = {};
+for (const [reg, list] of Object.entries(REGIONS)) list.split("|").forEach(d => {
+  const code = d.slice(0, d.indexOf(" ")), nom = d.slice(d.indexOf(" ") + 1);
+  DEPARTEMENTS[code] = `${nom} (${code})`; REGION_OF[code] = reg;
+});
+// Code postal -> département (outre-mer sur 3 chiffres, Corse 2A / 2B)
+function depOf(cp) {
+  if (!/^\d{5}$/.test(cp)) return "";
+  if (cp.startsWith("97")) return cp.slice(0, 3);
+  if (cp.startsWith("20")) return +cp.slice(0, 3) < 202 ? "2A" : "2B";
+  return cp.slice(0, 2);
+}
 const PRATIQUES = { "handisport": "Handisport", "sport adapte": "Sport adapté", "les deux": "Handisport et sport adapté" };
 const HANDICAPS = { visuel: "Visuel", auditif: "Auditif", moteur: "Moteur", mental: "Mental", psychique: "Psychique", autisme: "Autisme", polyhandicap: "Polyhandicap" };
 const PAGE = 30; // fiches affichées avant le bouton « Voir plus »
+const PUBLIC_COLS = "id,sport,nom,adresse,code_postal,ville,handicaps,pratique,creneaux,accessibilite,telephone,email,site,label,para_sportifs,encadrant_forme,verifie_le,essai,latitude,longitude";
 
-const state = { q: "", sport: "", dep: "", hs: new Set(), pratique: "", trustOnly: false, favOnly: false, sort: "reco", view: "liste", shown: PAGE };
+const state = { q: "", sport: "", region: "", dep: "", hs: new Set(), pratique: "", trustOnly: false, favOnly: false, sort: "reco", view: "liste", shown: PAGE };
 let clubs = [], userPos = null, meMarker = null, map, cluster, markers = new Map(), activePin = null, installEvt = null;
 
 const $ = id => document.getElementById(id);
@@ -728,7 +824,7 @@ function toClub(r) {
   const t = k => (r[k] == null ? "" : String(r[k])).trim();
   const cp = t("code_postal");
   return {
-    id: r.id, sport: t("sport"), nom: t("nom"), adresse: t("adresse"), cp, ville: t("ville"), dep: cp.slice(0, 2),
+    id: r.id, sport: t("sport"), nom: t("nom"), adresse: t("adresse"), cp, ville: t("ville"), dep: depOf(cp), region: REGION_OF[depOf(cp)] || "",
     handicaps: t("handicaps").split(/[,;]/).map(norm).filter(Boolean),
     pratique: norm(t("pratique")),
     creneaux: t("creneaux").split(";").map(s => s.trim()).filter(Boolean),
@@ -747,7 +843,7 @@ const byId = id => clubs.find(c => String(c.id) === String(id));
 async function loadClubs() {
   const rows = [];
   for (let from = 0; ; from += 1000) {
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/clubs?select=*&order=nom.asc,id.asc&offset=${from}&limit=1000`, { headers: { apikey: SUPABASE_KEY } });
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/clubs?select=${PUBLIC_COLS}&order=nom.asc,id.asc&offset=${from}&limit=1000`, { headers: { apikey: SUPABASE_KEY } });
     if (!r.ok) throw new Error("Supabase " + r.status);
     const page = await r.json();
     rows.push(...page);
@@ -761,6 +857,7 @@ function filtered(ignoreSport) {
   const out = clubs.filter(c => {
     if (state.favOnly && !favs.has(String(c.id))) return false;
     if (!ignoreSport && state.sport && norm(c.sport) !== state.sport) return false;
+    if (state.region && c.region !== state.region) return false;
     if (state.dep && c.dep !== state.dep) return false;
     if (state.hs.size && ![...state.hs].every(h => c.handicaps.includes(h))) return false;
     if (state.pratique && c.pratique !== state.pratique && c.pratique !== "les deux") return false;
@@ -778,7 +875,7 @@ function filtered(ignoreSport) {
     : (trust(b) - trust(a) || (a.dist ?? 0) - (b.dist ?? 0) || a.nom.localeCompare(b.nom, "fr")));
   return out;
 }
-const activeFilters = () => state.hs.size + (state.pratique ? 1 : 0) + (state.dep ? 1 : 0) + (state.trustOnly ? 1 : 0);
+const activeFilters = () => state.hs.size + (state.pratique ? 1 : 0) + (state.region ? 1 : 0) + (state.dep ? 1 : 0) + (state.trustOnly ? 1 : 0);
 function sportCounts(list) {
   const counts = {};
   list.forEach(c => { const s = norm(c.sport); if (s) counts[s] = (counts[s] || 0) + 1; });
@@ -864,7 +961,7 @@ const pinIcon = on => L.divIcon({ className: "", html: `<div class="pin${on ? " 
 const meIcon = L.divIcon({ className: "", html: '<div class="pin me"></div>', iconSize: [20, 20], iconAnchor: [10, 10] });
 
 function initMap() {
-  map = L.map("map", { zoomControl: false, scrollWheelZoom: false }).setView([48.8566, 2.3522], 10);
+  map = L.map("map", { zoomControl: false, scrollWheelZoom: false }).setView([46.6, 2.4], 6);
   L.control.zoom({ position: "bottomright" }).addTo(map);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -1050,16 +1147,25 @@ function toggleFav(id, btn) {
 function fillFilters() {
   $("fHandicaps").innerHTML = Object.entries(HANDICAPS).map(([v, l]) =>
     `<label class="opt"><input type="checkbox" value="${v}"><span>${l}</span></label>`).join("");
-  const deps = [...new Set(clubs.map(c => c.dep).filter(d => DEPARTEMENTS[d]))].sort();
-  $("fDep").innerHTML = '<option value="">Toute l\'Île-de-France</option>' + deps.map(d => `<option value="${d}">${DEPARTEMENTS[d]}</option>`).join("");
+  const regs = [...new Set(clubs.map(c => c.region).filter(Boolean))].sort((a, b) => a.localeCompare(b, "fr"));
+  $("fReg").innerHTML = '<option value="">Toute la France</option>' + regs.map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join("");
+  fillDeps();
+}
+// La liste des départements suit la région choisie (et ne montre que ceux qui ont des clubs)
+function fillDeps() {
+  const deps = [...new Set(clubs.filter(c => !state.region || c.region === state.region).map(c => c.dep).filter(d => DEPARTEMENTS[d]))]
+    .sort((a, b) => a.localeCompare(b, "fr", { numeric: true }));
+  $("fDep").innerHTML = '<option value="">Tous les départements</option>' + deps.map(d => `<option value="${d}">${esc(DEPARTEMENTS[d])}</option>`).join("");
+  if (state.dep && !deps.includes(state.dep)) state.dep = "";
+  $("fDep").value = state.dep;
 }
 function syncFiltersUI() {
   $("fHandicaps").querySelectorAll("input").forEach(i => i.checked = state.hs.has(i.value));
   $("fPratique").querySelectorAll("input").forEach(i => i.checked = i.value === state.pratique);
-  $("fDep").value = state.dep; $("fTrust").checked = state.trustOnly;
+  $("fReg").value = state.region; fillDeps(); $("fTrust").checked = state.trustOnly;
 }
 function setQuery(v) { state.q = v; $("q").value = v; $("heroQ").value = v; $("clearQ").hidden = !v; }
-function resetFilters() { state.hs.clear(); state.pratique = ""; state.dep = ""; state.trustOnly = false; syncFiltersUI(); render(); }
+function resetFilters() { state.hs.clear(); state.pratique = ""; state.region = ""; state.dep = ""; state.trustOnly = false; syncFiltersUI(); render(); }
 function resetAll() { setQuery(""); state.sport = ""; state.favOnly = false; resetFilters(); if (!isDesktop()) setTab("liste"); }
 
 // ===== Localisation =====
@@ -1086,6 +1192,77 @@ function locate(focusMap) {
   }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
 }
 
+// ===== Formulaire « Inscrire un club » : écrit directement dans Supabase (club masqué, à valider) =====
+const CP_FR = cp => !!DEPARTEMENTS[depOf(cp)];
+function openPropose() {
+  const f = $("proposeForm");
+  if (f.dataset.done) { delete f.dataset.done; f.innerHTML = f.dataset.html; fillPropose(); }
+  $("pError").textContent = "";
+  openSheet($("propose"));
+  setTimeout(() => { if (isDesktop()) $("pNom").focus(); }, 50);
+}
+function fillPropose() {
+  $("pHandicaps").innerHTML = Object.entries(HANDICAPS).map(([v, l]) => `<label class="opt"><input type="checkbox" name="handicaps" value="${v}"><span>${l}</span></label>`).join("");
+  $("sportList").innerHTML = Object.keys(sportLabels).sort().map(s => `<option value="${esc(sportLabels[s])}">`).join("");
+}
+function bindPropose() {
+  const f = $("proposeForm");
+  fillPropose();
+  f.addEventListener("submit", sendPropose);
+  f.addEventListener("input", e => e.target.removeAttribute && e.target.removeAttribute("aria-invalid"));
+}
+async function sendPropose(e) {
+  e.preventDefault();
+  const f = $("proposeForm"), fd = new FormData(f);
+  const v = k => (fd.get(k) || "").toString().trim();
+  if (v("site_web")) return; // robot : champ caché rempli
+  // Vérifications
+  const errs = [];
+  const bad = (id, msg) => { $(id).setAttribute("aria-invalid", "true"); errs.push([id, msg]); };
+  if (!v("nom")) bad("pNom", "Indique le nom du club.");
+  if (!v("sport")) bad("pSport", "Indique au moins un sport.");
+  if (!CP_FR(v("code_postal"))) bad("pCp", "Indique un code postal français à 5 chiffres (ex. : 69003).");
+  if (!v("ville")) bad("pVille", "Indique la ville.");
+  if (v("email") && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v("email"))) bad("pEmail", "L'email du club n'est pas valide.");
+  if (v("propose_par") && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v("propose_par"))) bad("pPar", "Ton email n'est pas valide.");
+  if (v("site") && !safeUrl(v("site"))) bad("pSite", "L'adresse du site n'est pas valide.");
+  if (!$("pOk").checked) bad("pOk", "Coche la case de confirmation.");
+  if (errs.length) { $("pError").textContent = errs[0][1]; $(errs[0][0]).focus(); return; }
+
+  const btn = $("pSend");
+  btn.disabled = true; btn.textContent = "Envoi en cours…";
+  $("pError").textContent = "";
+  const pos = await geocode([v("adresse"), v("code_postal"), v("ville")].filter(Boolean).join(" "));
+  const base = {
+    nom: v("nom"), adresse: v("adresse") || null, code_postal: v("code_postal"), ville: v("ville"),
+    handicaps: fd.getAll("handicaps").join(", ") || null, pratique: v("pratique") || null,
+    creneaux: v("creneaux") || null, accessibilite: v("accessibilite") || null, essai: v("essai") || null,
+    telephone: v("telephone") || null, email: v("email") || null, site: v("site") ? safeUrl(v("site")) : null,
+    latitude: pos ? pos.lat : null, longitude: pos ? pos.lon : null,
+    propose_par: v("propose_par") || null, message: v("message") || null, propose_le: new Date().toISOString(),
+    source: "formulaire", publie: false, para_sportifs: false, encadrant_forme: false
+  };
+  // Une ligne par sport, comme dans le reste de la base
+  const sports = [...new Set(v("sport").split(/[,;\n]/).map(x => x.trim().toLowerCase()).filter(Boolean))].slice(0, 8);
+  const rows = sports.map(sport => ({ ...base, sport }));
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/clubs`, {
+      method: "POST",
+      headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify(rows)
+    });
+    if (!r.ok) throw new Error(r.status + " " + (await r.text()).slice(0, 200));
+    f.dataset.done = "1";
+    f.innerHTML = `<div class="done"><div class="ok">${ico("check")}</div><h3 style="margin:0 0 .5rem">Merci, c'est envoyé !</h3>
+      <p style="color:var(--muted);margin:0 0 1.5rem">« ${esc(base.nom)} » sera vérifié puis ajouté à l'annuaire, en général sous quelques jours.</p>
+      <button type="button" class="btn" data-close>Fermer</button></div>`;
+  } catch (err) {
+    console.error(err);
+    $("pError").innerHTML = `L'envoi n'a pas fonctionné. Vérifie ta connexion et réessaie, ou <a href="mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Inscrire un club : " + base.nom)}">écris-nous</a>.`;
+    btn.disabled = false; btn.textContent = "Envoyer le club";
+  }
+}
+
 // ===== Installation de l'appli =====
 addEventListener("beforeinstallprompt", e => {
   e.preventDefault(); installEvt = e;
@@ -1096,9 +1273,14 @@ addEventListener("appinstalled", () => { document.querySelectorAll(".install").f
 
 // ===== Événements =====
 function bind() {
+  $("proposeForm").dataset.html = $("proposeForm").innerHTML;
+  bindPropose();
   const mail = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club handisport : proposer un club");
   const contact = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club handisport : signaler une erreur");
-  document.querySelectorAll(".suggest").forEach(a => a.href = mail);
+  document.querySelectorAll(".suggest").forEach(a => {
+    a.href = mail; // repli si le JavaScript ne fonctionne pas
+    a.addEventListener("click", e => { e.preventDefault(); openPropose(); });
+  });
   document.querySelectorAll(".contact, #contactLink").forEach(a => a.href = contact);
   $("year").textContent = new Date().getFullYear();
   if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) $("installCard").hidden = true;
@@ -1138,6 +1320,7 @@ function bind() {
   });
   $("fHandicaps").addEventListener("change", e => { e.target.checked ? state.hs.add(e.target.value) : state.hs.delete(e.target.value); render(); });
   $("fPratique").addEventListener("change", e => { state.pratique = e.target.value; render(); });
+  $("fReg").addEventListener("change", () => { state.region = $("fReg").value; state.dep = ""; fillDeps(); render(); });
   $("fDep").addEventListener("change", () => { state.dep = $("fDep").value; render(); });
   $("fTrust").addEventListener("change", () => { state.trustOnly = $("fTrust").checked; render(); });
   $("fReset").addEventListener("click", resetFilters);
@@ -1181,6 +1364,7 @@ async function start() {
   [...favs].forEach(id => { if (!byId(id)) favs.delete(id); });
   storeSet("favs", [...favs]);
   fillFilters();
+  fillPropose();
   renderSite();
   render();
   const m = /^#club-(.+)$/.exec(location.hash);

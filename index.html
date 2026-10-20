@@ -24,6 +24,12 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Paralliance","alternateName":"Paralliance, l'annuaire parasport","url":"https://monclubhandi.github.io/mon-club-handi/","inLanguage":"fr","areaServed":"FR","description":"Annuaire des clubs de sport en France qui accueillent les personnes en situation de handicap : handisport et sport adapté."}
 </script>
+<script>
+  // Appli installée (lancée depuis l'icône) -> design d'appli ; navigateur -> design de site, même sur téléphone.
+  // « ?mode=app » force le mode appli (pratique pour tester).
+  if (matchMedia("(display-mode: standalone)").matches || navigator.standalone === true || /[?&]mode=app\b/.test(location.search))
+    document.documentElement.classList.add("app");
+</script>
 <script>if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js"));</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%232F6F6A'/><rect x='17' y='13' width='8' height='38' rx='4' fill='white'/><circle cx='34' cy='26' r='11' fill='none' stroke='white' stroke-width='8'/><circle cx='34' cy='26' r='3.6' fill='%23F5B841'/><circle cx='44.5' cy='46.5' r='5' fill='%23F5B841'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,6 +121,9 @@
   .tag { display: inline-flex; align-items: center; gap: .3rem; font-size: .85rem; padding: .2rem .6rem; border-radius: 999px; background: color-mix(in srgb, var(--text) 7%, transparent); color: var(--muted); }
   .tag .icon { width: 1em; height: 1em; }
   .tag.trust { background: var(--accent-tint); color: var(--accent-dark); font-weight: 700; }
+  .view-toggle { display: none; gap: .25rem; padding: .25rem; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); width: max-content; margin: .25rem 0 0; }
+  .view-toggle button { border: 0; background: none; cursor: pointer; display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; padding: .5rem 1rem; border-radius: 999px; color: var(--muted); min-height: 2.6rem; }
+  .view-toggle button[aria-pressed="true"] { background: var(--panel); color: var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
   .eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .9rem; color: var(--accent-dark); background: var(--accent-tint); padding: .35rem .8rem; border-radius: 999px; }
 
   /* ===== Barre du haut ===== */
@@ -353,35 +362,70 @@
   .tabbar .badge[hidden] { display: none; }
 
   /* =====================================================================
-     TÉLÉPHONE ET TABLETTE (< 960 px) : l'appli
+     APPLI INSTALLÉE (html.app) SUR TÉLÉPHONE ET TABLETTE : onglets en bas, carte plein écran
      ===================================================================== */
   @media (max-width: 959.98px) {
-    body { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
-    .site-nav { flex: none; }
-    .site-nav.compact .nav-in { height: 0; opacity: 0; }
-    .only-desktop { display: none !important; }
-    main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
-    #annuaire { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0; background: var(--bg); }
-    .dir-head { flex: none; width: 100%; max-width: none; margin: 0; min-width: 0; padding-top: .6rem; border-bottom: 1px solid var(--line); }
-    .dir-body { flex: 1; min-height: 0; position: relative; display: flex; padding: 0; width: 100%; max-width: none; margin: 0; }
-    .pane-list { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 1rem calc(var(--tabbar) + 1.5rem + env(safe-area-inset-bottom, 0px)); }
-    .pane-list > * { max-width: 44rem; margin-left: auto; margin-right: auto; }
-    .pane-map { position: absolute; inset: 0; bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); visibility: hidden; }
-    .dir-body[data-view="carte"] .pane-map { visibility: visible; }
-    .dir-body[data-view="carte"] .pane-list { visibility: hidden; }
+    html.app body { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+    html.app .site-nav { flex: none; }
+    html.app .site-nav.compact .nav-in { height: 0; opacity: 0; }
+    html.app .only-desktop { display: none !important; }
+    html.app main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+    html.app #annuaire { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0; background: var(--bg); }
+    html.app .dir-head { flex: none; width: 100%; max-width: none; margin: 0; min-width: 0; padding-top: .6rem; border-bottom: 1px solid var(--line); }
+    html.app .dir-body { flex: 1; min-height: 0; position: relative; display: flex; padding: 0; width: 100%; max-width: none; margin: 0; }
+    html.app .pane-list { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 1rem calc(var(--tabbar) + 1.5rem + env(safe-area-inset-bottom, 0px)); }
+    html.app .pane-list > * { max-width: 44rem; margin-left: auto; margin-right: auto; }
+    html.app .pane-map { position: absolute; inset: 0; bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); visibility: hidden; }
+    html.app .dir-body[data-view="carte"] .pane-map { visibility: visible; }
+    html.app .dir-body[data-view="carte"] .pane-list { visibility: hidden; }
     /* Onglet « Infos » : la partie site, dans l'appli */
-    .infos { display: none; }
-    body[data-tab="infos"] #annuaire { display: none; }
-    body[data-tab="infos"] .infos { display: block; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); }
-    .section { padding: 2.25rem 0; }
-    .section-head { margin-bottom: 1.25rem; }
-    .section-head h2 { font-size: 1.5rem; }
-    .steps, .why, .about { grid-template-columns: 1fr; gap: .9rem; }
-    .step, .feat { padding: 1.2rem; }
-    .about blockquote { font-size: 1.15rem; }
-    .foot-grid { grid-template-columns: 1fr 1fr; }
-    .foot-grid > :first-child { grid-column: 1 / -1; }
-    dialog.sheet .sheet-head { cursor: grab; }
+    html.app .infos { display: none; }
+    html.app body[data-tab="infos"] #annuaire { display: none; }
+    html.app body[data-tab="infos"] .infos { display: block; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); }
+    html.app .section { padding: 2.25rem 0; }
+    html.app .section-head { margin-bottom: 1.25rem; }
+    html.app .section-head h2 { font-size: 1.5rem; }
+    html.app .steps, html.app .why, html.app .about { grid-template-columns: 1fr; gap: .9rem; }
+    html.app .step, html.app .feat { padding: 1.2rem; }
+    html.app .about blockquote { font-size: 1.15rem; }
+    html.app .foot-grid { grid-template-columns: 1fr 1fr; }
+    html.app .foot-grid > :first-child { grid-column: 1 / -1; }
+    html.app dialog.sheet .sheet-head { cursor: grab; }
+  }
+
+  /* =====================================================================
+     SITE DANS UN NAVIGATEUR, SUR TÉLÉPHONE ET TABLETTE : la page complète, adaptée au petit écran
+     ===================================================================== */
+  @media (max-width: 959.98px) {
+    html:not(.app) { --tabbar: 0px; }
+    html:not(.app) .tabbar, html:not(.app) .intro, html:not(.app) .nav-actions .btn, html:not(.app) .hero-visual { display: none !important; }
+    html:not(.app) .site-nav { position: sticky; top: 0; }
+    html:not(.app) .hero { padding: 2rem 0 2.25rem; }
+    html:not(.app) .hero-grid { grid-template-columns: 1fr; gap: 0; }
+    html:not(.app) .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); margin: .8rem 0; }
+    html:not(.app) .hero .lead { font-size: 1.05rem; margin-bottom: 1.25rem; }
+    html:not(.app) .hero-search { flex-wrap: wrap; border-radius: var(--r-lg); padding: .5rem; }
+    html:not(.app) .hero-search label { flex: 1 1 100%; padding: 0 .5rem; border-bottom: 1px solid var(--line); }
+    html:not(.app) .hero-search .btn { flex: 1 1 0; padding: .6rem .8rem; }
+    html:not(.app) .stats { grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: 1.75rem; }
+    html:not(.app) .stat { padding: 1rem; }
+    html:not(.app) .stat b { font-size: 1.8rem; }
+    html:not(.app) .sports-grid { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .6rem; }
+    html:not(.app) .section, html:not(.app) #annuaire { padding: 2.5rem 0; }
+    html:not(.app) .section-head { margin-bottom: 1.25rem; }
+    html:not(.app) .section-head h2 { font-size: 1.6rem; }
+    html:not(.app) .steps, html:not(.app) .why, html:not(.app) .about { grid-template-columns: 1fr; gap: .9rem; }
+    html:not(.app) .step, html:not(.app) .feat { padding: 1.2rem; }
+    html:not(.app) .about blockquote { font-size: 1.15rem; }
+    html:not(.app) .foot-grid { grid-template-columns: 1fr 1fr; }
+    html:not(.app) .foot-grid > :first-child { grid-column: 1 / -1; }
+    html:not(.app) .dir-head .search { margin-bottom: .25rem; }
+    html:not(.app) .view-toggle { display: flex; }
+    html:not(.app) .dir-body { display: block; }
+    html:not(.app) .pane-map { display: none; position: relative; height: 70vh; min-height: 22rem; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); margin-top: .75rem; }
+    html:not(.app) .dir-body[data-view="carte"] .pane-map { display: block; }
+    html:not(.app) .dir-body[data-view="carte"] .pane-list .list, html:not(.app) .dir-body[data-view="carte"] .pane-list .geo-status { display: none; }
+    html:not(.app) .toast { bottom: 1.25rem; }
   }
 
   /* =====================================================================
@@ -546,6 +590,10 @@
           <label><span class="sr-only">Trier par</span>
             <select class="sort" id="sort"><option value="reco">Recommandés</option><option value="near">Plus proches</option><option value="az">De A à Z</option></select>
           </label>
+        </div>
+        <div class="view-toggle" role="group" aria-label="Affichage">
+          <button type="button" data-view="liste" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Liste</button>
+          <button type="button" data-view="carte" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>Carte</button>
         </div>
         <p class="geo-status" id="geoStatus" aria-live="polite"></p>
         <ul class="list" id="list">
@@ -796,6 +844,7 @@ const safeUrl = s => { const u = (s || "").trim(); if (!u) return ""; if (/^[a-z
 const frDate = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : (d || ""); };
 const fmtKm = d => d == null ? "" : (d < 10 ? d.toFixed(1).replace(".", ",") : Math.round(d)) + " km";
 const isDesktop = () => matchMedia("(min-width: 960px)").matches;
+const isApp = () => document.documentElement.classList.contains("app") && !isDesktop();
 
 function km(a, b) {
   const R = 6371, rad = x => x * Math.PI / 180;
@@ -974,8 +1023,8 @@ function renderSite() {
   $("heroCard").innerHTML = best ? cardHtml(best, { hero: true }) : "";
 }
 function gotoDirectory() {
-  if (isDesktop()) $("annuaire").scrollIntoView({ behavior: "smooth", block: "start" });
-  else setTab("liste");
+  if (isApp()) setTab("liste");
+  else $("annuaire").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // ===== Carte =====
@@ -995,7 +1044,7 @@ function initMap() {
   map.on("click", hidePeek);
   map.on("focus", () => map.scrollWheelZoom.enable());
   map.on("blur", () => map.scrollWheelZoom.disable());
-  if (!isDesktop()) map.scrollWheelZoom.enable();
+  if (isApp()) map.scrollWheelZoom.enable();
 }
 
 let fitKey = "";
@@ -1192,7 +1241,7 @@ function syncFiltersUI() {
 }
 function setQuery(v) { state.q = v; $("q").value = v; $("heroQ").value = v; $("clearQ").hidden = !v; }
 function resetFilters() { state.hs.clear(); state.pratique = ""; state.region = ""; state.dep = ""; state.trustOnly = false; syncFiltersUI(); render(); }
-function resetAll() { setQuery(""); state.sport = ""; state.favOnly = false; resetFilters(); if (!isDesktop()) setTab("liste"); }
+function resetAll() { setQuery(""); state.sport = ""; state.favOnly = false; resetFilters(); if (isApp()) setTab("liste"); }
 
 // ===== Localisation =====
 function setUserPos(p) {
@@ -1343,7 +1392,7 @@ function bind() {
     const s = e.target.closest("[data-goto-sport]");
     if (s) { state.sport = s.dataset.gotoSport; render(); gotoDirectory(); return; }
     const g = e.target.closest("[data-goto]");
-    if (g && !isDesktop()) { e.preventDefault(); setTab(g.dataset.goto); }
+    if (g && isApp()) { e.preventDefault(); setTab(g.dataset.goto); }
     const ib = e.target.closest(".install");
     if (ib && installEvt) { installEvt.prompt(); installEvt = null; }
   });
@@ -1375,6 +1424,13 @@ function bind() {
   $("fTrust").addEventListener("change", () => { state.trustOnly = $("fTrust").checked; render(); });
   $("fReset").addEventListener("click", resetFilters);
   document.querySelectorAll(".tabbar button").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
+  // Site sur petit écran : bascule Liste / Carte
+  document.querySelectorAll(".view-toggle button").forEach(b => b.addEventListener("click", () => {
+    state.view = b.dataset.view;
+    $("app").dataset.view = state.view;
+    document.querySelectorAll(".view-toggle button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    if (state.view === "carte") setTimeout(() => { map.invalidateSize(); fitKey = ""; render(true); }, 30);
+  }));
 
   $("list").addEventListener("click", e => {
     const f = e.target.closest("[data-fav]");
@@ -1391,7 +1447,7 @@ function bind() {
   // Téléphone : la barre du haut se replie quand on fait défiler la liste
   const pl = $("paneList"), nav = $("siteNav");
   pl.addEventListener("scroll", () => {
-    if (isDesktop()) return;
+    if (!isApp()) return;
     if (pl.scrollTop > 80) nav.classList.add("compact");
     else if (pl.scrollTop < 10) nav.classList.remove("compact");
   }, { passive: true });

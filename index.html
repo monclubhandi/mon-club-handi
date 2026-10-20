@@ -3,14 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mon club handisport – Trouve un club parasport près de chez toi !</title>
-<meta name="description" content="Trouve un club de sport qui accueille les personnes en situation de handicap près de chez toi : handisport, sport adapté, créneaux, accessibilité, contact.">
+<title>Mon club handisport – Trouve un club parasport en Île-de-France</title>
+<meta name="description" content="Trouve un club de sport qui accueille les personnes en situation de handicap en Île-de-France : handisport, sport adapté, créneaux, accessibilité et contacts. Gratuit, sans inscription.">
 <link rel="canonical" href="https://monclubhandi.github.io/mon-club-handi/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mon club handisport">
-<meta property="og:description" content="Trouve un club de sport qui accueille les personnes en situation de handicap en Île-de-France : créneaux, accessibilité, contact.">
+<meta property="og:site_name" content="Mon club handisport">
+<meta property="og:title" content="Mon club handisport – le sport, avec un club qui sait t'accueillir">
+<meta property="og:description" content="L'annuaire des clubs d'Île-de-France qui accueillent les sportifs en situation de handicap : créneaux, accès, contacts.">
 <meta property="og:url" content="https://monclubhandi.github.io/mon-club-handi/">
 <meta property="og:image" content="https://monclubhandi.github.io/mon-club-handi/icon-512.png">
+<meta property="og:locale" content="fr_FR">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121A22" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
@@ -19,6 +21,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Club handi">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Mon club handisport","url":"https://monclubhandi.github.io/mon-club-handi/","inLanguage":"fr","description":"Annuaire des clubs de sport d'Île-de-France qui accueillent les personnes en situation de handicap : handisport et sport adapté."}
+</script>
 <script>if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js"));</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232F6F6A'/><path d='M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z' fill='white'/><circle cx='16' cy='13.5' r='2.6' fill='%232F6F6A'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,100 +32,76 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
 <style>
+  /* =====================================================================
+     Un seul code, deux expériences :
+     - téléphone (< 960 px) : une appli (onglets en bas, carte plein écran, fiches en feuille)
+     - ordinateur (>= 960 px) : un site (accueil, chiffres, sports, annuaire, à propos)
+     ===================================================================== */
   :root {
-    --white: #FFFFFF;
-    --soft: #F4F6F8;
-    --line: #E3E6EB;
-    --text: #1F2A37;
-    --muted: #5B6675;
-    --accent: #2F6F6A;
-    --accent-dark: #24544F;
-    --accent-tint: #E9F2F1;
-    --on-accent: #FFFFFF;
-    --bg: #FFFFFF;
-    --panel: #FFFFFF;
+    --soft: #F4F6F8; --line: #E3E6EB; --text: #1F2A37; --muted: #5B6675;
+    --accent: #2F6F6A; --accent-dark: #24544F; --accent-tint: #E9F2F1; --on-accent: #FFFFFF;
+    --bg: #FFFFFF; --panel: #FFFFFF; --hero: #F3F8F7;
     --shadow: 0 10px 30px -16px rgba(31, 42, 55, .35);
+    --shadow-lg: 0 30px 60px -30px rgba(31, 42, 55, .45);
     --danger: #B4413C;
     --r-xl: 24px; --r-lg: 18px; --r-md: 14px; --r-sm: 10px;
-    --tabbar: 4.25rem;
+    --tabbar: 4.25rem; --max: 76rem;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --white: #121A22; --soft: #18222C; --line: #2A3643; --text: #EEF1F4; --muted: #A8B3BF;
+      --soft: #18222C; --line: #2A3643; --text: #EEF1F4; --muted: #A8B3BF;
       --accent: #6CC0B7; --accent-dark: #8ED3CB; --accent-tint: #1C3331; --on-accent: #0E1A19;
-      --bg: #121A22; --panel: #18222C; --shadow: 0 10px 30px -16px rgba(0, 0, 0, .7); --danger: #F08A84;
+      --bg: #121A22; --panel: #18222C; --hero: #14211F; --danger: #F08A84;
+      --shadow: 0 10px 30px -16px rgba(0, 0, 0, .7); --shadow-lg: 0 30px 60px -30px rgba(0, 0, 0, .8);
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --white: #121A22; --soft: #18222C; --line: #2A3643; --text: #EEF1F4; --muted: #A8B3BF;
+    --soft: #18222C; --line: #2A3643; --text: #EEF1F4; --muted: #A8B3BF;
     --accent: #6CC0B7; --accent-dark: #8ED3CB; --accent-tint: #1C3331; --on-accent: #0E1A19;
-    --bg: #121A22; --panel: #18222C; --shadow: 0 10px 30px -16px rgba(0, 0, 0, .7); --danger: #F08A84;
+    --bg: #121A22; --panel: #18222C; --hero: #14211F; --danger: #F08A84;
+    --shadow: 0 10px 30px -16px rgba(0, 0, 0, .7); --shadow-lg: 0 30px 60px -30px rgba(0, 0, 0, .8);
     color-scheme: dark;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { height: 100%; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
     font-family: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
-    font-size: 1.0625rem; line-height: 1.5;
-    display: flex; flex-direction: column; height: 100dvh; overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
+    font-size: 1.0625rem; line-height: 1.55; -webkit-tap-highlight-color: transparent;
   }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
+  h1, h2, h3 { line-height: 1.15; letter-spacing: -.015em; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .skip { position: absolute; left: 1rem; top: -4rem; z-index: 100; background: var(--accent); color: var(--on-accent); padding: .6rem 1rem; border-radius: var(--r-sm); font-weight: 700; }
+  .skip:focus { top: 1rem; }
   .icon { width: 1.2em; height: 1.2em; flex: none; }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 
-  /* ===== En-tête : marque, recherche, filtres rapides ===== */
-  .top {
-    flex: none; background: var(--bg); border-bottom: 1px solid var(--line); z-index: 20;
-    padding: env(safe-area-inset-top, 0px) 0 0;
+  /* ===== Boutons, puces, étiquettes ===== */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .6rem 1.25rem;
+    border-radius: 999px; border: 2px solid var(--accent); background: var(--accent); color: var(--on-accent);
+    font-weight: 700; text-decoration: none; cursor: pointer; white-space: nowrap; transition: background .15s, border-color .15s;
   }
-  .top-in { max-width: 80rem; margin: 0 auto; padding: 0 1rem; display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 1rem; }
-  .search, .chips { grid-column: 1 / -1; }
-  .brand-actions { overflow: hidden; transition: height .25s ease, opacity .2s ease; height: 3.5rem; }
-  .top.compact .brand-actions { height: 0; opacity: 0; }
-  .brand {
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    height: 3.5rem; overflow: hidden; transition: height .25s ease, opacity .2s ease;
-  }
-  .top.compact .brand { height: 0; opacity: 0; }
-  .logo { display: flex; align-items: center; gap: .55rem; font-weight: 700; font-size: 1.1rem; text-decoration: none; }
-  .logo svg { width: 1.9rem; height: 1.9rem; }
+  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .btn.outline { background: transparent; color: var(--accent); }
+  .btn.outline:hover { background: var(--accent-tint); }
+  .btn.block { width: 100%; }
   .icon-btn {
-    display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%;
-    border: 1px solid var(--line); background: var(--panel); cursor: pointer; text-decoration: none; flex: none;
+    display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; flex: none;
+    border: 1px solid var(--line); background: var(--panel); cursor: pointer; text-decoration: none;
   }
   .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .brand-actions { display: flex; gap: .5rem; align-items: center; }
-  .propose { display: none; font-weight: 700; color: var(--accent); text-decoration: none; }
-
-  .search {
-    display: flex; align-items: center; gap: .6rem; height: 3.1rem; padding: 0 .4rem 0 1rem;
-    background: var(--soft); border: 1px solid var(--line); border-radius: 999px; margin: .35rem 0 .7rem;
-  }
-  .search:focus-within { border-color: var(--accent); background: var(--panel); }
-  .search input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; color: var(--text); height: 100%; outline: none; }
-  .search input::placeholder { color: var(--muted); }
-  .search input::-webkit-search-cancel-button { display: none; }
-  .search .clear { width: 2.3rem; height: 2.3rem; border: 0; background: none; border-radius: 50%; cursor: pointer; display: grid; place-items: center; color: var(--muted); }
-  .search .clear[hidden] { display: none; }
-
-  .chips {
-    display: flex; gap: .5rem; overflow-x: auto; padding: 0 1rem .75rem; margin: 0 -1rem;
-    scrollbar-width: none; scroll-snap-type: x proximity;
-  }
-  .chips::-webkit-scrollbar { display: none; }
   .chip {
     flex: none; display: inline-flex; align-items: center; gap: .4rem; height: 2.5rem; padding: 0 1rem;
     border-radius: 999px; border: 1px solid var(--line); background: var(--panel); cursor: pointer;
-    font-weight: 700; font-size: .95rem; white-space: nowrap; scroll-snap-align: start;
-    transition: background .15s, border-color .15s, color .15s;
+    font-weight: 700; font-size: .95rem; white-space: nowrap; scroll-snap-align: start; transition: background .15s, border-color .15s, color .15s;
   }
   .chip:hover { border-color: var(--accent); }
   .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
@@ -128,26 +109,48 @@
   .chip .badge { min-width: 1.35rem; height: 1.35rem; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: .8rem; display: inline-grid; place-items: center; padding: 0 .3rem; }
   .chip .badge[hidden] { display: none; }
   .chip.sep { padding: 0; width: 1px; border: 0; background: var(--line); height: 1.6rem; align-self: center; pointer-events: none; }
+  .pill { display: inline-block; font-size: .82rem; font-weight: 700; padding: .2rem .65rem; border-radius: 999px; background: var(--accent-tint); color: var(--accent-dark); }
+  .tags { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+  .tag { display: inline-flex; align-items: center; gap: .3rem; font-size: .85rem; padding: .2rem .6rem; border-radius: 999px; background: var(--soft); color: var(--muted); }
+  .tag .icon { width: 1em; height: 1em; }
+  .tag.trust { background: var(--accent-tint); color: var(--accent-dark); font-weight: 700; }
+  .eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .9rem; color: var(--accent-dark); background: var(--accent-tint); padding: .35rem .8rem; border-radius: 999px; }
 
-  /* ===== Contenu : liste et carte ===== */
-  .app { flex: 1; min-height: 0; position: relative; display: flex; }
-  .pane-list { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding-bottom: calc(var(--tabbar) + 1.5rem + env(safe-area-inset-bottom, 0px)); }
-  .pane-map { position: absolute; inset: 0; bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); visibility: hidden; }
-  .app[data-view="carte"] .pane-map { visibility: visible; }
-  .app[data-view="carte"] .pane-list { visibility: hidden; }
-  #map { position: absolute; inset: 0; z-index: 0; background: var(--soft); }
-  .list-in { max-width: 48rem; margin: 0 auto; padding: 0 1rem; }
+  /* ===== Barre du haut ===== */
+  .site-nav { background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); z-index: 40; padding-top: env(safe-area-inset-top, 0px); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 3.75rem; transition: height .25s ease, opacity .2s ease; overflow: hidden; }
+  .logo { display: flex; align-items: center; gap: .55rem; font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+  .logo svg { width: 1.9rem; height: 1.9rem; }
+  .nav-links { display: none; gap: .25rem; align-items: center; }
+  .nav-links a { text-decoration: none; font-weight: 700; color: var(--muted); padding: .5rem .8rem; border-radius: 999px; }
+  .nav-links a:hover { color: var(--text); background: var(--soft); }
+  .nav-actions { display: flex; gap: .5rem; align-items: center; }
+  .install[hidden] { display: none; }
 
-  .intro { padding: 1.1rem 0 .4rem; }
-  .intro h1 { font-size: 1.45rem; line-height: 1.2; margin: 0 0 .35rem; letter-spacing: -.01em; }
+  /* ===== Recherche et filtres rapides (annuaire) ===== */
+  .search {
+    display: flex; align-items: center; gap: .6rem; height: 3.1rem; padding: 0 .4rem 0 1rem;
+    background: var(--soft); border: 1px solid var(--line); border-radius: 999px;
+  }
+  .search:focus-within { border-color: var(--accent); background: var(--panel); }
+  .search input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; color: var(--text); height: 100%; outline: none; }
+  .search input::placeholder { color: var(--muted); }
+  .search input::-webkit-search-cancel-button { display: none; }
+  .search .clear { width: 2.3rem; height: 2.3rem; border: 0; background: none; border-radius: 50%; cursor: pointer; display: grid; place-items: center; color: var(--muted); }
+  .search .clear[hidden] { display: none; }
+  .chips { display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; padding: .75rem 1rem; margin: 0 -1rem; }
+  .chips::-webkit-scrollbar { display: none; }
+
+  /* ===== Liste des clubs ===== */
+  .intro { padding: 1rem 0 .25rem; }
+  .intro h1 { font-size: 1.4rem; margin: 0 0 .3rem; }
   .intro p { margin: 0; color: var(--muted); font-size: 1rem; }
-  .summary { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: 1rem 0 .75rem; }
+  .summary { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .9rem 0 .75rem; }
   .count { margin: 0; font-weight: 700; }
   .count small { display: block; font-weight: 400; color: var(--muted); font-size: .9rem; }
   .sort { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; height: 2.5rem; padding: 0 .9rem; font: inherit; font-size: .95rem; color: var(--text); }
   .geo-status { margin: 0 0 .75rem; color: var(--muted); font-size: .95rem; }
   .geo-status:empty { display: none; }
-
   .list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
   .card {
     position: relative; display: block; width: 100%; text-align: left; cursor: pointer;
@@ -157,56 +160,34 @@
   .card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
   .card:active { transform: scale(.99); }
   .card.focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
-  .card h2 { font-size: 1.12rem; line-height: 1.25; margin: .35rem 0 .25rem; }
+  .card h3 { font-size: 1.12rem; line-height: 1.25; margin: .35rem 0 .25rem; letter-spacing: 0; }
   .card .where { display: flex; align-items: center; gap: .35rem; color: var(--muted); font-size: .95rem; margin: 0; }
-  .tags { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
   .card .tags { margin-top: .6rem; }
-  .tag .icon { width: 1em; height: 1em; }
-  .tag { display: inline-flex; align-items: center; gap: .3rem; font-size: .85rem; padding: .2rem .6rem; border-radius: 999px; background: var(--soft); color: var(--muted); }
-  .tag.trust { background: var(--accent-tint); color: var(--accent-dark); font-weight: 700; }
-  .pill { display: inline-block; font-size: .82rem; font-weight: 700; padding: .2rem .65rem; border-radius: 999px; background: var(--accent-tint); color: var(--accent-dark); }
   .dist { font-weight: 700; color: var(--text); }
-  .fav {
-    position: absolute; top: .6rem; right: .6rem; width: 2.75rem; height: 2.75rem; border-radius: 50%;
-    border: 0; background: none; cursor: pointer; display: grid; place-items: center; color: var(--muted);
-  }
-  .fav:hover { color: var(--danger); }
-  .fav[aria-pressed="true"] { color: var(--danger); }
-  .fav[aria-pressed="true"] svg { fill: currentColor; }
-  .fav.pop svg { animation: pop .35s ease; }
+  .fav { position: absolute; top: .6rem; right: .6rem; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 0; background: none; cursor: pointer; display: grid; place-items: center; color: var(--muted); }
+  .fav:hover, .fav[aria-pressed="true"] { color: var(--danger); }
+  .fav[aria-pressed="true"] svg, .icon-btn[aria-pressed="true"] svg { fill: currentColor; }
+  .icon-btn[aria-pressed="true"] { color: var(--danger); }
+  .pop svg { animation: pop .35s ease; }
   @keyframes pop { 40% { transform: scale(1.35); } }
-
-  .more { display: flex; justify-content: center; padding: 1rem 0; }
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .6rem 1.2rem;
-    border-radius: 999px; border: 2px solid var(--accent); background: var(--accent); color: var(--on-accent);
-    font-weight: 700; text-decoration: none; cursor: pointer;
-  }
-  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
-  .btn.outline { background: transparent; color: var(--accent); }
-  .btn.outline:hover { background: var(--accent-tint); }
-  .btn.block { width: 100%; }
-
+  .more { display: flex; justify-content: center; padding: 1rem 0; list-style: none; }
   .state { text-align: center; padding: 2.5rem 1rem; color: var(--muted); list-style: none; }
   .state strong { color: var(--text); }
   .skeleton { height: 7.5rem; border-radius: var(--r-lg); background: linear-gradient(90deg, var(--soft) 25%, var(--line) 50%, var(--soft) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; list-style: none; }
   @keyframes shimmer { to { background-position: -200% 0; } }
 
-  .foot { margin-top: 2.5rem; padding: 1.5rem 0 0; border-top: 1px solid var(--line); }
-  .foot h2 { font-size: 1.1rem; margin: 0 0 .35rem; }
-  .foot p { color: var(--muted); margin: 0 0 1rem; }
-  .fine { font-size: .9rem; color: var(--muted); margin-top: 1.5rem; }
-
-  /* Carte */
+  /* ===== Carte ===== */
+  #map { position: absolute; inset: 0; z-index: 0; background: var(--soft); }
   .pin { width: 34px; height: 34px; border-radius: 50% 50% 50% 0; background: var(--accent); transform: rotate(-45deg); border: 3px solid #fff; box-shadow: 0 3px 8px rgba(0,0,0,.3); transition: transform .15s; }
   .pin.on { transform: rotate(-45deg) scale(1.25); background: var(--accent-dark); }
   .pin.me { border-radius: 50%; background: #1F6FEB; width: 20px; height: 20px; transform: none; box-shadow: 0 0 0 6px rgba(31,111,235,.25); }
   .cluster { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--on-accent); border: 3px solid #fff; box-shadow: 0 3px 8px rgba(0,0,0,.3); display: grid; place-items: center; font-weight: 700; font-family: "Atkinson Hyperlegible", Arial, sans-serif; }
   .leaflet-tile-pane { filter: saturate(.45) brightness(1.04); }
+  .leaflet-container { font-family: inherit; }
   .map-tools { position: absolute; right: .75rem; top: .75rem; z-index: 500; display: grid; gap: .5rem; }
   .map-tools .icon-btn { box-shadow: var(--shadow); width: 3rem; height: 3rem; }
   .peek {
-    position: absolute; left: .75rem; right: .75rem; bottom: .75rem; z-index: 500;
+    position: absolute; left: .75rem; right: .75rem; bottom: .75rem; z-index: 500; max-width: 30rem;
     background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow);
     padding: .9rem 1rem; display: flex; align-items: center; gap: .75rem; animation: rise .25s cubic-bezier(.2,.8,.2,1);
   }
@@ -216,39 +197,91 @@
   .peek span { color: var(--muted); font-size: .92rem; }
   @keyframes rise { from { transform: translateY(30px); opacity: 0; } }
 
-  /* ===== Barre d'onglets (téléphone) ===== */
-  .tabbar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(3, 1fr);
-    height: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px);
-    background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid var(--line);
-  }
-  .tabbar button {
-    border: 0; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: .15rem; font-size: .82rem; font-weight: 700; color: var(--muted); position: relative;
-  }
-  .tabbar button .icon { width: 1.5rem; height: 1.5rem; }
-  .tabbar button[aria-pressed="true"] { color: var(--accent); }
-  .tabbar button[aria-pressed="true"]::before { content: ""; position: absolute; top: 0; left: 30%; right: 30%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
-  .tabbar .badge { position: absolute; top: .45rem; left: calc(50% + .45rem); min-width: 1.2rem; height: 1.2rem; border-radius: 999px; background: var(--danger); color: #fff; font-size: .72rem; display: grid; place-items: center; padding: 0 .25rem; }
-  .tabbar .badge[hidden] { display: none; }
+  /* ===== Partie « site » : accueil, sports, explications, à propos ===== */
+  .section { padding: 4.5rem 0; }
+  .section.alt { background: var(--soft); }
+  .section-head { max-width: 44rem; margin: 0 0 2.25rem; }
+  .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: .75rem 0 .5rem; }
+  .section-head p { color: var(--muted); margin: 0; font-size: 1.1rem; }
 
-  /* ===== Feuilles (filtres et fiche club) ===== */
+  .hero { background: radial-gradient(1200px 500px at 85% -10%, var(--accent-tint), transparent 60%), var(--hero); padding: 4.5rem 0 3.5rem; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3.5rem; align-items: center; }
+  .hero h1 { font-size: clamp(2.4rem, 4.6vw, 3.6rem); margin: 1rem 0 1rem; max-width: 16ch; }
+  .hero .lead { font-size: 1.2rem; color: var(--muted); margin: 0 0 2rem; max-width: 34rem; }
+  .hero-search { display: flex; gap: .6rem; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: .4rem; box-shadow: var(--shadow-lg); max-width: 40rem; }
+  .hero-search label { flex: 1; display: flex; align-items: center; gap: .6rem; padding-left: 1rem; color: var(--muted); }
+  .hero-search input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; font-size: 1.05rem; color: var(--text); outline: none; height: 3rem; }
+  .hero-search .btn.outline { border-color: var(--line); color: var(--text); }
+  .popular { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: 1.25rem; color: var(--muted); font-size: .95rem; }
+  .popular button { border: 0; background: none; cursor: pointer; font-weight: 700; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; padding: .2rem .25rem; }
+  .hero-visual { position: relative; min-height: 22rem; }
+  .hero-visual .card { cursor: pointer; box-shadow: var(--shadow-lg); padding: 1.25rem 3.6rem 1.25rem 1.25rem; }
+  .hero-visual .stack { position: relative; transform: rotate(-1.5deg); }
+  .hero-visual .stack::before, .hero-visual .stack::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-lg); background: var(--panel); border: 1px solid var(--line); z-index: -1; }
+  .hero-visual .stack::before { transform: translate(18px, 18px) rotate(3deg); opacity: .7; }
+  .hero-visual .stack::after { transform: translate(34px, 34px) rotate(6deg); opacity: .4; }
+  .float { position: absolute; display: flex; align-items: center; gap: .6rem; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow); padding: .7rem .9rem; font-weight: 700; font-size: .95rem; }
+  .float .dot { width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--accent-tint); color: var(--accent); display: grid; place-items: center; }
+  .float.f1 { top: -1.5rem; right: -1rem; }
+  .float.f2 { bottom: -1rem; left: -1.5rem; }
+  .hero-visual .label { font-size: .85rem; color: var(--muted); font-weight: 700; margin: 0 0 .6rem; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3.5rem; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.25rem 1.4rem; }
+  .stat b { display: block; font-size: 2.2rem; line-height: 1; color: var(--accent); letter-spacing: -.02em; }
+  .stat span { color: var(--muted); font-weight: 700; }
+
+  .sports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: .75rem; }
+  .sport-tile { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 1.1rem 1.2rem; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--panel); cursor: pointer; text-align: left; transition: border-color .15s, transform .15s, box-shadow .15s; }
+  .sport-tile:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .sport-tile .ic { width: 2.6rem; height: 2.6rem; border-radius: 12px; background: var(--accent-tint); color: var(--accent-dark); display: grid; place-items: center; font-weight: 700; font-size: 1.1rem; }
+  .sport-tile strong { font-size: 1.05rem; line-height: 1.2; }
+  .sport-tile span { color: var(--muted); font-size: .92rem; margin-top: -.5rem; }
+
+  .steps, .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .why { grid-template-columns: repeat(2, 1fr); }
+  .step, .feat { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.6rem; }
+  .step .num { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-weight: 700; margin-bottom: 1rem; }
+  .feat .ic { width: 3rem; height: 3rem; border-radius: 14px; background: var(--accent-tint); color: var(--accent); display: grid; place-items: center; margin-bottom: 1rem; }
+  .feat .ic .icon { width: 1.5rem; height: 1.5rem; }
+  .step h3, .feat h3 { font-size: 1.2rem; margin: 0 0 .4rem; letter-spacing: 0; }
+  .step p, .feat p { margin: 0; color: var(--muted); }
+
+  .about { display: grid; grid-template-columns: 1.1fr .9fr; gap: 2.5rem; align-items: start; }
+  .about blockquote { margin: 0 0 1.25rem; font-size: 1.35rem; line-height: 1.45; font-weight: 700; padding-left: 1.25rem; border-left: 4px solid var(--accent); }
+  .about p { color: var(--muted); margin: 0 0 1rem; font-size: 1.08rem; }
+  .cta-cards { display: grid; gap: 1rem; }
+  .cta { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.4rem; }
+  .cta h3 { margin: 0 0 .35rem; font-size: 1.15rem; letter-spacing: 0; }
+  .cta p { margin: 0 0 1rem; color: var(--muted); }
+  .cta.main { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .cta.main p { color: inherit; opacity: .9; }
+  .cta.main .btn { background: var(--on-accent); color: var(--accent); border-color: var(--on-accent); }
+  .ios-steps { margin: .5rem 0 0; padding-left: 1.2rem; color: var(--muted); }
+
+  .site-foot { border-top: 1px solid var(--line); padding: 3rem 0 2rem; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem; }
+  .foot-grid h4 { margin: 0 0 .75rem; font-size: .95rem; }
+  .foot-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+  .foot-grid a { color: var(--muted); text-decoration: none; }
+  .foot-grid a:hover { color: var(--accent); text-decoration: underline; }
+  .foot-grid .desc { color: var(--muted); margin: .75rem 0 0; max-width: 22rem; }
+  .fine { font-size: .9rem; color: var(--muted); margin: 2.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+  /* ===== Feuilles (filtres, fiche club) ===== */
   dialog.sheet {
-    position: fixed; top: auto; bottom: 0; left: 0; right: 0; margin: 0; width: 100%; max-width: none;
-    max-height: 92dvh; border: 0; padding: 0; border-radius: var(--r-xl) var(--r-xl) 0 0;
-    background: var(--panel); color: var(--text); box-shadow: 0 -10px 40px rgba(0,0,0,.25);
+    position: fixed; top: auto; bottom: 0; left: 0; right: 0; margin: 0; width: 100%; max-width: none; max-height: 92dvh;
+    border: 0; padding: 0; border-radius: var(--r-xl) var(--r-xl) 0 0; background: var(--panel); color: var(--text); box-shadow: 0 -10px 40px rgba(0,0,0,.25);
   }
   dialog.sheet[open] { display: flex; flex-direction: column; overflow: hidden; animation: sheet-up .3s cubic-bezier(.2,.8,.2,1); }
   dialog.sheet::backdrop { background: rgba(15, 23, 32, .45); }
   @keyframes sheet-up { from { transform: translateY(100%); } }
-  .sheet-head { flex: none; padding: .5rem 1rem .75rem; touch-action: none; cursor: grab; }
+  .sheet-head { flex: none; padding: .5rem 1rem .75rem; touch-action: none; }
   .grabber { width: 2.75rem; height: .3rem; border-radius: 999px; background: var(--line); margin: 0 auto .6rem; }
   .sheet-title { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
-  .sheet-title h2 { margin: 0; font-size: 1.25rem; line-height: 1.25; }
+  .sheet-title h2 { margin: 0; font-size: 1.25rem; }
   .sheet-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 0 1rem 1rem; }
   .sheet-foot { flex: none; display: flex; gap: .6rem; padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: var(--panel); }
-
   .group { margin: 0 0 1.4rem; padding: 0; border: 0; }
   .group > legend, .group > .label { font-weight: 700; margin: 0 0 .6rem; padding: 0; display: block; }
   .opts { display: flex; flex-wrap: wrap; gap: .5rem; }
@@ -259,19 +292,13 @@
   .opt input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
   .select { width: 100%; height: 3rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--panel); color: var(--text); font: inherit; padding: 0 .9rem; }
   .switch { display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; padding: .9rem 1rem; border: 1px solid var(--line); border-radius: var(--r-md); }
-  .switch input { appearance: none; width: 3rem; height: 1.75rem; border-radius: 999px; background: var(--line); position: relative; flex: none; cursor: pointer; transition: background .2s; margin: 0; }
+  .switch input { appearance: none; -webkit-appearance: none; width: 3rem; height: 1.75rem; border-radius: 999px; background: var(--line); position: relative; flex: none; cursor: pointer; transition: background .2s; margin: 0; }
   .switch input::after { content: ""; position: absolute; top: .2rem; left: .2rem; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: #fff; transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
   .switch input:checked { background: var(--accent); }
   .switch input:checked::after { transform: translateX(1.25rem); }
-
-  /* Fiche club */
   .d-where { color: var(--muted); margin: .3rem 0 0; display: flex; align-items: center; gap: .35rem; flex-wrap: wrap; }
   .actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin: 1rem 0 1.25rem; }
-  .act {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem; min-height: 4.4rem;
-    border-radius: var(--r-md); background: var(--accent-tint); color: var(--accent-dark); text-decoration: none;
-    font-weight: 700; font-size: .85rem; border: 0; cursor: pointer; text-align: center; padding: .4rem;
-  }
+  .act { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem; min-height: 4.4rem; border-radius: var(--r-md); background: var(--accent-tint); color: var(--accent-dark); text-decoration: none; font-weight: 700; font-size: .85rem; border: 0; cursor: pointer; text-align: center; padding: .4rem; }
   .act .icon { width: 1.45rem; height: 1.45rem; }
   .act:hover { background: var(--accent); color: var(--on-accent); }
   .act[aria-disabled="true"] { opacity: .4; pointer-events: none; }
@@ -287,39 +314,88 @@
   .slots li b { display: block; }
   .checked { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .92rem; margin: 0 0 .5rem; }
   .report { color: var(--muted); font-size: .92rem; }
-
-  .toast {
-    position: fixed; left: 50%; bottom: calc(var(--tabbar) + 1rem + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
-    background: var(--text); color: var(--bg); padding: .7rem 1.1rem; border-radius: 999px; font-weight: 700; z-index: 1000;
-    box-shadow: var(--shadow); animation: rise .25s ease;
-  }
+  .toast { position: fixed; left: 50%; bottom: calc(var(--tabbar) + 1rem + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--text); color: var(--bg); padding: .7rem 1.1rem; border-radius: 999px; font-weight: 700; z-index: 1000; box-shadow: var(--shadow); animation: rise .25s ease; }
   .toast[hidden] { display: none; }
 
-  /* ===== Ordinateur : liste et carte côte à côte ===== */
+  /* ===== Barre d'onglets (téléphone) ===== */
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(4, 1fr);
+    height: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line);
+  }
+  .tabbar button { border: 0; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; font-size: .8rem; font-weight: 700; color: var(--muted); position: relative; }
+  .tabbar button .icon { width: 1.5rem; height: 1.5rem; }
+  .tabbar button[aria-pressed="true"] { color: var(--accent); }
+  .tabbar button[aria-pressed="true"]::before { content: ""; position: absolute; top: 0; left: 30%; right: 30%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
+  .tabbar .badge { position: absolute; top: .45rem; left: calc(50% + .45rem); min-width: 1.2rem; height: 1.2rem; border-radius: 999px; background: var(--danger); color: #fff; font-size: .72rem; display: grid; place-items: center; padding: 0 .25rem; }
+  .tabbar .badge[hidden] { display: none; }
+
+  /* =====================================================================
+     TÉLÉPHONE ET TABLETTE (< 960 px) : l'appli
+     ===================================================================== */
+  @media (max-width: 959.98px) {
+    body { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+    .site-nav { flex: none; }
+    .site-nav.compact .nav-in { height: 0; opacity: 0; }
+    .only-desktop { display: none !important; }
+    main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+    #annuaire { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0; background: var(--bg); }
+    .dir-head { flex: none; width: 100%; max-width: none; margin: 0; min-width: 0; padding-top: .6rem; border-bottom: 1px solid var(--line); }
+    .dir-body { flex: 1; min-height: 0; position: relative; display: flex; padding: 0; width: 100%; max-width: none; margin: 0; }
+    .pane-list { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 1rem calc(var(--tabbar) + 1.5rem + env(safe-area-inset-bottom, 0px)); }
+    .pane-list > * { max-width: 44rem; margin-left: auto; margin-right: auto; }
+    .pane-map { position: absolute; inset: 0; bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); visibility: hidden; }
+    .dir-body[data-view="carte"] .pane-map { visibility: visible; }
+    .dir-body[data-view="carte"] .pane-list { visibility: hidden; }
+    /* Onglet « Infos » : la partie site, dans l'appli */
+    .infos { display: none; }
+    body[data-tab="infos"] #annuaire { display: none; }
+    body[data-tab="infos"] .infos { display: block; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: calc(var(--tabbar) + env(safe-area-inset-bottom, 0px)); }
+    .section { padding: 2.25rem 0; }
+    .section-head { margin-bottom: 1.25rem; }
+    .section-head h2 { font-size: 1.5rem; }
+    .steps, .why, .about { grid-template-columns: 1fr; gap: .9rem; }
+    .step, .feat { padding: 1.2rem; }
+    .about blockquote { font-size: 1.15rem; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-grid > :first-child { grid-column: 1 / -1; }
+    dialog.sheet .sheet-head { cursor: grab; }
+  }
+
+  /* =====================================================================
+     ORDINATEUR (>= 960 px) : le site
+     ===================================================================== */
   @media (min-width: 960px) {
     :root { --tabbar: 0px; }
-    .tabbar { display: none; }
-    .propose { display: inline; }
-    .top.compact .brand, .top.compact .brand-actions { height: 3.5rem; opacity: 1; }
-    .top-in { display: grid; grid-template-columns: auto 1fr auto; column-gap: 1.5rem; align-items: center; }
-    .brand { grid-column: 1; }
-    .search { grid-column: 2; margin: 0; max-width: 40rem; }
-    .brand-actions { grid-column: 3; grid-row: 1; justify-self: end; }
-    .chips { grid-column: 1 / -1; margin: .7rem 0 0; padding: 0 0 .75rem; }
-    .pane-list { flex: none; width: 31rem; border-right: 1px solid var(--line); padding-bottom: 1.5rem; }
-    .pane-map, .app[data-view] .pane-map { position: relative; inset: auto; flex: 1; visibility: visible; }
-    .app[data-view] .pane-list { visibility: visible; }
-    dialog.sheet { top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: min(38rem, 92vw); max-height: 86vh; border-radius: var(--r-xl); }
+    .tabbar, .only-mobile { display: none !important; }
+    .site-nav { position: sticky; top: 0; }
+    .nav-in { height: 4.5rem; }
+    .nav-links { display: flex; }
+    .nav-actions .icon-btn.suggest { display: none; }
+    .dir-head { display: grid; grid-template-columns: minmax(18rem, 30rem) 1fr; gap: .75rem 1.25rem; align-items: center; padding-bottom: 1rem; }
+    .dir-head .section-head { grid-column: 1 / -1; margin-bottom: 1rem; }
+    .dir-head .chips { margin: 0; padding: .25rem 0; min-width: 0; mask-image: linear-gradient(90deg, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); }
+    .dir-body { display: grid; grid-template-columns: 30rem 1fr; gap: 1.25rem; height: min(80vh, 56rem); }
+    .pane-list { overflow-y: auto; padding-right: .5rem; scrollbar-width: thin; }
+    .pane-map { position: relative; border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--line); }
+    #annuaire { padding: 4.5rem 0; }
+    .intro { display: none; }
+    dialog.sheet { top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: min(40rem, 92vw); max-height: 86vh; border-radius: var(--r-xl); }
     dialog.sheet[open] { animation: fade .2s ease; }
-    .sheet-head { cursor: default; }
     .grabber { display: none; }
-    .sheet-head { padding-top: 1rem; }
+    .sheet-head { padding-top: 1.1rem; }
     .toast { bottom: 1.5rem; }
+  }
+  @media (min-width: 960px) and (max-width: 1100px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .dir-body { grid-template-columns: 26rem 1fr; }
   }
   @keyframes fade { from { opacity: 0; transform: scale(.97); } }
 </style>
 </head>
-<body>
+<body data-tab="liste">
+<a class="skip" href="#annuaire">Aller à l'annuaire des clubs</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
@@ -334,82 +410,209 @@
   <symbol id="i-access" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5h14M12 8.5v5l-3 7M12 13.5l3 7"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9-9.3C2 7.4 4.2 4.5 7.3 4.5c2 0 3.6 1.1 4.7 2.8 1.1-1.7 2.7-2.8 4.7-2.8 3.1 0 5.3 2.9 4.3 6.2-1.5 4.7-9 9.3-9 9.3Z"/></symbol>
   <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></symbol>
-  <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
   <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></symbol>
   <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m9 4-6 2.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8S10.5 4 8 4.5 7 8 12 8Zm0 0s1.5-4 4-3.5S17 8 12 8Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19h14"/></symbol>
 </svg>
 
-<header class="top" id="top">
-  <div class="top-in">
-    <div class="brand">
-      <a class="logo" href="./" aria-label="Mon club handisport, accueil">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2F6F6A"/><path d="M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z" fill="#fff"/><circle cx="16" cy="13.5" r="2.6" fill="#2F6F6A"/></svg>
-        Mon club handisport
-      </a>
-    </div>
-    <div class="brand-actions">
-      <a class="propose suggest" href="#">Proposer un club</a>
-      <a class="icon-btn suggest" href="#" aria-label="Proposer un club" title="Proposer un club"><svg class="icon"><use href="#i-plus"/></svg></a>
-    </div>
-    <form class="search" role="search" onsubmit="event.preventDefault(); document.activeElement.blur();">
-      <svg class="icon" aria-hidden="true" style="color:var(--muted)"><use href="#i-search"/></svg>
-      <label for="q" class="sr-only">Rechercher une ville, un code postal, un sport ou un club</label>
-      <input type="search" id="q" placeholder="Ville, code postal, sport, club…" autocomplete="off" enterkeyhint="search">
-      <button type="button" class="clear" id="clearQ" aria-label="Effacer la recherche" hidden><svg class="icon"><use href="#i-close"/></svg></button>
-    </form>
-    <div class="chips" id="chips" role="toolbar" aria-label="Filtres rapides">
-      <button type="button" class="chip" id="near" aria-pressed="false"><svg class="icon"><use href="#i-locate"/></svg>Autour de moi</button>
-      <button type="button" class="chip" id="openFilters" aria-haspopup="dialog"><svg class="icon"><use href="#i-filter"/></svg>Filtres<span class="badge" id="filterBadge" hidden></span></button>
-      <button type="button" class="chip" id="favChip" aria-pressed="false"><svg class="icon"><use href="#i-heart"/></svg>Favoris</button>
-      <span class="chip sep" aria-hidden="true"></span>
-      <span id="sportChips" style="display:contents"></span>
+<!-- ===== Barre du haut ===== -->
+<header class="site-nav" id="siteNav">
+  <div class="container nav-in">
+    <a class="logo" href="./" aria-label="Mon club handisport, accueil">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2F6F6A"/><path d="M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z" fill="#fff"/><circle cx="16" cy="13.5" r="2.6" fill="#2F6F6A"/></svg>
+      Mon club handisport
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#annuaire">Trouver un club</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#apropos">À propos</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="btn outline install only-desktop" hidden><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Installer l'appli</button>
+      <a class="btn only-desktop suggest" href="#">Proposer un club</a>
+      <a class="icon-btn suggest only-mobile" href="#" aria-label="Proposer un club" title="Proposer un club"><svg class="icon"><use href="#i-plus"/></svg></a>
     </div>
   </div>
 </header>
 
-<main class="app" id="app" data-view="liste">
-  <section class="pane-list" id="paneList" aria-label="Liste des clubs">
-    <div class="list-in">
-      <div class="intro" id="intro">
-        <h1>Le sport, avec un club qui sait t'accueillir</h1>
-        <p>Des clubs d'Île-de-France qui accueillent les sportifs en situation de handicap, avec leurs créneaux, leur accès et leurs contacts.</p>
+<main id="main">
+  <!-- ===== Accueil (ordinateur) ===== -->
+  <section class="hero only-desktop" aria-labelledby="heroTitle">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Annuaire parasport · Île-de-France</span>
+          <h1 id="heroTitle">Le sport, avec un club qui sait t'accueillir</h1>
+          <p class="lead">Trouve en quelques secondes un club qui accueille les personnes en situation de handicap : créneaux, accessibilité, contacts. Gratuit et sans inscription.</p>
+          <form class="hero-search" role="search" id="heroForm">
+            <label><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Ville, code postal, sport ou club</span>
+              <input type="search" id="heroQ" placeholder="Ville, code postal, sport ou club" autocomplete="off"></label>
+            <button type="button" class="btn outline" id="heroNear"><svg class="icon" aria-hidden="true"><use href="#i-locate"/></svg>Autour de moi</button>
+            <button type="submit" class="btn">Rechercher</button>
+          </form>
+          <div class="popular" id="popular" aria-label="Sports populaires"></div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <p class="label">Exemple de fiche</p>
+          <div class="stack" id="heroCard"><div class="card skeleton" style="height:10rem"></div></div>
+          <div class="float f1"><span class="dot"><svg class="icon"><use href="#i-shield"/></svg></span>Clubs de confiance</div>
+          <div class="float f2"><span class="dot"><svg class="icon"><use href="#i-clock"/></svg></span>Créneaux publiés</div>
+        </div>
       </div>
-      <div class="summary">
-        <p class="count" id="count" aria-live="polite">Chargement des clubs…</p>
-        <label><span class="sr-only">Trier par</span>
-          <select class="sort" id="sort"><option value="reco">Recommandés</option><option value="near">Plus proches</option><option value="az">De A à Z</option></select>
-        </label>
+      <div class="stats" id="stats" aria-live="polite">
+        <div class="stat"><b>–</b><span>clubs référencés</span></div>
+        <div class="stat"><b>–</b><span>sports</span></div>
+        <div class="stat"><b>–</b><span>départements</span></div>
+        <div class="stat"><b>–</b><span>clubs de confiance</span></div>
       </div>
-      <p class="geo-status" id="geoStatus" aria-live="polite"></p>
-      <ul class="list" id="list">
-        <li class="skeleton" aria-hidden="true"></li><li class="skeleton" aria-hidden="true"></li><li class="skeleton" aria-hidden="true"></li>
-      </ul>
-
-      <footer class="foot">
-        <h2>Tu connais un club qui devrait être ici ?</h2>
-        <p>Envoie-nous son nom et ce que tu sais de son accueil. Chaque club est vérifié avant d'être ajouté.</p>
-        <a class="btn suggest" href="#"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Proposer un club</a>
-        <p class="fine">Les informations sont vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance pour confirmer les horaires. Une partie des clubs provient du <a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a> du ministère des Sports.</p>
-      </footer>
     </div>
   </section>
 
-  <section class="pane-map" aria-label="Carte des clubs">
-    <div id="map"></div>
-    <div class="map-tools">
-      <button type="button" class="icon-btn" id="mapLocate" aria-label="Me localiser" title="Me localiser"><svg class="icon"><use href="#i-locate"/></svg></button>
+  <!-- ===== Sports (ordinateur) ===== -->
+  <section class="section only-desktop" aria-labelledby="sportsTitle">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Explorer</span>
+        <h2 id="sportsTitle">Choisis ton sport</h2>
+        <p>Clique sur un sport pour voir les clubs qui le proposent, sur la liste et sur la carte.</p>
+      </div>
+      <div class="sports-grid" id="sportsGrid"></div>
     </div>
-    <div class="peek" id="peek" hidden></div>
   </section>
+
+  <!-- ===== Annuaire (ordinateur et téléphone) ===== -->
+  <section id="annuaire" class="section alt" aria-label="Annuaire des clubs">
+    <div class="container dir-head">
+      <div class="section-head only-desktop">
+        <span class="eyebrow">Annuaire</span>
+        <h2>Trouver un club</h2>
+        <p>Filtre par handicap, type de pratique ou département. Clique sur un club pour voir ses créneaux, son accès et ses contacts.</p>
+      </div>
+      <form class="search" role="search" onsubmit="event.preventDefault(); document.activeElement.blur();">
+        <svg class="icon" aria-hidden="true" style="color:var(--muted)"><use href="#i-search"/></svg>
+        <label for="q" class="sr-only">Rechercher une ville, un code postal, un sport ou un club</label>
+        <input type="search" id="q" placeholder="Ville, code postal, sport, club…" autocomplete="off" enterkeyhint="search">
+        <button type="button" class="clear" id="clearQ" aria-label="Effacer la recherche" hidden><svg class="icon"><use href="#i-close"/></svg></button>
+      </form>
+      <div class="chips" id="chips" role="toolbar" aria-label="Filtres rapides">
+        <button type="button" class="chip" id="near" aria-pressed="false"><svg class="icon"><use href="#i-locate"/></svg>Autour de moi</button>
+        <button type="button" class="chip" id="openFilters" aria-haspopup="dialog"><svg class="icon"><use href="#i-filter"/></svg>Filtres<span class="badge" id="filterBadge" hidden></span></button>
+        <button type="button" class="chip" id="favChip" aria-pressed="false"><svg class="icon"><use href="#i-heart"/></svg>Favoris</button>
+        <span class="chip sep" aria-hidden="true"></span>
+        <span id="sportChips" style="display:contents"></span>
+      </div>
+    </div>
+
+    <div class="container dir-body" id="app" data-view="liste">
+      <div class="pane-list" id="paneList">
+        <div class="intro" id="intro">
+          <h1>Le sport, avec un club qui sait t'accueillir</h1>
+          <p>Des clubs d'Île-de-France qui accueillent les sportifs en situation de handicap, avec leurs créneaux, leur accès et leurs contacts.</p>
+        </div>
+        <div class="summary">
+          <p class="count" id="count" aria-live="polite">Chargement des clubs…</p>
+          <label><span class="sr-only">Trier par</span>
+            <select class="sort" id="sort"><option value="reco">Recommandés</option><option value="near">Plus proches</option><option value="az">De A à Z</option></select>
+          </label>
+        </div>
+        <p class="geo-status" id="geoStatus" aria-live="polite"></p>
+        <ul class="list" id="list">
+          <li class="skeleton" aria-hidden="true"></li><li class="skeleton" aria-hidden="true"></li><li class="skeleton" aria-hidden="true"></li>
+        </ul>
+      </div>
+      <div class="pane-map" aria-label="Carte des clubs">
+        <div id="map"></div>
+        <div class="map-tools">
+          <button type="button" class="icon-btn" id="mapLocate" aria-label="Me localiser" title="Me localiser"><svg class="icon"><use href="#i-locate"/></svg></button>
+        </div>
+        <div class="peek" id="peek" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Infos : comment ça marche, pourquoi, à propos (ordinateur, et onglet « Infos » sur téléphone) ===== -->
+  <div class="infos" id="infos">
+    <section id="comment" class="section" aria-labelledby="howTitle">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Simple</span>
+          <h2 id="howTitle">Comment ça marche</h2>
+          <p>Trois étapes pour passer de « je ne sais pas où aller » à ta première séance.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><h3>Cherche</h3><p>Par ville, par sport ou autour de toi. Filtre selon ton handicap et le type de pratique : handisport ou sport adapté.</p></div>
+          <div class="step"><div class="num">2</div><h3>Compare</h3><p>Créneaux, accès, accueil : chaque fiche dit l'essentiel. Le badge « Club de confiance » signale les clubs qui accueillent déjà des para sportifs.</p></div>
+          <div class="step"><div class="num">3</div><h3>Lance-toi</h3><p>Appelle le club ou écris-lui en un geste, demande une séance d'essai, et c'est parti.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" aria-labelledby="whyTitle">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Notre différence</span>
+          <h2 id="whyTitle">Pourquoi Mon club handisport ?</h2>
+          <p>Un annuaire pensé pour répondre aux vraies questions avant de pousser la porte d'un club.</p>
+        </div>
+        <div class="why">
+          <div class="feat"><div class="ic"><svg class="icon"><use href="#i-clock"/></svg></div><h3>Les créneaux, pas seulement l'adresse</h3><p>La première question avant de se lancer : « quand est-ce que je peux venir ? ». Les horaires sont affichés dès qu'on les connaît.</p></div>
+          <div class="feat"><div class="ic"><svg class="icon"><use href="#i-shield"/></svg></div><h3>Des informations vérifiées</h3><p>Chaque fiche indique sa date de vérification. Le badge « Club de confiance » est réservé aux clubs qui accueillent déjà des para sportifs.</p></div>
+          <div class="feat"><div class="ic"><svg class="icon"><use href="#i-eye"/></svg></div><h3>Pensé pour l'accessibilité</h3><p>Police très lisible conçue pour les personnes malvoyantes, contrastes forts, grands boutons, navigation au clavier et mode sombre.</p></div>
+          <div class="feat"><div class="ic"><svg class="icon"><use href="#i-gift"/></svg></div><h3>Gratuit, sans pub, sans compte</h3><p>Aucune inscription. Tes favoris restent sur ton appareil. Et l'appli s'installe sur ton téléphone en deux gestes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="apropos" class="section" aria-labelledby="aboutTitle">
+      <div class="container about">
+        <div>
+          <span class="eyebrow">À propos</span>
+          <div class="section-head" style="margin-bottom:1.25rem"><h2 id="aboutTitle">Né sur les tatamis</h2></div>
+          <blockquote>Trouver un club prêt à accueillir un sportif en situation de handicap ne devrait pas prendre des semaines d'appels.</blockquote>
+          <p>Mon club handisport est un projet bénévole lancé par un para judoka, champion de France. L'objectif : réunir au même endroit les clubs d'Île-de-France qui accueillent les personnes en situation de handicap, avec les informations qui comptent vraiment.</p>
+          <p>Les fiches sont construites à partir de sources publiques, dont le <a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a> du ministère des Sports, puis complétées et vérifiées auprès des clubs.</p>
+        </div>
+        <div class="cta-cards">
+          <div class="cta main"><h3>Tu es un club ?</h3><p>Fais connaître ton accueil et tes créneaux. L'ajout est gratuit et vérifié avec toi.</p><a class="btn suggest" href="#">Inscrire mon club</a></div>
+          <div class="cta"><h3>Une info à corriger ?</h3><p>Un créneau a changé, un club a déménagé ? Dis-le-nous, on met la fiche à jour.</p><a class="btn outline" id="contactLink" href="#">Nous écrire</a></div>
+          <div class="cta" id="installCard"><h3>Installe l'appli</h3><p>Garde l'annuaire sur ton écran d'accueil, même sans connexion.</p>
+            <button type="button" class="btn install" hidden><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Installer l'appli</button>
+            <ol class="ios-steps" id="iosSteps"><li>Sur iPhone, ouvre ce site dans <strong>Safari</strong>.</li><li>Touche <strong>Partager</strong>, puis <strong>Sur l'écran d'accueil</strong>.</li></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-foot">
+      <div class="container">
+        <div class="foot-grid">
+          <div>
+            <a class="logo" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2F6F6A"/><path d="M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z" fill="#fff"/><circle cx="16" cy="13.5" r="2.6" fill="#2F6F6A"/></svg>Mon club handisport</a>
+            <p class="desc">L'annuaire des clubs d'Île-de-France qui accueillent les sportifs en situation de handicap.</p>
+          </div>
+          <div><h4>Le site</h4><ul><li><a href="#annuaire" data-goto="liste">Trouver un club</a></li><li><a href="#comment">Comment ça marche</a></li><li><a href="#apropos">À propos</a></li></ul></div>
+          <div><h4>Contribuer</h4><ul><li><a class="suggest" href="#">Proposer un club</a></li><li><a class="contact" href="#">Signaler une erreur</a></li></ul></div>
+          <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
+        </div>
+        <p class="fine"><span>© <span id="year">2026</span> Mon club handisport · Projet bénévole</span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
+      </div>
+    </footer>
+  </div>
 </main>
 
 <nav class="tabbar" aria-label="Affichage">
   <button type="button" data-tab="liste" aria-pressed="true"><svg class="icon"><use href="#i-list"/></svg>Liste</button>
   <button type="button" data-tab="carte" aria-pressed="false"><svg class="icon"><use href="#i-map"/></svg>Carte</button>
   <button type="button" data-tab="favoris" aria-pressed="false"><svg class="icon"><use href="#i-heart"/></svg>Favoris<span class="badge" id="favBadge" hidden></span></button>
+  <button type="button" data-tab="infos" aria-pressed="false"><svg class="icon"><use href="#i-info"/></svg>Infos</button>
 </nav>
 
 <!-- Filtres -->
@@ -422,25 +625,16 @@
     </div>
   </div>
   <div class="sheet-body">
-    <fieldset class="group">
-      <legend>Handicap</legend>
-      <div class="opts" id="fHandicaps"></div>
-    </fieldset>
-    <fieldset class="group">
-      <legend>Type de pratique</legend>
+    <fieldset class="group"><legend>Handicap</legend><div class="opts" id="fHandicaps"></div></fieldset>
+    <fieldset class="group"><legend>Type de pratique</legend>
       <div class="opts" id="fPratique">
         <label class="opt"><input type="radio" name="pratique" value="" checked><span>Toutes</span></label>
         <label class="opt"><input type="radio" name="pratique" value="handisport"><span>Handisport</span></label>
         <label class="opt"><input type="radio" name="pratique" value="sport adapte"><span>Sport adapté</span></label>
       </div>
     </fieldset>
-    <div class="group">
-      <label class="label" for="fDep">Département</label>
-      <select class="select" id="fDep"><option value="">Toute l'Île-de-France</option></select>
-    </div>
-    <div class="group">
-      <label class="switch"><span><strong>Clubs expérimentés</strong><br><span style="color:var(--muted);font-size:.95rem">Uniquement ceux qui accueillent déjà des para sportifs</span></span><input type="checkbox" id="fTrust"></label>
-    </div>
+    <div class="group"><label class="label" for="fDep">Département</label><select class="select" id="fDep"><option value="">Toute l'Île-de-France</option></select></div>
+    <div class="group"><label class="switch"><span><strong>Clubs expérimentés</strong><br><span style="color:var(--muted);font-size:.95rem">Uniquement ceux qui accueillent déjà des para sportifs</span></span><input type="checkbox" id="fTrust"></label></div>
   </div>
   <div class="sheet-foot">
     <button type="button" class="btn outline" id="fReset">Effacer</button>
@@ -455,7 +649,7 @@
     <div class="sheet-title">
       <span class="pill" id="dSport"></span>
       <div style="display:flex;gap:.4rem">
-        <button type="button" class="icon-btn fav-d" id="dFav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="icon"><use href="#i-heart"/></svg></button>
+        <button type="button" class="icon-btn" id="dFav" aria-pressed="false" aria-label="Ajouter aux favoris"><svg class="icon"><use href="#i-heart"/></svg></button>
         <button type="button" class="icon-btn" id="dShare" aria-label="Partager ce club"><svg class="icon"><use href="#i-share"/></svg></button>
         <button type="button" class="icon-btn" data-close aria-label="Fermer"><svg class="icon"><use href="#i-close"/></svg></button>
       </div>
@@ -483,7 +677,7 @@ const HANDICAPS = { visuel: "Visuel", auditif: "Auditif", moteur: "Moteur", ment
 const PAGE = 30; // fiches affichées avant le bouton « Voir plus »
 
 const state = { q: "", sport: "", dep: "", hs: new Set(), pratique: "", trustOnly: false, favOnly: false, sort: "reco", view: "liste", shown: PAGE };
-let clubs = [], userPos = null, meMarker = null, map, cluster, markers = new Map(), activePin = null;
+let clubs = [], userPos = null, meMarker = null, map, cluster, markers = new Map(), activePin = null, installEvt = null;
 
 const $ = id => document.getElementById(id);
 const norm = s => (s || "").toString().normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
@@ -546,6 +740,8 @@ function toClub(r) {
   };
 }
 const trust = c => (c.label ? 1 : 0) + (c.paraClub ? 1 : 0) + (c.encadrant ? 1 : 0);
+const sportLabels = {}; // "athletisme" -> "athlétisme" : on garde l'écriture de la base pour l'affichage
+const sportLabel = s => cap(sportLabels[s] || s);
 const byId = id => clubs.find(c => String(c.id) === String(id));
 
 async function loadClubs() {
@@ -583,26 +779,30 @@ function filtered(ignoreSport) {
   return out;
 }
 const activeFilters = () => state.hs.size + (state.pratique ? 1 : 0) + (state.dep ? 1 : 0) + (state.trustOnly ? 1 : 0);
+function sportCounts(list) {
+  const counts = {};
+  list.forEach(c => { const s = norm(c.sport); if (s) counts[s] = (counts[s] || 0) + 1; });
+  return counts;
+}
 
-// ===== Affichage de la liste =====
-function cardHtml(c) {
+// ===== Liste =====
+function cardHtml(c, opts = {}) {
   const tags = [];
   if (trust(c) >= 2) tags.push(`<span class="tag trust">${ico("shield")}Club de confiance</span>`);
   else if (trust(c) === 1) tags.push(`<span class="tag trust">${ico("shield")}Club engagé</span>`);
-  if (c.creneaux.length) tags.push(`<span class="tag">Créneaux publiés</span>`);
+  if (c.creneaux.length) tags.push(`<span class="tag">${ico("clock")}Créneaux publiés</span>`);
   c.handicaps.slice(0, 3).forEach(h => tags.push(`<span class="tag">${esc(HANDICAPS[h] || cap(h))}</span>`));
   if (c.handicaps.length > 3) tags.push(`<span class="tag">+${c.handicaps.length - 3}</span>`);
   const fav = favs.has(String(c.id));
-  return `
-  <li>
-    <div class="card" id="club-${c.id}" role="button" tabindex="0" data-id="${c.id}" aria-label="${esc(c.nom)}, ${esc(c.sport)}, ${esc(c.ville)}">
+  const card = `
+    <div class="card" ${opts.hero ? "" : `id="club-${c.id}"`} role="button" tabindex="${opts.hero ? -1 : 0}" data-id="${c.id}" aria-label="${esc(c.nom)}, ${esc(c.sport)}, ${esc(c.ville)}">
       <span class="pill">${esc(cap(c.sport))}</span>
-      <h2>${esc(c.nom)}</h2>
+      <h3>${esc(c.nom)}</h3>
       <p class="where">${ico("pin")}<span>${esc(c.ville)}${c.cp ? " (" + esc(c.cp) + ")" : ""}</span>${c.dist != null ? `<span>·</span><span class="dist">${fmtKm(c.dist)}</span>` : ""}</p>
       ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
-      <button type="button" class="fav" data-fav="${c.id}" aria-pressed="${fav}" aria-label="${fav ? "Retirer des favoris" : "Ajouter aux favoris"}">${ico("heart")}</button>
-    </div>
-  </li>`;
+      ${opts.hero ? "" : `<button type="button" class="fav" data-fav="${c.id}" aria-pressed="${fav}" aria-label="${fav ? "Retirer des favoris" : "Ajouter aux favoris"}">${ico("heart")}</button>`}
+    </div>`;
+  return opts.hero ? card : `<li>${card}</li>`;
 }
 
 function render(keepPage) {
@@ -615,9 +815,9 @@ function render(keepPage) {
   $("intro").hidden = !!(state.q || state.sport || activeFilters() || state.favOnly);
   $("list").innerHTML = n === 0
     ? (state.favOnly && !favs.size
-        ? `<li class="state"><p><strong>Aucun favori pour l'instant.</strong></p><p>Touche le cœur d'un club pour le retrouver ici, même hors connexion.</p></li>`
+        ? `<li class="state"><p><strong>Aucun favori pour l'instant.</strong></p><p>Touche le cœur d'un club pour le retrouver ici.</p></li>`
         : `<li class="state"><p><strong>Aucun club ne correspond.</strong></p><p>Retire un filtre pour élargir la recherche, ou propose un club que tu connais.</p><button type="button" class="btn outline" onclick="resetAll()">Tout effacer</button></li>`)
-    : list.slice(0, state.shown).map(cardHtml).join("")
+    : list.slice(0, state.shown).map(c => cardHtml(c)).join("")
       + (n > state.shown ? `<li class="more"><button type="button" class="btn outline" onclick="showMore()">Voir plus de clubs (${n - state.shown})</button></li>` : "");
   renderMarkers(list);
   renderChips();
@@ -630,12 +830,33 @@ function render(keepPage) {
 function showMore() { state.shown += PAGE; render(true); }
 
 function renderChips() {
-  const counts = {};
-  filtered(true).forEach(c => { const s = norm(c.sport); if (s) counts[s] = (counts[s] || 0) + 1; });
+  const counts = sportCounts(filtered(true));
   const sports = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b, "fr"));
   if (state.sport && !counts[state.sport]) sports.unshift(state.sport);
   $("sportChips").innerHTML = sports.map(s =>
-    `<button type="button" class="chip" data-sport="${esc(s)}" aria-pressed="${state.sport === s}">${esc(cap(s))}<span class="n">${counts[s] || 0}</span></button>`).join("");
+    `<button type="button" class="chip" data-sport="${esc(s)}" aria-pressed="${state.sport === s}">${esc(sportLabel(s))}<span class="n">${counts[s] || 0}</span></button>`).join("");
+}
+
+// ===== Partie site : chiffres, sports, fiche exemple =====
+function renderSite() {
+  const noms = new Set(clubs.map(c => norm(c.nom)));
+  const sports = sportCounts(clubs);
+  const deps = new Set(clubs.map(c => c.dep).filter(d => DEPARTEMENTS[d]));
+  const confiance = new Set(clubs.filter(c => trust(c) >= 2).map(c => norm(c.nom)));
+  const vals = [noms.size, Object.keys(sports).length, deps.size, confiance.size];
+  $("stats").querySelectorAll(".stat b").forEach((b, i) => b.textContent = vals[i]);
+
+  const ordered = Object.keys(sports).sort((a, b) => sports[b] - sports[a] || a.localeCompare(b, "fr"));
+  $("sportsGrid").innerHTML = ordered.map(s =>
+    `<button type="button" class="sport-tile" data-goto-sport="${esc(s)}"><span class="ic" aria-hidden="true">${esc(sportLabel(s).charAt(0))}</span><strong>${esc(sportLabel(s))}</strong><span>${sports[s]} club${sports[s] > 1 ? "s" : ""}</span></button>`).join("");
+  $("popular").innerHTML = `<span>Populaires :</span>` + ordered.slice(0, 5).map(s => `<button type="button" data-goto-sport="${esc(s)}">${esc(sportLabel(s))}</button>`).join("");
+
+  const best = [...clubs].sort((a, b) => trust(b) - trust(a) || b.creneaux.length - a.creneaux.length)[0];
+  $("heroCard").innerHTML = best ? cardHtml(best, { hero: true }) : "";
+}
+function gotoDirectory() {
+  if (isDesktop()) $("annuaire").scrollIntoView({ behavior: "smooth", block: "start" });
+  else setTab("liste");
 }
 
 // ===== Carte =====
@@ -643,7 +864,7 @@ const pinIcon = on => L.divIcon({ className: "", html: `<div class="pin${on ? " 
 const meIcon = L.divIcon({ className: "", html: '<div class="pin me"></div>', iconSize: [20, 20], iconAnchor: [10, 10] });
 
 function initMap() {
-  map = L.map("map", { zoomControl: false, tap: true }).setView([48.8566, 2.3522], 10);
+  map = L.map("map", { zoomControl: false, scrollWheelZoom: false }).setView([48.8566, 2.3522], 10);
   L.control.zoom({ position: "bottomright" }).addTo(map);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -653,6 +874,9 @@ function initMap() {
     iconCreateFunction: g => L.divIcon({ className: "", html: `<div class="cluster">${g.getChildCount()}</div>`, iconSize: [44, 44] })
   }).addTo(map);
   map.on("click", hidePeek);
+  map.on("focus", () => map.scrollWheelZoom.enable());
+  map.on("blur", () => map.scrollWheelZoom.disable());
+  if (!isDesktop()) map.scrollWheelZoom.enable();
 }
 
 let fitKey = "";
@@ -670,7 +894,6 @@ function renderMarkers(list) {
     pts.push([c.pos.lat, c.pos.lon]);
   });
   if (userPos) pts.push([userPos.lat, userPos.lon]);
-  // On ne recadre la carte que si la sélection de clubs a changé
   const key = list.map(c => c.id).join(",") + (userPos ? "u" : "") + pts.length;
   if (pts.length && key !== fitKey) { fitKey = key; map.fitBounds(pts, { padding: [50, 50], maxZoom: 14 }); }
   hidePeek();
@@ -687,9 +910,9 @@ function showPeek(id) {
     <button type="button" class="btn" onclick="openDetail('${c.id}')">Voir${ico("chev")}</button>`;
   p.hidden = false;
   if (isDesktop()) {
-    const el = $("club-" + c.id);
     document.querySelectorAll(".card.focus").forEach(e => e.classList.remove("focus"));
-    if (el) { el.classList.add("focus"); el.scrollIntoView({ behavior: "smooth", block: "center" }); }
+    const el = $("club-" + c.id);
+    if (el) { el.classList.add("focus"); el.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
   }
 }
 function hidePeek() {
@@ -697,18 +920,20 @@ function hidePeek() {
   if (activePin) { activePin.setIcon(pinIcon(false)); activePin = null; }
 }
 
-// ===== Vues (liste / carte / favoris) =====
+// ===== Onglets (téléphone) =====
 function setTab(tab) {
+  document.body.dataset.tab = tab;
   state.favOnly = tab === "favoris";
   state.view = tab === "carte" ? "carte" : "liste";
   $("app").dataset.view = state.view;
   document.querySelectorAll(".tabbar button").forEach(b => b.setAttribute("aria-pressed", b.dataset.tab === tab));
+  if (tab === "infos") { $("infos").scrollTop = 0; return; }
   if (state.view === "carte") setTimeout(() => map.invalidateSize(), 30);
   render();
   $("paneList").scrollTop = 0;
 }
 
-// ===== Feuilles (dialogues) avec retour arrière du téléphone =====
+// ===== Feuilles (dialogues) avec retour arrière =====
 function openSheet(dlg, hash) {
   if (dlg.open) return;
   dlg.showModal();
@@ -719,7 +944,7 @@ function closeSheet(dlg) {
   if (history.state && history.state.sheet === dlg.id) history.back();
   else { dlg.close(); clearHash(); }
 }
-function clearHash() { if (location.hash) history.replaceState(history.state, "", location.pathname + location.search); }
+function clearHash() { if (/^#club-/.test(location.hash)) history.replaceState(history.state, "", location.pathname + location.search); }
 addEventListener("popstate", () => {
   document.querySelectorAll("dialog[open]").forEach(d => d.close());
   const m = /^#club-(.+)$/.exec(location.hash);
@@ -777,8 +1002,7 @@ function fillDetail(c) {
     <div class="sec"><h3>Créneaux</h3>
       ${c.creneaux.length ? `<ul class="slots">${c.creneaux.map(slotHtml).join("")}</ul>` : "<p>Horaires non publiés. Contacte le club pour les connaître.</p>"}
     </div>
-    ${c.handicaps.length || c.pratique ? `<div class="sec"><h3>Accueil</h3>
-      <div class="tags">
+    ${c.handicaps.length || c.pratique ? `<div class="sec"><h3>Accueil</h3><div class="tags">
         ${c.pratique ? `<span class="tag trust">${ico("access")}${esc(PRATIQUES[c.pratique] || cap(c.pratique))}</span>` : ""}
         ${c.handicaps.map(h => `<span class="tag">Handicap ${esc((HANDICAPS[h] || h).toLowerCase())}</span>`).join("")}
       </div></div>` : ""}
@@ -800,9 +1024,8 @@ function openDetail(id) {
 async function share(id) {
   const c = byId(id);
   const url = location.origin + location.pathname + "#club-" + id;
-  const data = { title: c.nom, text: `${c.nom} : ${c.sport} à ${c.ville}, sur Mon club handisport`, url };
   try {
-    if (navigator.share) await navigator.share(data);
+    if (navigator.share) await navigator.share({ title: c.nom, text: `${c.nom} : ${c.sport} à ${c.ville}, sur Mon club handisport`, url });
     else { await navigator.clipboard.writeText(url); toast("Lien copié"); }
   } catch (e) {}
 }
@@ -835,8 +1058,9 @@ function syncFiltersUI() {
   $("fPratique").querySelectorAll("input").forEach(i => i.checked = i.value === state.pratique);
   $("fDep").value = state.dep; $("fTrust").checked = state.trustOnly;
 }
+function setQuery(v) { state.q = v; $("q").value = v; $("heroQ").value = v; $("clearQ").hidden = !v; }
 function resetFilters() { state.hs.clear(); state.pratique = ""; state.dep = ""; state.trustOnly = false; syncFiltersUI(); render(); }
-function resetAll() { state.q = ""; $("q").value = ""; $("clearQ").hidden = true; state.sport = ""; state.favOnly = false; resetFilters(); setTab("liste"); }
+function resetAll() { setQuery(""); state.sport = ""; state.favOnly = false; resetFilters(); if (!isDesktop()) setTab("liste"); }
 
 // ===== Localisation =====
 function setUserPos(p) {
@@ -862,13 +1086,37 @@ function locate(focusMap) {
   }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
 }
 
+// ===== Installation de l'appli =====
+addEventListener("beforeinstallprompt", e => {
+  e.preventDefault(); installEvt = e;
+  document.querySelectorAll(".install").forEach(b => b.hidden = false);
+  $("iosSteps").hidden = true;
+});
+addEventListener("appinstalled", () => { document.querySelectorAll(".install").forEach(b => b.hidden = true); $("installCard").hidden = true; });
+
 // ===== Événements =====
 function bind() {
   const mail = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club handisport : proposer un club");
+  const contact = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club handisport : signaler une erreur");
   document.querySelectorAll(".suggest").forEach(a => a.href = mail);
+  document.querySelectorAll(".contact, #contactLink").forEach(a => a.href = contact);
+  $("year").textContent = new Date().getFullYear();
+  if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) $("installCard").hidden = true;
 
-  $("q").addEventListener("input", () => { state.q = $("q").value; $("clearQ").hidden = !state.q; render(); });
-  $("clearQ").addEventListener("click", () => { $("q").value = ""; state.q = ""; $("clearQ").hidden = true; render(); $("q").focus(); });
+  $("q").addEventListener("input", () => { setQuery($("q").value); render(); });
+  $("clearQ").addEventListener("click", () => { setQuery(""); render(); $("q").focus(); });
+  $("heroForm").addEventListener("submit", e => { e.preventDefault(); setQuery($("heroQ").value.trim()); render(); gotoDirectory(); });
+  $("heroNear").addEventListener("click", () => { locate(false); gotoDirectory(); });
+  document.addEventListener("click", e => {
+    const s = e.target.closest("[data-goto-sport]");
+    if (s) { state.sport = s.dataset.gotoSport; render(); gotoDirectory(); return; }
+    const g = e.target.closest("[data-goto]");
+    if (g && !isDesktop()) { e.preventDefault(); setTab(g.dataset.goto); }
+    const ib = e.target.closest(".install");
+    if (ib && installEvt) { installEvt.prompt(); installEvt = null; }
+  });
+  $("heroCard").addEventListener("click", e => { const c = e.target.closest(".card"); if (c) openDetail(c.dataset.id); });
+
   $("sort").addEventListener("change", () => { state.sort = $("sort").value; if (state.sort === "near" && !userPos) locate(); else render(); });
   $("near").addEventListener("click", () => {
     if ($("near").getAttribute("aria-pressed") === "true" && userPos) {
@@ -876,22 +1124,23 @@ function bind() {
     } else locate(state.view === "carte");
   });
   $("mapLocate").addEventListener("click", () => userPos ? map.setView([userPos.lat, userPos.lon], 13) : locate(true));
-  $("favChip").addEventListener("click", () => { state.favOnly = !state.favOnly; document.querySelectorAll(".tabbar button").forEach(b => b.setAttribute("aria-pressed", b.dataset.tab === (state.favOnly ? "favoris" : state.view))); render(); });
+  $("favChip").addEventListener("click", () => {
+    state.favOnly = !state.favOnly;
+    document.querySelectorAll(".tabbar button").forEach(b => b.setAttribute("aria-pressed", b.dataset.tab === (state.favOnly ? "favoris" : state.view)));
+    render();
+  });
   $("openFilters").addEventListener("click", () => { syncFiltersUI(); openSheet($("filters")); });
   $("chips").addEventListener("click", e => {
     const b = e.target.closest("[data-sport]");
     if (!b) return;
     state.sport = state.sport === b.dataset.sport ? "" : b.dataset.sport;
     render();
-    const nb = document.querySelector(`[data-sport="${CSS.escape(b.dataset.sport)}"]`);
-    if (nb) nb.scrollIntoView({ inline: "nearest", block: "nearest" });
   });
   $("fHandicaps").addEventListener("change", e => { e.target.checked ? state.hs.add(e.target.value) : state.hs.delete(e.target.value); render(); });
   $("fPratique").addEventListener("change", e => { state.pratique = e.target.value; render(); });
   $("fDep").addEventListener("change", () => { state.dep = $("fDep").value; render(); });
   $("fTrust").addEventListener("change", () => { state.trustOnly = $("fTrust").checked; render(); });
   $("fReset").addEventListener("click", resetFilters);
-
   document.querySelectorAll(".tabbar button").forEach(b => b.addEventListener("click", () => setTab(b.dataset.tab)));
 
   $("list").addEventListener("click", e => {
@@ -906,12 +1155,15 @@ function bind() {
   $("dFav").addEventListener("click", () => toggleFav($("dFav").dataset.fav, $("dFav")));
   $("dShare").addEventListener("click", () => share($("dShare").dataset.id));
 
-  // L'en-tête se réduit quand on fait défiler la liste (téléphone)
-  const pl = $("paneList"), top = $("top");
+  // Téléphone : la barre du haut se replie quand on fait défiler la liste
+  const pl = $("paneList"), nav = $("siteNav");
   pl.addEventListener("scroll", () => {
-    if (pl.scrollTop > 80) top.classList.add("compact");
-    else if (pl.scrollTop < 10) top.classList.remove("compact");
+    if (isDesktop()) return;
+    if (pl.scrollTop > 80) nav.classList.add("compact");
+    else if (pl.scrollTop < 10) nav.classList.remove("compact");
   }, { passive: true });
+  // Passage téléphone <-> ordinateur (rotation, fenêtre redimensionnée)
+  matchMedia("(min-width: 960px)").addEventListener("change", () => { nav.classList.remove("compact"); setTimeout(() => map.invalidateSize(), 50); });
 }
 
 // ===== Démarrage =====
@@ -925,10 +1177,11 @@ async function start() {
     $("list").innerHTML = `<li class="state"><p><strong>La liste des clubs n'a pas pu être chargée.</strong></p><p>Vérifie ta connexion internet, puis recharge la page.</p><button type="button" class="btn" onclick="location.reload()">Recharger</button></li>`;
     return;
   }
-  // Les favoris d'un club supprimé de la base sont oubliés
+  clubs.forEach(c => { const k = norm(c.sport); if (k && !sportLabels[k]) sportLabels[k] = c.sport.toLowerCase(); });
   [...favs].forEach(id => { if (!byId(id)) favs.delete(id); });
   storeSet("favs", [...favs]);
   fillFilters();
+  renderSite();
   render();
   const m = /^#club-(.+)$/.exec(location.hash);
   if (m && byId(m[1])) { fillDetail(byId(m[1])); $("detail").showModal(); }

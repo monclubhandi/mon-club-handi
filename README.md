@@ -1,6 +1,6 @@
 # Mon club handisport
 
-Annuaire des clubs de sport qui accueillent les personnes en situation de handicap en Île-de-France.
+Annuaire des clubs de sport qui accueillent les personnes en situation de handicap, partout en France (métropole et outre-mer).
 Site web et application téléphone (PWA installable) : https://monclubhandi.github.io/mon-club-handi/
 
 ## Comment ça marche

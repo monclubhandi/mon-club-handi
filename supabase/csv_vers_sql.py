@@ -61,8 +61,23 @@ SPORTS = {
     "gymnastique corporelle": "gymnastique", "gymnastique artistique": "gymnastique", "grs": "gymnastique",
     "yoga aerien": "yoga", "sophrologie": "yoga", "catamaran": "voile", "planche a voile": "voile",
     "vol d'initiation planeur": "vol à voile", "aquajump": "aquagym", "boules lyonnaises": "boule lyonnaise",
-    "raffa volo": "boccia", "grimpe dans les arbres": "grimpe d'arbres", "grappeling": "grappling", "kick boxing": "boxe",
+    "raffa volo": "boccia", "grimpe dans les arbres": "grimpe d'arbres", "grimpe d'arbre": "grimpe d'arbres", "grappeling": "grappling", "kick boxing": "boxe",
     "boxe francaise": "boxe", "ski alpin": "ski", "marche": "marche nordique", "marche nordique douce": "marche nordique",
+    "natation perfectionnement": "natation", "natation apprentissage": "natation", "perfectionnement": "natation",
+    "balade equitherapie": "équitation", "equitation sur poney shetland": "équitation", "equitation adaptee": "équitation",
+    "readaptation par l'equitation": "équitation", "readaptation par l’equitation": "équitation",
+    "bapteme": "karting", "initiation conduite de kart": "karting", "vols": "montgolfière",
+    "baptemes de montgolfiere": "montgolfière", "simulation de vol": "montgolfière",
+    "stand up paddle paddle geant": "paddle", "stand up paddle": "paddle", "kayak de mer": "canoë-kayak",
+    "canoe kayak": "canoë-kayak", "kayak": "canoë-kayak", "voile sur deriveur": "voile", "bateau collectif": "voile",
+    "multisports": "multisport", "multisports sante": "multisport", "multisports jeunes": "multisport",
+    "gymnastique douce adaptee": "gymnastique", "gymnastique adaptee": "gymnastique", "gymnastique douce": "gymnastique",
+    "marche aquatique sante": "marche aquatique", "atelier equilibre": "remise en forme", "self defense": "self-défense",
+    "basket adapte": "basket", "glisse sur glace": "patinage", "peche au coup": "pêche", "tir sportif a la carabine": "tir sportif",
+    "volley-ball assis": "volley assis", "volley-ball": "volley-ball", "taiso": "taïso", "aquaforme": "aquagym",
+    "balade": "randonnée", "balade nature": "randonnée", "randonnee pedestre/": "randonnée", "echecs": "échecs",
+    "decouverte de l'environnement": "découverte de la nature", "decouverte de l’environnement": "découverte de la nature",
+    "natation apprentissage, perfectionnement": "natation",
 }
 # Ce qui n'est pas un sport
 PAS_DES_SPORTS = {"intervention a domicile", "jeux de societe", "conference", "visite culturelle", "ateliers cuisine",
@@ -74,7 +89,7 @@ def normaliser_sports(texte):
     sports = []
     texte = texte.replace("Sarbacane Boccia", "sarbacane, boccia").replace("sarbacane boccia", "sarbacane, boccia")
     for morceau in re.split(r"[,;/\n]|\s+et\s+|\s+ou\s+", texte or ""):
-        m = re.sub(r"\s+et$", "", morceau.strip().strip(".").strip())
+        m = re.sub(r"\s+et$", "", morceau.replace("’", "'").strip().strip(".").strip())
         n = norm(m)
         if not n or n in PAS_DES_SPORTS or len(n) > 40 or n.startswith(("ou ", "le comite", "inclusive")):
             continue

@@ -23,6 +23,9 @@ Les imports utilisent `on conflict do nothing` : on peut les relancer sans crée
 - `supabase/import_34_clubs.sql` : les premiers clubs (Île-de-France).
 - `supabase/04_import_doubs.sql` : 120 structures du Doubs et alentours, généré par `supabase/import_doubs.py` depuis
   l'annuaire parasport du Département du Doubs (plateforme Oz, data.gouv.fr, licence ODbL : attribution dans le pied de page).
+- `supabase/05_import_cotes_armor.sql` : 98 structures, généré par `supabase/import_cotes_armor.py` (lecture des tableaux du
+  « Guide des associations accueillantes 2019-2021 » du Département des Côtes-d'Armor, partie handicap). Le guide ne donne que
+  la commune : `code_postal` contient le numéro du département et l'appli géocode la commune.
 
 ## Table `clubs` (Supabase)
 `sport, nom, adresse, code_postal, ville, handicaps, pratique, creneaux, accessibilite, telephone, email, site,

@@ -742,6 +742,10 @@
 const SUPABASE_URL = "https://aogcjrfrfdasxesntlpk.supabase.co";
 const SUPABASE_KEY = "sb_publishable_ZNohzowK1cNBG_-qukzemQ_KAG9EX-Z";
 const CONTACT_EMAIL = "soner.gunebakan0@gmail.com";
+// Notification par email à chaque club proposé (service gratuit FormSubmit). Après activation, on peut remplacer
+// l'adresse email par le code secret que FormSubmit envoie, pour ne plus l'afficher dans le code.
+const NOTIF_EMAIL = CONTACT_EMAIL;
+const SUPABASE_EDITOR = "https://supabase.com/dashboard/project/aogcjrfrfdasxesntlpk/editor";
 
 // Départements et régions de France (métropole et outre-mer)
 const REGIONS = {
@@ -1279,6 +1283,7 @@ async function sendPropose(e) {
       return;
     }
     if (!r.ok) throw new Error(r.status + " " + (await r.text()).slice(0, 200));
+    notifier(base, sports);
     f.dataset.done = "1";
     f.innerHTML = `<div class="done"><div class="ok">${ico("check")}</div><h3 style="margin:0 0 .5rem">Merci, c'est envoyé !</h3>
       <p style="color:var(--muted);margin:0 0 1.5rem">« ${esc(base.nom)} » sera vérifié puis ajouté à l'annuaire, en général sous quelques jours.</p>
@@ -1288,6 +1293,24 @@ async function sendPropose(e) {
     $("pError").innerHTML = `L'envoi n'a pas fonctionné. Vérifie ta connexion et réessaie, ou <a href="mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Inscrire un club : " + base.nom)}">écris-nous</a>.`;
     btn.disabled = false; btn.textContent = "Envoyer le club";
   }
+}
+
+// Envoie le récapitulatif par email ; un échec ici ne bloque jamais l'inscription (déjà enregistrée)
+function notifier(base, sports) {
+  const champs = {
+    _subject: `Paralliance : nouveau club à valider – ${base.nom}`,
+    _template: "table", _captcha: "false",
+    "Club": base.nom, "Sports": sports.join(", "), "Ville": `${base.ville} (${base.code_postal})`,
+    "Adresse": base.adresse || "-", "Handicaps": base.handicaps || "-", "Pratique": base.pratique || "-",
+    "Créneaux": base.creneaux || "-", "Accès": base.accessibilite || "-", "Séance d'essai": base.essai || "-",
+    "Téléphone du club": base.telephone || "-", "Email du club": base.email || "-", "Site": base.site || "-",
+    "Proposé par": base.propose_par || "-", "Message": base.message || "-",
+    "Pour valider": `Supabase > Table Editor > clubs > filtre publie = false > cocher publie : ${SUPABASE_EDITOR}`
+  };
+  if (base.propose_par) champs._replyto = base.propose_par;
+  fetch(`https://formsubmit.co/ajax/${NOTIF_EMAIL}`, {
+    method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(champs)
+  }).catch(() => {});
 }
 
 // ===== Installation de l'appli =====

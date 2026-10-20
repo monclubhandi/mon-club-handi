@@ -1,5 +1,5 @@
 """
-Collecte des fiches du Handiguide des sports pour "Mon club handisport".
+Collecte des fiches du Handiguide des sports pour "Paralliance".
 
 Utilisation :
     python handiguide_scraper.py "URL_DE_RECHERCHE_HANDIGUIDE" --test      (5 fiches pour vérifier)
@@ -423,7 +423,7 @@ def ecrire_sorties(lignes, base):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description="Collecte les fiches du Handiguide des sports pour Mon club handisport.",
+    ap = argparse.ArgumentParser(description="Collecte les fiches du Handiguide des sports pour Paralliance.",
                                  add_help=False)
     ap.add_argument("url", nargs="?", help="adresse d'une page de recherche du Handiguide")
     ap.add_argument("--test", action="store_true", help="ne lit que 5 fiches")

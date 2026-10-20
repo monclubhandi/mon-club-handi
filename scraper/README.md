@@ -1,7 +1,7 @@
 # Scraper Handiguide → Supabase
 
 Récupère les fiches du [Handiguide des sports](https://www.handiguide.sports.gouv.fr/) et les met au format
-de la base Supabase de **Mon club handisport** (une ligne par sport et par lieu de pratique).
+de la base Supabase de **Paralliance** (une ligne par sport et par lieu de pratique).
 
 ## Garde-fous intégrés
 - vérifie le fichier `robots.txt` du site avant de commencer ;

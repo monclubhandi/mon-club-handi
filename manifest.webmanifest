@@ -1,13 +1,13 @@
 {
-  "name": "Mon club handisport",
-  "short_name": "Club handi",
-  "description": "Trouve un club de sport qui accueille les personnes en situation de handicap, partout en France.",
+  "name": "Paralliance",
+  "short_name": "Paralliance",
+  "description": "Paralliance : trouve un club de sport qui accueille les personnes en situation de handicap, partout en France.",
   "lang": "fr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#FFFFFF",
-  "theme_color": "#FFFFFF",
+  "theme_color": "#2F6F6A",
   "icons": [
     {
       "src": "icon-192.png",

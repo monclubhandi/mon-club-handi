@@ -14,6 +14,19 @@ Site web et application téléphone (PWA installable) : https://monclubhandi.git
 - **Référencement** : `sitemap.xml` et `robots.txt` pour Google Search Console.
 - **Scraper** : `scraper/` collecte des fiches du Handiguide des sports au format du tableau (voir son README).
 
+## Un club = une fiche
+La colonne `sport` peut contenir plusieurs sports séparés par des virgules. La base refuse les doublons
+(même nom, sans tenir compte des majuscules/espaces/tirets, et même code postal) : voir `supabase/03_un_club_une_fiche.sql`.
+Les imports utilisent `on conflict do nothing` : on peut les relancer sans créer de doublon.
+
+## Sources importées
+- `supabase/import_34_clubs.sql` : les premiers clubs (Île-de-France).
+- `supabase/04_import_doubs.sql` : 120 structures du Doubs et alentours, généré par `supabase/import_doubs.py` depuis
+  l'annuaire parasport du Département du Doubs (plateforme Oz, data.gouv.fr, licence ODbL : attribution dans le pied de page).
+- `supabase/05_import_cotes_armor.sql` : 98 structures, généré par `supabase/import_cotes_armor.py` (lecture des tableaux du
+  « Guide des associations accueillantes 2019-2021 » du Département des Côtes-d'Armor, partie handicap). Le guide ne donne que
+  la commune : `code_postal` contient le numéro du département et l'appli géocode la commune.
+
 ## Table `clubs` (Supabase)
 `sport, nom, adresse, code_postal, ville, handicaps, pratique, creneaux, accessibilite, telephone, email, site,
 label, para_sportifs, encadrant_forme, verifie_le, essai, latitude, longitude, source, publie`

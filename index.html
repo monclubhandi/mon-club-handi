@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mon club handisport – Trouve un club parasport près de chez toi, partout en France</title>
+<title>Paralliance – Trouve un club parasport près de chez toi, partout en France</title>
 <meta name="description" content="Trouve un club de sport qui accueille les personnes en situation de handicap partout en France : handisport, sport adapté, créneaux, accessibilité et contacts. Gratuit, sans inscription.">
 <link rel="canonical" href="https://monclubhandi.github.io/mon-club-handi/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Mon club handisport">
-<meta property="og:title" content="Mon club handisport – le sport, avec un club qui sait t'accueillir">
+<meta property="og:site_name" content="Paralliance">
+<meta property="og:title" content="Paralliance – le sport, avec un club qui sait t'accueillir">
 <meta property="og:description" content="L'annuaire des clubs de France qui accueillent les sportifs en situation de handicap : créneaux, accès, contacts.">
 <meta property="og:url" content="https://monclubhandi.github.io/mon-club-handi/">
 <meta property="og:image" content="https://monclubhandi.github.io/mon-club-handi/icon-512.png">
@@ -19,13 +19,13 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Club handi">
+<meta name="apple-mobile-web-app-title" content="Paralliance">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Mon club handisport","url":"https://monclubhandi.github.io/mon-club-handi/","inLanguage":"fr","areaServed":"FR","description":"Annuaire des clubs de sport en France qui accueillent les personnes en situation de handicap : handisport et sport adapté."}
+{"@context":"https://schema.org","@type":"WebSite","name":"Paralliance","alternateName":"Paralliance, l'annuaire parasport","url":"https://monclubhandi.github.io/mon-club-handi/","inLanguage":"fr","areaServed":"FR","description":"Annuaire des clubs de sport en France qui accueillent les personnes en situation de handicap : handisport et sport adapté."}
 </script>
 <script>if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js"));</script>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232F6F6A'/><path d='M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z' fill='white'/><circle cx='16' cy='13.5' r='2.6' fill='%232F6F6A'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%232F6F6A'/><rect x='17' y='13' width='8' height='38' rx='4' fill='white'/><circle cx='34' cy='26' r='11' fill='none' stroke='white' stroke-width='8'/><circle cx='34' cy='26' r='3.6' fill='%23F5B841'/><circle cx='44.5' cy='46.5' r='5' fill='%23F5B841'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -121,7 +121,9 @@
   .site-nav { background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); z-index: 40; padding-top: env(safe-area-inset-top, 0px); }
   .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 3.75rem; transition: height .25s ease, opacity .2s ease; overflow: hidden; }
   .logo { display: flex; align-items: center; gap: .55rem; font-weight: 700; font-size: 1.1rem; text-decoration: none; }
-  .logo svg { width: 1.9rem; height: 1.9rem; }
+  .logo svg { width: 2.1rem; height: 2.1rem; flex: none; }
+  .logo { letter-spacing: -.01em; }
+  .brand-para { color: var(--accent); }
   .nav-links { display: none; gap: .25rem; align-items: center; }
   .nav-links a { text-decoration: none; font-weight: 700; color: var(--muted); padding: .5rem .8rem; border-radius: 999px; }
   .nav-links a:hover { color: var(--text); background: var(--soft); }
@@ -418,6 +420,8 @@
 <a class="skip" href="#annuaire">Aller à l'annuaire des clubs</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Logo Paralliance : un « P » dont la boucle est une roue, et le point doré du club qui t'attend -->
+  <symbol id="logo" viewBox="0 0 64 64"><defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A8A83"/><stop offset="1" stop-color="#1F4F4B"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#logoGrad)"/><rect x="17" y="13" width="8" height="38" rx="4" fill="#fff"/><circle cx="34" cy="26" r="11" fill="none" stroke="#fff" stroke-width="8"/><circle cx="34" cy="26" r="3.6" fill="#F5B841"/><circle cx="44.5" cy="46.5" r="5" fill="#F5B841"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
   <symbol id="i-locate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.3-7-11.5A7 7 0 0 1 19 9.5C19 14.7 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
@@ -446,9 +450,9 @@
 <!-- ===== Barre du haut ===== -->
 <header class="site-nav" id="siteNav">
   <div class="container nav-in">
-    <a class="logo" href="./" aria-label="Mon club handisport, accueil">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2F6F6A"/><path d="M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z" fill="#fff"/><circle cx="16" cy="13.5" r="2.6" fill="#2F6F6A"/></svg>
-      Mon club handisport
+    <a class="logo" href="./" aria-label="Paralliance, accueil">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>
+      <span><span class="brand-para">Para</span>lliance</span>
     </a>
     <nav class="nav-links" aria-label="Navigation principale">
       <a href="#annuaire">Trouver un club</a>
@@ -579,7 +583,7 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Notre différence</span>
-          <h2 id="whyTitle">Pourquoi Mon club handisport ?</h2>
+          <h2 id="whyTitle">Pourquoi Paralliance ?</h2>
           <p>Un annuaire pensé pour répondre aux vraies questions avant de pousser la porte d'un club.</p>
         </div>
         <div class="why">
@@ -597,7 +601,7 @@
           <span class="eyebrow">À propos</span>
           <div class="section-head" style="margin-bottom:1.25rem"><h2 id="aboutTitle">Né sur les tatamis</h2></div>
           <blockquote>Trouver un club prêt à accueillir un sportif en situation de handicap ne devrait pas prendre des semaines d'appels.</blockquote>
-          <p>Mon club handisport est un projet bénévole lancé par un para judoka, champion de France. L'objectif : réunir au même endroit les clubs de toute la France qui accueillent les personnes en situation de handicap, avec les informations qui comptent vraiment.</p>
+          <p>Paralliance est un projet bénévole lancé par un para judoka, champion de France. L'objectif : réunir au même endroit les clubs de toute la France qui accueillent les personnes en situation de handicap, avec les informations qui comptent vraiment.</p>
           <p>Les fiches sont construites à partir de sources publiques, dont le <a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a> du ministère des Sports et les annuaires publiés en données ouvertes par les départements, puis complétées et vérifiées auprès des clubs.</p>
         </div>
         <div class="cta-cards">
@@ -615,14 +619,14 @@
       <div class="container">
         <div class="foot-grid">
           <div>
-            <a class="logo" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2F6F6A"/><path d="M16 7a6.5 6.5 0 0 0-6.5 6.5c0 4.9 6.5 11.5 6.5 11.5s6.5-6.6 6.5-11.5A6.5 6.5 0 0 0 16 7Z" fill="#fff"/><circle cx="16" cy="13.5" r="2.6" fill="#2F6F6A"/></svg>Mon club handisport</a>
+            <a class="logo" href="./" aria-label="Paralliance, accueil"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg><span><span class="brand-para">Para</span>lliance</span></a>
             <p class="desc">L'annuaire des clubs de France qui accueillent les sportifs en situation de handicap.</p>
           </div>
           <div><h4>Le site</h4><ul><li><a href="#annuaire" data-goto="liste">Trouver un club</a></li><li><a href="#comment">Comment ça marche</a></li><li><a href="#apropos">À propos</a></li></ul></div>
           <div><h4>Contribuer</h4><ul><li><a class="suggest" href="#">Proposer un club</a></li><li><a class="contact" href="#">Signaler une erreur</a></li></ul></div>
           <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.data.gouv.fr/datasets/annuaire-des-associations-et-clubs-proposant-une-activite-parasportive" target="_blank" rel="noopener">Département du Doubs, plateforme Oz (ODbL)</a></li><li><a href="https://cotesdarmor.fr/sites/default/files/2021-03/Guide_Spt_Handicaps_2019_2021_BATWeb.pdf" target="_blank" rel="noopener">Département des Côtes-d'Armor (guide 2019-2021)</a></li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
         </div>
-        <p class="fine"><span>© <span id="year">2026</span> Mon club handisport · Projet bénévole</span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
+        <p class="fine"><span>© <span id="year">2026</span> Paralliance · Projet bénévole</span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
       </div>
     </footer>
   </div>
@@ -1140,7 +1144,7 @@ async function share(id) {
   const c = byId(id);
   const url = location.origin + location.pathname + "#club-" + id;
   try {
-    if (navigator.share) await navigator.share({ title: c.nom, text: `${c.nom} : ${c.sports.join(", ")} à ${c.ville}, sur Mon club handisport`, url });
+    if (navigator.share) await navigator.share({ title: c.nom, text: `${c.nom} : ${c.sports.join(", ")} à ${c.ville}, sur Paralliance`, url });
     else { await navigator.clipboard.writeText(url); toast("Lien copié"); }
   } catch (e) {}
 }
@@ -1298,8 +1302,8 @@ addEventListener("appinstalled", () => { document.querySelectorAll(".install").f
 function bind() {
   $("proposeForm").dataset.html = $("proposeForm").innerHTML;
   bindPropose();
-  const mail = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club handisport : proposer un club");
-  const contact = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Mon club handisport : signaler une erreur");
+  const mail = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Paralliance : proposer un club");
+  const contact = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Paralliance : signaler une erreur");
   document.querySelectorAll(".suggest").forEach(a => {
     a.href = mail; // repli si le JavaScript ne fonctionne pas
     a.addEventListener("click", e => { e.preventDefault(); openPropose(); });

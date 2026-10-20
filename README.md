@@ -24,5 +24,12 @@ label, para_sportifs, encadrant_forme, verifie_le, essai, latitude, longitude, s
 - **para_sportifs / encadrant_forme** : cases à cocher (donnent le badge « Club de confiance »).
 - **publie** : décocher pour masquer un club sans le supprimer.
 
+## Inscriptions de clubs (formulaire)
+Les boutons « Proposer / Inscrire un club » ouvrent un formulaire qui écrit directement dans la table `clubs`,
+avec `publie = false` et `source = 'formulaire'` (une ligne par sport). Pour valider : Table Editor → clubs →
+filtre `publie` = false → vérifier → cocher `publie`. Les colonnes privées `propose_par`, `message`, `propose_le`
+ne sont jamais lisibles depuis le site (`supabase/02_propositions.sql`). Une nouvelle colonne publique doit être
+ajoutée au `grant select (...)` de ce fichier et à `PUBLIC_COLS` dans `index.html`.
+
 Import d'un CSV (export Sheets ou scraper) : `python supabase/csv_vers_sql.py fichier.csv > import.sql`,
 puis coller `import.sql` dans le SQL Editor de Supabase.

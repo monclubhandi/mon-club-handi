@@ -597,7 +597,7 @@
           <div class="section-head" style="margin-bottom:1.25rem"><h2 id="aboutTitle">Né sur les tatamis</h2></div>
           <blockquote>Trouver un club prêt à accueillir un sportif en situation de handicap ne devrait pas prendre des semaines d'appels.</blockquote>
           <p>Mon club handisport est un projet bénévole lancé par un para judoka, champion de France. L'objectif : réunir au même endroit les clubs de toute la France qui accueillent les personnes en situation de handicap, avec les informations qui comptent vraiment.</p>
-          <p>Les fiches sont construites à partir de sources publiques, dont le <a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a> du ministère des Sports, puis complétées et vérifiées auprès des clubs.</p>
+          <p>Les fiches sont construites à partir de sources publiques, dont le <a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a> du ministère des Sports et les annuaires publiés en données ouvertes par les départements, puis complétées et vérifiées auprès des clubs.</p>
         </div>
         <div class="cta-cards">
           <div class="cta main"><h3>Tu es un club ?</h3><p>Fais connaître ton accueil et tes créneaux. L'ajout est gratuit et vérifié avec toi.</p><a class="btn suggest" href="#">Inscrire mon club</a></div>
@@ -619,7 +619,7 @@
           </div>
           <div><h4>Le site</h4><ul><li><a href="#annuaire" data-goto="liste">Trouver un club</a></li><li><a href="#comment">Comment ça marche</a></li><li><a href="#apropos">À propos</a></li></ul></div>
           <div><h4>Contribuer</h4><ul><li><a class="suggest" href="#">Proposer un club</a></li><li><a class="contact" href="#">Signaler une erreur</a></li></ul></div>
-          <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
+          <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.data.gouv.fr/datasets/annuaire-des-associations-et-clubs-proposant-une-activite-parasportive" target="_blank" rel="noopener">Département du Doubs, plateforme Oz (ODbL)</a></li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
         </div>
         <p class="fine"><span>© <span id="year">2026</span> Mon club handisport · Projet bénévole</span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
       </div>
@@ -824,7 +824,7 @@ function toClub(r) {
   const t = k => (r[k] == null ? "" : String(r[k])).trim();
   const cp = t("code_postal");
   return {
-    id: r.id, sport: t("sport"), nom: t("nom"), adresse: t("adresse"), cp, ville: t("ville"), dep: depOf(cp), region: REGION_OF[depOf(cp)] || "",
+    id: r.id, sports: [...new Set(t("sport").split(/[,;]/).map(x => x.trim().toLowerCase()).filter(Boolean))], nom: t("nom"), adresse: t("adresse"), cp, ville: t("ville"), dep: depOf(cp), region: REGION_OF[depOf(cp)] || "",
     handicaps: t("handicaps").split(/[,;]/).map(norm).filter(Boolean),
     pratique: norm(t("pratique")),
     creneaux: t("creneaux").split(";").map(s => s.trim()).filter(Boolean),
@@ -839,6 +839,7 @@ const trust = c => (c.label ? 1 : 0) + (c.paraClub ? 1 : 0) + (c.encadrant ? 1 :
 const sportLabels = {}; // "athletisme" -> "athlétisme" : on garde l'écriture de la base pour l'affichage
 const sportLabel = s => cap(sportLabels[s] || s);
 const byId = id => clubs.find(c => String(c.id) === String(id));
+const sportsTxt = (c, max = 3) => c.sports.slice(0, max).map(cap).join(", ") + (c.sports.length > max ? ` +${c.sports.length - max}` : "");
 
 async function loadClubs() {
   const rows = [];
@@ -856,14 +857,14 @@ function filtered(ignoreSport) {
   const words = norm(state.q).split(/\s+/).filter(Boolean);
   const out = clubs.filter(c => {
     if (state.favOnly && !favs.has(String(c.id))) return false;
-    if (!ignoreSport && state.sport && norm(c.sport) !== state.sport) return false;
+    if (!ignoreSport && state.sport && !c.sports.some(x => norm(x) === state.sport)) return false;
     if (state.region && c.region !== state.region) return false;
     if (state.dep && c.dep !== state.dep) return false;
     if (state.hs.size && ![...state.hs].every(h => c.handicaps.includes(h))) return false;
     if (state.pratique && c.pratique !== state.pratique && c.pratique !== "les deux") return false;
     if (state.trustOnly && !c.paraClub) return false;
     if (words.length) {
-      const hay = norm([c.nom, c.sport, c.ville, c.cp, c.adresse].join(" "));
+      const hay = norm([c.nom, c.sports.join(" "), c.ville, c.cp, c.adresse].join(" "));
       if (!words.every(w => hay.includes(w))) return false;
     }
     return true;
@@ -878,7 +879,7 @@ function filtered(ignoreSport) {
 const activeFilters = () => state.hs.size + (state.pratique ? 1 : 0) + (state.region ? 1 : 0) + (state.dep ? 1 : 0) + (state.trustOnly ? 1 : 0);
 function sportCounts(list) {
   const counts = {};
-  list.forEach(c => { const s = norm(c.sport); if (s) counts[s] = (counts[s] || 0) + 1; });
+  list.forEach(c => c.sports.forEach(x => { const s = norm(x); if (s) counts[s] = (counts[s] || 0) + 1; }));
   return counts;
 }
 
@@ -892,8 +893,8 @@ function cardHtml(c, opts = {}) {
   if (c.handicaps.length > 3) tags.push(`<span class="tag">+${c.handicaps.length - 3}</span>`);
   const fav = favs.has(String(c.id));
   const card = `
-    <div class="card" ${opts.hero ? "" : `id="club-${c.id}"`} role="button" tabindex="${opts.hero ? -1 : 0}" data-id="${c.id}" aria-label="${esc(c.nom)}, ${esc(c.sport)}, ${esc(c.ville)}">
-      <span class="pill">${esc(cap(c.sport))}</span>
+    <div class="card" ${opts.hero ? "" : `id="club-${c.id}"`} role="button" tabindex="${opts.hero ? -1 : 0}" data-id="${c.id}" aria-label="${esc(c.nom)}, ${esc(c.sports.join(", "))}, ${esc(c.ville)}">
+      <span class="pill">${esc(sportsTxt(c, 2))}</span>
       <h3>${esc(c.nom)}</h3>
       <p class="where">${ico("pin")}<span>${esc(c.ville)}${c.cp ? " (" + esc(c.cp) + ")" : ""}</span>${c.dist != null ? `<span>·</span><span class="dist">${fmtKm(c.dist)}</span>` : ""}</p>
       ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
@@ -906,7 +907,7 @@ function render(keepPage) {
   if (keepPage !== true) state.shown = PAGE;
   const list = filtered();
   const n = list.length;
-  const sports = new Set(list.map(c => norm(c.sport))).size;
+  const sports = new Set(list.flatMap(c => c.sports.map(norm))).size;
   $("count").innerHTML = n === 0 ? "Aucun club trouvé"
     : `${n} club${n > 1 ? "s" : ""}${state.favOnly ? " en favori" : ""}<small>${sports} sport${sports > 1 ? "s" : ""}${userPos ? " · distances depuis ta position" : ""}</small>`;
   $("intro").hidden = !!(state.q || state.sport || activeFilters() || state.favOnly);
@@ -944,8 +945,12 @@ function renderSite() {
   $("stats").querySelectorAll(".stat b").forEach((b, i) => b.textContent = vals[i]);
 
   const ordered = Object.keys(sports).sort((a, b) => sports[b] - sports[a] || a.localeCompare(b, "fr"));
-  $("sportsGrid").innerHTML = ordered.map(s =>
-    `<button type="button" class="sport-tile" data-goto-sport="${esc(s)}"><span class="ic" aria-hidden="true">${esc(sportLabel(s).charAt(0))}</span><strong>${esc(sportLabel(s))}</strong><span>${sports[s]} club${sports[s] > 1 ? "s" : ""}</span></button>`).join("");
+  const tile = s => `<button type="button" class="sport-tile" data-goto-sport="${esc(s)}"><span class="ic" aria-hidden="true">${esc(sportLabel(s).charAt(0))}</span><strong>${esc(sportLabel(s))}</strong><span>${sports[s]} club${sports[s] > 1 ? "s" : ""}</span></button>`;
+  const TOP = 15;
+  $("sportsGrid").innerHTML = ordered.slice(0, TOP).map(tile).join("")
+    + (ordered.length > TOP ? `<button type="button" class="sport-tile" id="allSports"><span class="ic" aria-hidden="true">+</span><strong>Tous les sports</strong><span>${ordered.length} sports</span></button>` : "");
+  const all = $("allSports");
+  if (all) all.addEventListener("click", () => { all.remove(); $("sportsGrid").insertAdjacentHTML("beforeend", ordered.slice(TOP).map(tile).join("")); });
   $("popular").innerHTML = `<span>Populaires :</span>` + ordered.slice(0, 5).map(s => `<button type="button" data-goto-sport="${esc(s)}">${esc(sportLabel(s))}</button>`).join("");
 
   const best = [...clubs].sort((a, b) => trust(b) - trust(a) || b.creneaux.length - a.creneaux.length)[0];
@@ -1003,7 +1008,7 @@ function showPeek(id) {
   activePin = markers.get(String(id));
   if (activePin) activePin.setIcon(pinIcon(true));
   const p = $("peek");
-  p.innerHTML = `<div class="txt"><strong>${esc(c.nom)}</strong><span>${esc(cap(c.sport))} · ${esc(c.ville)}${c.dist != null ? " · " + fmtKm(c.dist) : ""}</span></div>
+  p.innerHTML = `<div class="txt"><strong>${esc(c.nom)}</strong><span>${esc(sportsTxt(c, 2))} · ${esc(c.ville)}${c.dist != null ? " · " + fmtKm(c.dist) : ""}</span></div>
     <button type="button" class="btn" onclick="openDetail('${c.id}')">Voir${ico("chev")}</button>`;
   p.hidden = false;
   if (isDesktop()) {
@@ -1069,7 +1074,7 @@ function slotHtml(s) {
 }
 function fillDetail(c) {
   const fullAddr = [c.adresse, c.cp, c.ville].filter(Boolean).join(" ");
-  $("dSport").textContent = cap(c.sport);
+  $("dSport").textContent = sportsTxt(c, 2);
   $("dName").textContent = c.nom;
   $("dWhere").innerHTML = `${ico("pin")}${esc(c.ville)}${c.cp ? " (" + esc(c.cp) + ")" : ""}${c.dist != null ? ` · <strong>${fmtKm(c.dist)}</strong>` : ""}`;
   const fav = favs.has(String(c.id));
@@ -1086,7 +1091,7 @@ function fillDetail(c) {
   const act = (href, icon, label, ext) => href
     ? `<a class="act" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}>${ico(icon)}${label}</a>`
     : `<span class="act" aria-disabled="true">${ico(icon)}${label}</span>`;
-  const report = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Correction : " + c.nom)}&body=${encodeURIComponent("Club : " + c.nom + " (" + c.sport + ", " + c.ville + ")\n\nCe qu'il faut corriger :\n")}`;
+  const report = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Correction : " + c.nom)}&body=${encodeURIComponent("Club : " + c.nom + " (" + c.sports.join(", ") + ", " + c.ville + ")\n\nCe qu'il faut corriger :\n")}`;
 
   $("dBody").innerHTML = `
     <div class="actions">
@@ -1096,6 +1101,7 @@ function fillDetail(c) {
       ${act(c.site, "globe", "Site", true)}
     </div>
     ${t ? `<div class="trust-box">${ico("shield")}<div><strong>${t >= 2 ? "Club de confiance" : "Club engagé"}</strong><span>${cap(reasons.join(", "))}</span></div></div>` : ""}
+    ${c.sports.length > 1 ? `<div class="sec"><h3>Sports proposés</h3><div class="tags">${c.sports.map(x => `<span class="tag trust">${esc(cap(x))}</span>`).join("")}</div></div>` : ""}
     <div class="sec"><h3>Créneaux</h3>
       ${c.creneaux.length ? `<ul class="slots">${c.creneaux.map(slotHtml).join("")}</ul>` : "<p>Horaires non publiés. Contacte le club pour les connaître.</p>"}
     </div>
@@ -1122,7 +1128,7 @@ async function share(id) {
   const c = byId(id);
   const url = location.origin + location.pathname + "#club-" + id;
   try {
-    if (navigator.share) await navigator.share({ title: c.nom, text: `${c.nom} : ${c.sport} à ${c.ville}, sur Mon club handisport`, url });
+    if (navigator.share) await navigator.share({ title: c.nom, text: `${c.nom} : ${c.sports.join(", ")} à ${c.ville}, sur Mon club handisport`, url });
     else { await navigator.clipboard.writeText(url); toast("Lien copié"); }
   } catch (e) {}
 }
@@ -1242,15 +1248,20 @@ async function sendPropose(e) {
     propose_par: v("propose_par") || null, message: v("message") || null, propose_le: new Date().toISOString(),
     source: "formulaire", publie: false, para_sportifs: false, encadrant_forme: false
   };
-  // Une ligne par sport, comme dans le reste de la base
-  const sports = [...new Set(v("sport").split(/[,;\n]/).map(x => x.trim().toLowerCase()).filter(Boolean))].slice(0, 8);
-  const rows = sports.map(sport => ({ ...base, sport }));
+  // Un club = une fiche, avec tous ses sports
+  const sports = [...new Set(v("sport").split(/[,;\n]/).map(x => x.trim().toLowerCase()).filter(Boolean))].slice(0, 12);
+  const rows = [{ ...base, sport: sports.join(", ") }];
   try {
     const r = await fetch(`${SUPABASE_URL}/rest/v1/clubs`, {
       method: "POST",
       headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
       body: JSON.stringify(rows)
     });
+    if (r.status === 409) {
+      $("pError").textContent = `« ${base.nom} » (${base.code_postal}) est déjà dans l'annuaire ou a déjà été proposé. Merci ! Pour corriger sa fiche, utilise « Signaler une correction ».`;
+      btn.disabled = false; btn.textContent = "Envoyer le club";
+      return;
+    }
     if (!r.ok) throw new Error(r.status + " " + (await r.text()).slice(0, 200));
     f.dataset.done = "1";
     f.innerHTML = `<div class="done"><div class="ok">${ico("check")}</div><h3 style="margin:0 0 .5rem">Merci, c'est envoyé !</h3>
@@ -1360,7 +1371,7 @@ async function start() {
     $("list").innerHTML = `<li class="state"><p><strong>La liste des clubs n'a pas pu être chargée.</strong></p><p>Vérifie ta connexion internet, puis recharge la page.</p><button type="button" class="btn" onclick="location.reload()">Recharger</button></li>`;
     return;
   }
-  clubs.forEach(c => { const k = norm(c.sport); if (k && !sportLabels[k]) sportLabels[k] = c.sport.toLowerCase(); });
+  clubs.forEach(c => c.sports.forEach(x => { const k = norm(x); if (k && !sportLabels[k]) sportLabels[k] = x; }));
   [...favs].forEach(id => { if (!byId(id)) favs.delete(id); });
   storeSet("favs", [...favs]);
   fillFilters();

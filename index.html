@@ -76,6 +76,7 @@
   button { font: inherit; color: inherit; }
   h1, h2, h3 { line-height: 1.15; letter-spacing: -.015em; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  [tabindex="-1"]:focus { outline: none; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .skip { position: absolute; left: 1rem; top: -4rem; z-index: 100; background: var(--accent); color: var(--on-accent); padding: .6rem 1rem; border-radius: var(--r-sm); font-weight: 700; }
   .skip:focus { top: 1rem; }
@@ -111,7 +112,7 @@
   .chip.sep { padding: 0; width: 1px; border: 0; background: var(--line); height: 1.6rem; align-self: center; pointer-events: none; }
   .pill { display: inline-block; font-size: .82rem; font-weight: 700; padding: .2rem .65rem; border-radius: 999px; background: var(--accent-tint); color: var(--accent-dark); }
   .tags { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
-  .tag { display: inline-flex; align-items: center; gap: .3rem; font-size: .85rem; padding: .2rem .6rem; border-radius: 999px; background: var(--soft); color: var(--muted); }
+  .tag { display: inline-flex; align-items: center; gap: .3rem; font-size: .85rem; padding: .2rem .6rem; border-radius: 999px; background: color-mix(in srgb, var(--text) 7%, transparent); color: var(--muted); }
   .tag .icon { width: 1em; height: 1em; }
   .tag.trust { background: var(--accent-tint); color: var(--accent-dark); font-weight: 700; }
   .eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; font-size: .9rem; color: var(--accent-dark); background: var(--accent-tint); padding: .35rem .8rem; border-radius: 999px; }
@@ -310,7 +311,7 @@
   .sec h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .5rem; }
   .sec p { margin: 0; }
   .slots { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
-  .slots li { padding: .65rem .85rem; border-radius: var(--r-sm); background: var(--soft); }
+  .slots li { padding: .65rem .85rem; border-radius: var(--r-sm); background: color-mix(in srgb, var(--text) 6%, transparent); }
   .slots li b { display: block; }
   .checked { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .92rem; margin: 0 0 .5rem; }
   .report { color: var(--muted); font-size: .92rem; }
@@ -639,7 +640,7 @@
   <div class="sheet-head">
     <div class="grabber"></div>
     <div class="sheet-title">
-      <h2 id="filtersTitle">Filtres</h2>
+      <h2 id="filtersTitle" tabindex="-1" autofocus>Filtres</h2>
       <button type="button" class="icon-btn" data-close aria-label="Fermer"><svg class="icon"><use href="#i-close"/></svg></button>
     </div>
   </div>
@@ -667,7 +668,7 @@
   <div class="sheet-head">
     <div class="grabber"></div>
     <div class="sheet-title">
-      <h2 id="proposeTitle">Inscrire un club</h2>
+      <h2 id="proposeTitle" tabindex="-1" autofocus>Inscrire un club</h2>
       <button type="button" class="icon-btn" data-close aria-label="Fermer"><svg class="icon"><use href="#i-close"/></svg></button>
     </div>
     <p style="margin:.4rem 0 0;color:var(--muted)">Club, éducateur ou sportif : ajoute un club qui accueille les personnes en situation de handicap. Il sera vérifié avant d'apparaître.</p>
@@ -721,7 +722,7 @@
         <button type="button" class="icon-btn" data-close aria-label="Fermer"><svg class="icon"><use href="#i-close"/></svg></button>
       </div>
     </div>
-    <h2 id="dName" style="margin:.6rem 0 0;font-size:1.35rem;line-height:1.2"></h2>
+    <h2 id="dName" tabindex="-1" autofocus style="margin:.6rem 0 0;font-size:1.35rem;line-height:1.2"></h2>
     <p class="d-where" id="dWhere"></p>
   </div>
   <div class="sheet-body" id="dBody"></div>
@@ -1003,9 +1004,12 @@ function renderMarkers(list) {
     markers.set(String(c.id), m);
     pts.push([c.pos.lat, c.pos.lon]);
   });
-  if (userPos) pts.push([userPos.lat, userPos.lon]);
-  const key = list.map(c => c.id).join(",") + (userPos ? "u" : "") + pts.length;
-  if (pts.length && key !== fitKey) { fitKey = key; map.fitBounds(pts, { padding: [50, 50], maxZoom: 14 }); }
+  // Autour de moi : on cadre sur ta position et tes 8 clubs les plus proches, sinon sur tous les clubs affichés
+  const near = state.sort === "near" && userPos;
+  const cadre = near ? list.filter(c => c.pos).slice(0, 8).map(c => [c.pos.lat, c.pos.lon]) : pts;
+  if (userPos) cadre.push([userPos.lat, userPos.lon]);
+  const key = list.map(c => c.id).join(",") + (userPos ? "u" : "") + (near ? "n" : "") + pts.length;
+  if (cadre.length && key !== fitKey) { fitKey = key; map.fitBounds(cadre, { padding: [50, 50], maxZoom: 14 }); }
   hidePeek();
 }
 
@@ -1198,7 +1202,7 @@ function locate(focusMap) {
     state.sort = "near"; $("sort").value = "near";
     $("geoStatus").textContent = "";
     render();
-    if (focusMap) map.setView([userPos.lat, userPos.lon], 13);
+    if (focusMap) { map.stop(); map.setView([userPos.lat, userPos.lon], 13, { animate: false }); }
   }, () => {
     $("near").setAttribute("aria-pressed", "false");
     $("geoStatus").textContent = "Localisation refusée. Tape ta ville ou ton code postal dans la recherche.";

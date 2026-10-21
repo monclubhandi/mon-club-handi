@@ -29,6 +29,11 @@
   // « ?mode=app » force le mode appli (pratique pour tester).
   if (matchMedia("(display-mode: standalone)").matches || navigator.standalone === true || /[?&]mode=app\b/.test(location.search))
     document.documentElement.classList.add("app");
+  // Site sur téléphone : une page à la fois (#clubs, #sports, #infos, #apropos ; sinon l'accueil)
+  (function () {
+    const h = location.hash.slice(1);
+    document.documentElement.dataset.vue = /^club-/.test(h) ? "clubs" : (["clubs", "sports", "infos", "apropos"].includes(h) ? h : "accueil");
+  })();
 </script>
 <script>if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js"));</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%232F6F6A'/><rect x='17' y='13' width='8' height='38' rx='4' fill='white'/><circle cx='34' cy='26' r='11' fill='none' stroke='white' stroke-width='8'/><circle cx='34' cy='26' r='3.6' fill='%23F5B841'/><circle cx='44.5' cy='46.5' r='5' fill='%23F5B841'/></svg>">
@@ -122,6 +127,13 @@
   .tag .icon { width: 1em; height: 1em; }
   .tag.trust { background: var(--accent-tint); color: var(--accent-dark); font-weight: 700; }
   .burger { display: none; }
+  .raccourcis { display: none; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: .9rem; }
+  .raccourcis a { display: flex; flex-direction: column; gap: .2rem; padding: 1rem; border-radius: var(--r-lg); background: var(--panel); border: 1px solid var(--line); text-decoration: none; min-height: 7rem; }
+  .raccourcis a:hover { border-color: var(--accent); }
+  .raccourcis .icon { width: 1.6rem; height: 1.6rem; color: var(--accent); margin-bottom: .35rem; }
+  .raccourcis strong { font-size: 1.02rem; line-height: 1.2; }
+  .raccourcis span { color: var(--muted); font-size: .88rem; line-height: 1.3; }
+  .menu-list a[aria-current="page"] { background: var(--accent-tint); color: var(--accent-dark); }
   dialog.sheet.drawer { top: 0; bottom: 0; left: auto; right: 0; width: min(20rem, 86vw); height: 100dvh; max-height: none; border-radius: var(--r-xl) 0 0 var(--r-xl); box-shadow: -10px 0 40px rgba(0,0,0,.25); }
   dialog.sheet.drawer[open] { animation: drawer-in .25s cubic-bezier(.2,.8,.2,1); }
   @keyframes drawer-in { from { transform: translateX(100%); } }
@@ -436,6 +448,14 @@
     html:not(.app) .dir-head .search { margin-bottom: .25rem; }
     html:not(.app) .view-toggle { display: flex; }
     html:not(.app) .burger { display: inline-grid; }
+    /* Une page à la fois */
+    html:not(.app) main [data-vue] { display: none; }
+    html:not(.app)[data-vue="accueil"] main [data-vue="accueil"], html:not(.app)[data-vue="clubs"] main [data-vue="clubs"],
+    html:not(.app)[data-vue="sports"] main [data-vue="sports"], html:not(.app)[data-vue="infos"] main [data-vue="infos"],
+    html:not(.app)[data-vue="apropos"] main [data-vue="apropos"] { display: block; }
+    html:not(.app) .raccourcis { display: grid; }
+    html:not(.app)[data-vue="accueil"] .stats { margin-top: 1.25rem; }
+    html:not(.app) #annuaire { padding-top: 1rem; }
     html:not(.app) .dir-body { display: block; }
     html:not(.app) .pane-map { display: none; position: relative; height: 70vh; min-height: 22rem; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); margin-top: .75rem; }
     html:not(.app) .dir-body[data-view="carte"] .pane-map { display: block; }
@@ -532,7 +552,7 @@
 
 <main id="main">
   <!-- ===== Accueil (ordinateur) ===== -->
-  <section class="hero only-desktop" aria-labelledby="heroTitle">
+  <section class="hero only-desktop" data-vue="accueil" aria-labelledby="heroTitle">
     <div class="container">
       <div class="hero-grid">
         <div>
@@ -560,11 +580,17 @@
         <div class="stat"><b>–</b><span>départements</span></div>
         <div class="stat"><b>–</b><span>clubs de confiance</span></div>
       </div>
+      <nav class="raccourcis" aria-label="Raccourcis">
+        <a href="#clubs" data-page="clubs"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><strong>Trouver un club</strong><span>Liste, carte et filtres</span></a>
+        <a href="#sports" data-page="sports"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><strong>Choisis ton sport</strong><span>Tous les sports proposés</span></a>
+        <a href="#infos" data-page="infos"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg><strong>Comment ça marche</strong><span>En 3 étapes</span></a>
+        <a href="#apropos" data-page="apropos"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><strong>À propos</strong><span>Le projet, inscrire un club</span></a>
+      </nav>
     </div>
   </section>
 
   <!-- ===== Sports (ordinateur) ===== -->
-  <section class="section only-desktop" id="sports" aria-labelledby="sportsTitle">
+  <section class="section only-desktop" id="sports" data-vue="sports" aria-labelledby="sportsTitle">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Explorer</span>
@@ -576,7 +602,7 @@
   </section>
 
   <!-- ===== Annuaire (ordinateur et téléphone) ===== -->
-  <section id="annuaire" class="section alt" aria-label="Annuaire des clubs">
+  <section id="annuaire" class="section alt" data-vue="clubs" aria-label="Annuaire des clubs">
     <div class="container dir-head">
       <div class="section-head only-desktop">
         <span class="eyebrow">Annuaire</span>
@@ -631,7 +657,7 @@
 
   <!-- ===== Infos : comment ça marche, pourquoi, à propos (ordinateur, et onglet « Infos » sur téléphone) ===== -->
   <div class="infos" id="infos">
-    <section id="comment" class="section" aria-labelledby="howTitle">
+    <section id="comment" class="section" data-vue="infos" aria-labelledby="howTitle">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Simple</span>
@@ -646,7 +672,7 @@
       </div>
     </section>
 
-    <section class="section alt" id="pourquoi" aria-labelledby="whyTitle">
+    <section class="section alt" id="pourquoi" data-vue="infos" aria-labelledby="whyTitle">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Notre différence</span>
@@ -662,7 +688,7 @@
       </div>
     </section>
 
-    <section id="apropos" class="section" aria-labelledby="aboutTitle">
+    <section id="apropos" class="section" data-vue="apropos" aria-labelledby="aboutTitle">
       <div class="container about">
         <div>
           <span class="eyebrow">À propos</span>
@@ -743,15 +769,15 @@
     </div>
   </div>
   <nav class="sheet-body menu-list" aria-label="Menu du site">
-    <a href="#main" data-menu="haut"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Accueil</a>
-    <a href="#annuaire" data-menu="annuaire"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>Trouver un club</a>
+    <a href="#main" data-menu="haut" data-page="accueil"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Accueil</a>
+    <a href="#annuaire" data-menu="annuaire" data-page="clubs"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>Trouver un club</a>
     <a href="#annuaire" data-menu="carte"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>Voir la carte</a>
-    <a href="#sports" data-menu="sports"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Choisis ton sport</a>
+    <a href="#sports" data-menu="sports" data-page="sports"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Choisis ton sport</a>
     <a href="#annuaire" data-menu="favoris"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Mes favoris<span class="badge" id="menuFavBadge" hidden></span></a>
     <hr>
-    <a href="#comment" data-menu="comment"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Comment ça marche</a>
+    <a href="#comment" data-menu="comment" data-page="infos"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Comment ça marche</a>
     <a href="#pourquoi" data-menu="pourquoi"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Pourquoi Paralliance</a>
-    <a href="#apropos" data-menu="apropos"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>À propos</a>
+    <a href="#apropos" data-menu="apropos" data-page="apropos"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>À propos</a>
     <hr>
     <a href="#" data-menu="proposer" class="menu-cta"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Proposer un club</a>
     <a href="#installCard" data-menu="installer"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Installer l'appli</a>
@@ -1067,7 +1093,30 @@ function renderSite() {
 }
 function gotoDirectory() {
   if (isApp()) setTab("liste");
-  else $("annuaire").scrollIntoView({ behavior: "smooth", block: "start" });
+  else if (isSiteMobile()) {
+    const b = document.querySelector('.view-toggle [data-view="liste"]');
+    if (b && b.getAttribute("aria-pressed") !== "true") b.click();
+    setPage("clubs");
+  } else $("annuaire").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ===== Pages du site sur téléphone =====
+const PAGES = ["accueil", "clubs", "sports", "infos", "apropos"];
+const isSiteMobile = () => !isDesktop() && !document.documentElement.classList.contains("app");
+const pageDuLien = h => ({ "#main": "accueil", "#clubs": "clubs", "#annuaire": "clubs", "#sports": "sports", "#comment": "infos",
+  "#pourquoi": "infos", "#infos": "infos", "#apropos": "apropos", "#installCard": "apropos" })[h];
+function pageDepuisAdresse() {
+  const h = location.hash.slice(1);
+  return /^club-/.test(h) ? "clubs" : (PAGES.includes(h) ? h : "accueil");
+}
+function setPage(page, opts = {}) {
+  const changer = document.documentElement.dataset.vue !== page;
+  document.documentElement.dataset.vue = page;
+  if (opts.push !== false && changer) history.pushState({ page }, "", page === "accueil" ? location.pathname + location.search : "#" + page);
+  document.querySelectorAll("#menu [data-page]").forEach(a => a.dataset.page === page ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  if (page === "clubs" && state.view === "carte") setTimeout(() => map.invalidateSize(), 30);
+  if (opts.cible) setTimeout(() => document.getElementById(opts.cible).scrollIntoView({ block: "start" }), 30);
+  else if (changer || opts.haut) scrollTo(0, 0);
 }
 
 // ===== Carte =====
@@ -1151,7 +1200,7 @@ function setTab(tab) {
 function openSheet(dlg, hash) {
   if (dlg.open) return;
   dlg.showModal();
-  history.pushState({ sheet: dlg.id }, "", hash || location.pathname + location.search);
+  history.pushState({ sheet: dlg.id }, "", hash || location.pathname + location.search + location.hash);
 }
 function closeSheet(dlg) {
   if (!dlg.open) return;
@@ -1161,6 +1210,7 @@ function closeSheet(dlg) {
 function clearHash() { if (/^#club-/.test(location.hash)) history.replaceState(history.state, "", location.pathname + location.search); }
 addEventListener("popstate", () => {
   document.querySelectorAll("dialog[open]").forEach(d => d.close());
+  if (isSiteMobile() && (!history.state || !history.state.sheet)) setPage(pageDepuisAdresse(), { push: false });
   const m = /^#club-(.+)$/.exec(location.hash);
   if (m && byId(m[1])) { fillDetail(byId(m[1])); $("detail").showModal(); }
 });
@@ -1408,14 +1458,28 @@ function notifier(base, sports) {
 
 // ===== Menu burger (site sur téléphone) =====
 function menuAction(action) {
-  const aller = id => document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+  const pageDe = { haut: "accueil", annuaire: "clubs", carte: "clubs", favoris: "clubs", sports: "sports", comment: "infos", pourquoi: "infos", apropos: "apropos", installer: "apropos" };
+  const aller = id => isSiteMobile() && pageDe[action]
+    ? setPage(pageDe[action], { cible: ["installer", "pourquoi"].includes(action) ? id : null, haut: true })
+    : document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
   const vue = v => { const b = document.querySelector(`.view-toggle [data-view="${v}"]`); if (b && b.getAttribute("aria-pressed") !== "true") b.click(); };
-  if (action === "haut") scrollTo({ top: 0, behavior: "smooth" });
+  if (action === "haut") isSiteMobile() ? setPage("accueil", { haut: true }) : scrollTo({ top: 0, behavior: "smooth" });
   else if (action === "annuaire") { if (state.favOnly) { state.favOnly = false; render(); } vue("liste"); aller("annuaire"); }
   else if (action === "carte") { vue("carte"); aller("annuaire"); }
   else if (action === "favoris") { state.favOnly = true; vue("liste"); render(); aller("annuaire"); }
   else if (action === "proposer") openPropose();
   else aller(action === "installer" ? "installCard" : action);
+}
+function bindPages() {
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a[href^='#']");
+    if (!a || !isSiteMobile() || a.closest("#menu") || a.classList.contains("suggest")) return;
+    const page = a.dataset.page || pageDuLien(a.getAttribute("href"));
+    if (!page) return;
+    e.preventDefault();
+    setPage(page, { cible: a.getAttribute("href") === "#installCard" ? "installCard" : null, haut: true });
+  });
+  setPage(pageDepuisAdresse(), { push: false });
 }
 function bindMenu() {
   $("openMenu").addEventListener("click", () => {
@@ -1442,6 +1506,7 @@ addEventListener("appinstalled", () => { document.querySelectorAll(".install").f
 // ===== Événements =====
 function bind() {
   bindMenu();
+  bindPages();
   $("proposeForm").dataset.html = $("proposeForm").innerHTML;
   bindPropose();
   const mail = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Paralliance : proposer un club");

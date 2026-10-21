@@ -40,20 +40,24 @@ const listNames = p => p.$$eval('#list .card h3', els => els.map(e => e.textCont
   // ================= MISE EN PAGE SUR 4 ÉCRANS =================
   for (const [nom, conf] of [
     ['Ordinateur 1366', { viewport: { width: 1366, height: 860 } }],
-    ['Tablette 820', { viewport: { width: 820, height: 1180 }, hasTouch: true, isMobile: true }],
-    ['iPhone 13', devices['iPhone 13']],
-    ['Petit Android 360', { viewport: { width: 360, height: 740 }, hasTouch: true, isMobile: true, deviceScaleFactor: 3 }],
+    ['Tablette 820 (appli)', { viewport: { width: 820, height: 1180 }, hasTouch: true, isMobile: true }],
+    ['iPhone 13 (appli)', devices['iPhone 13']],
+    ['Petit Android 360 (appli)', { viewport: { width: 360, height: 740 }, hasTouch: true, isMobile: true, deviceScaleFactor: 3 }],
+    ['iPhone 13 (site Safari)', devices['iPhone 13']],
+    ['Petit Android 360 (site Chrome)', { viewport: { width: 360, height: 740 }, hasTouch: true, isMobile: true, deviceScaleFactor: 3 }],
+    ['Tablette 820 (site)', { viewport: { width: 820, height: 1180 }, hasTouch: true, isMobile: true }],
   ]) {
+    const appli = nom.includes('(appli)');
     const ctx = await b.newContext({ ...conf, serviceWorkers: 'block' });
     const p = await setup(ctx);
     const t0 = Date.now();
-    await p.goto(URL); await p.waitForFunction(() => /club/.test(document.getElementById('count').textContent) && !/Chargement/.test(document.getElementById('count').textContent));
+    await p.goto(appli ? URL + '?mode=app' : URL); await p.waitForFunction(() => /club/.test(document.getElementById('count').textContent) && !/Chargement/.test(document.getElementById('count').textContent));
     ok(nom, 'Chargement des 246 clubs', await count(p) === 246, `${await count(p)} clubs en ${Date.now() - t0} ms`);
     const over = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth);
     ok(nom, 'Pas de défilement horizontal', over <= 1, `débordement ${over}px`);
     const wide = await p.evaluate(() => [...document.querySelectorAll('body *')].filter(e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.right > innerWidth + 1 && getComputedStyle(e).position !== 'fixed' && !e.closest('.chips,.leaflet-container,#sportChips,.hero-visual'); }).slice(0, 3).map(e => e.tagName + '.' + e.className));
     ok(nom, 'Aucun élément ne dépasse de l\'écran', wide.length === 0, wide.join(', '));
-    if (conf.isMobile || (conf.viewport && conf.viewport.width < 960)) {
+    if (appli) {
       const small = await p.evaluate(() => [...document.querySelectorAll('.tabbar button, #chips .chip:not(.sep), .card .fav, #openFilters, #near, .nav-actions .icon-btn')].filter(e => { const r = e.getBoundingClientRect(); return r.width && (r.height < 40 || r.width < 40); }).map(e => (e.textContent.trim() || e.getAttribute('aria-label')) + ' ' + Math.round(e.getBoundingClientRect().height)));
       ok(nom, 'Zones tactiles assez grandes (≥ 40 px)', small.length === 0, small.slice(0, 4).join(' | '));
       ok(nom, 'Barre d\'onglets visible', await p.isVisible('.tabbar'));
@@ -63,6 +67,13 @@ const listNames = p => p.$$eval('#list .card h3', els => els.map(e => e.textCont
     } else {
       ok(nom, 'Accueil, chiffres et sports visibles', await p.isVisible('.hero') && await p.isVisible('#stats') && await p.isVisible('#sportsGrid'));
       ok(nom, 'Barre d\'onglets masquée', !(await p.isVisible('.tabbar')));
+      ok(nom, 'Rubriques « Comment ça marche » et « À propos » visibles', await p.isVisible('#comment') && await p.isVisible('#apropos'));
+      if (conf.isMobile) {
+        ok(nom, 'Page défilable normalement (pas figée comme l\'appli)', await p.evaluate(() => document.documentElement.scrollHeight > innerHeight * 3));
+        ok(nom, 'Bouton Liste / Carte visible', await p.isVisible('.view-toggle'));
+        const small = await p.evaluate(() => [...document.querySelectorAll('.hero-search .btn, .view-toggle button, #chips .chip:not(.sep), .nav-actions .icon-btn, .sport-tile')].filter(e => { const r = e.getBoundingClientRect(); return r.width && r.height < 40; }).map(e => e.textContent.trim()));
+        ok(nom, 'Zones tactiles assez grandes (≥ 40 px)', small.length === 0, small.slice(0, 4).join(' | '));
+      }
     }
     await p.screenshot({ path: `qa-${nom.replace(/\W+/g, '_')}.png` });
     ok(nom, 'Aucune erreur JavaScript', p._errs.length === 0, p._errs.join(' | '));
@@ -74,7 +85,8 @@ const listNames = p => p.$$eval('#list .card h3', els => els.map(e => e.textCont
     const mobile = nom !== 'Ordinateur';
     const ctx = await b.newContext({ ...conf, serviceWorkers: 'block', geolocation: { latitude: 48.51, longitude: -2.76 }, permissions: ['geolocation'] });
     const p = await setup(ctx);
-    await p.goto(URL); await p.waitForFunction(() => /\d+ club/.test(document.getElementById('count').textContent));
+    const U = mobile ? URL + '?mode=app' : URL;
+    await p.goto(U); await p.waitForFunction(() => /\d+ club/.test(document.getElementById('count').textContent));
     await p.waitForTimeout(1500);
 
     // --- Recherche
@@ -184,11 +196,11 @@ const listNames = p => p.$$eval('#list .card h3', els => els.map(e => e.textCont
     await p.waitForTimeout(200);
 
     // --- Lien direct vers une fiche
-    await p.goto(URL + '#club-' + multi.id); await p.waitForTimeout(1500);
+    await p.goto(U + '#club-' + multi.id); await p.waitForTimeout(1500);
     ok(nom, 'Lien direct vers une fiche', await p.evaluate(() => document.getElementById('detail').open) && (await p.textContent('#dName')) === multi.nom);
-    await p.goto(URL + '#club-999999'); await p.waitForTimeout(1200);
+    await p.goto(U + '#club-999999'); await p.waitForTimeout(1200);
     ok(nom, 'Lien vers une fiche inexistante ignoré', !(await p.evaluate(() => document.getElementById('detail').open)));
-    await p.goto(URL); await p.waitForTimeout(1500);
+    await p.goto(U); await p.waitForTimeout(1500);
 
     // --- Carte
     if (mobile) { await p.click('.tabbar [data-tab="carte"]'); await p.waitForTimeout(800); }
@@ -235,7 +247,7 @@ const listNames = p => p.$$eval('#list .card h3', els => els.map(e => e.textCont
     }
 
     // --- Formulaire « Inscrire un club »
-    await p.goto(URL); await p.waitForTimeout(1500);
+    await p.goto(U); await p.waitForTimeout(1500);
     await p.locator('.suggest:visible').first().click(); await p.waitForTimeout(400);
     ok(nom, 'Ouvrir le formulaire', await p.evaluate(() => document.getElementById('propose').open));
     await p.click('#pSend'); await p.waitForTimeout(100);
@@ -257,11 +269,46 @@ const listNames = p => p.$$eval('#list .card h3', els => els.map(e => e.textCont
     await ctx.close();
   }
 
+  // ================= SITE DANS SAFARI SUR IPHONE =================
+  {
+    const nom = 'Site sur iPhone';
+    const ctx = await b.newContext({ ...devices['iPhone 13'], serviceWorkers: 'block', geolocation: { latitude: 47.24, longitude: 6.02 }, permissions: ['geolocation'] });
+    const p = await setup(ctx);
+    await p.goto(URL); await p.waitForTimeout(1800);
+    ok(nom, 'Mode site (pas le mode appli)', !(await p.evaluate(() => document.documentElement.classList.contains('app'))));
+    await p.fill('#heroQ', 'Besançon'); await p.press('#heroQ', 'Enter'); await p.waitForTimeout(900);
+    ok(nom, 'Recherche de l\'accueil → annuaire filtré', (await p.inputValue('#q')) === 'Besançon' && await count(p) > 0 && await p.evaluate(() => document.getElementById('annuaire').getBoundingClientRect().top) < 120, `${await count(p)} clubs`);
+    await p.evaluate(() => resetAll());
+    await p.locator('.sport-tile').first().click(); await p.waitForTimeout(800);
+    ok(nom, 'Vignette sport → annuaire filtré', await p.evaluate(() => !!state.sport) && await p.evaluate(() => document.getElementById('annuaire').getBoundingClientRect().top) < 120);
+    await p.evaluate(() => resetAll());
+    await p.locator('.view-toggle [data-view="carte"]').click(); await p.waitForTimeout(800);
+    const mh = await p.evaluate(() => document.getElementById('map').getBoundingClientRect().height);
+    ok(nom, 'Bouton « Carte » : carte affichée avec les repères', mh > 300 && await p.evaluate(() => cluster.getLayers().length) === 246, Math.round(mh) + ' px');
+    await p.evaluate(() => { const m = [...markers.values()][0]; m.fire('click'); }); await p.waitForTimeout(300);
+    ok(nom, 'Repère → aperçu du club', await p.isVisible('#peek'));
+    await p.locator('.view-toggle [data-view="liste"]').click(); await p.waitForTimeout(300);
+    ok(nom, 'Bouton « Liste » : retour à la liste', await p.isVisible('#list .card') && !(await p.isVisible('#map')));
+    await p.locator('#list .card').first().click(); await p.waitForTimeout(400);
+    ok(nom, 'Fiche club avec détails', await p.evaluate(() => document.getElementById('detail').open) && await p.evaluate(() => document.getElementById('dBody').getBoundingClientRect().height) > 150);
+    await p.click('#detail [data-close]'); await p.waitForTimeout(300);
+    await p.click('#near'); await p.waitForTimeout(900);
+    ok(nom, '« Autour de moi » : tri par distance', await p.evaluate(() => state.sort === 'near' && filtered()[0].dist != null), await p.evaluate(() => (filtered()[0].dist || 0).toFixed(1) + ' km'));
+    await p.click('.nav-actions .icon-btn.suggest'); await p.waitForTimeout(400);
+    ok(nom, 'Bouton « + » : formulaire d\'inscription', await p.evaluate(() => document.getElementById('propose').open));
+    await p.evaluate(() => closeSheet(document.getElementById('propose'))); await p.waitForTimeout(300);
+    await p.locator('#apropos .suggest').click(); await p.waitForTimeout(400);
+    ok(nom, '« Inscrire mon club » (À propos) : formulaire', await p.evaluate(() => document.getElementById('propose').open));
+    await p.screenshot({ path: 'qa-site-iphone.png', fullPage: false });
+    ok(nom, 'Aucune erreur JavaScript', p._errs.length === 0, p._errs.join(' | '));
+    await ctx.close();
+  }
+
   // ================= CAS PARTICULIERS =================
   {
     const ctx = await b.newContext({ ...devices['iPhone 13'], serviceWorkers: 'block' });
     const p = await setup(ctx, { postStatus: 409 });
-    await p.goto(URL); await p.waitForTimeout(1500);
+    await p.goto(URL + '?mode=app'); await p.waitForTimeout(1500);
     await p.locator('.suggest:visible').first().click(); await p.waitForTimeout(400);
     await p.fill('#pNom', 'Handisport 2.0'); await p.fill('#pSport', 'boccia'); await p.fill('#pCp', '93000'); await p.fill('#pVille', 'Bobigny'); await p.locator('#pOk').check();
     await p.click('#pSend'); await p.waitForTimeout(800);

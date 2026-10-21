@@ -1,7 +1,7 @@
 # Paralliance
 
 Annuaire des clubs de sport qui accueillent les personnes en situation de handicap, partout en France (métropole et outre-mer).
-Site web et application téléphone (PWA installable) : https://monclubhandi.github.io/mon-club-handi/
+Site web et application téléphone (PWA installable) : https://paralliance.org/
 
 ## Comment ça marche
 - **Données** : une base Supabase (table `clubs`, voir `supabase/`), lue en direct par l'appli à chaque ouverture.

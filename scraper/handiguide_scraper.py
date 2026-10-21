@@ -33,7 +33,7 @@ SUPABASE_KEY = "sb_publishable_ZNohzowK1cNBG_-qukzemQ_KAG9EX-Z"
 BASE = "https://www.handiguide.sports.gouv.fr"
 # Base Adresse Nationale : géocodeur de l'IGN, et l'ancienne adresse en secours
 GEOCODEURS = ["https://data.geopf.fr/geocodage/search?limit=1&q=", "https://api-adresse.data.gouv.fr/search/?limit=1&q="]
-USER_AGENT = "MonClubHandi/2.0 (annuaire parasport benevole ; https://monclubhandi.github.io/mon-club-handi/)"
+USER_AGENT = "Paralliance/2.0 (annuaire parasport benevole ; https://paralliance.org/)"
 PAUSE = 3  # secondes entre deux fiches (ne pas descendre en dessous)
 PROGRESSION = ".progression.json"
 

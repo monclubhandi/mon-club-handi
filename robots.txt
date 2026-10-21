@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://monclubhandi.github.io/mon-club-handi/sitemap.xml
+Sitemap: https://paralliance.org/sitemap.xml

@@ -298,6 +298,9 @@
   .cta.main { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .cta.main p { color: inherit; opacity: .9; }
   .cta.main .btn { background: var(--on-accent); color: var(--accent); border-color: var(--on-accent); }
+  .cta.don { border-color: #F5B841; background: color-mix(in srgb, #F5B841 12%, var(--panel)); }
+  .cta.don .couts { font-size: .9rem; margin: -.4rem 0 1rem; }
+  .soutien { color: var(--muted); font-size: .92rem; margin-top: .25rem; }
   .ios-steps { margin: .5rem 0 0; padding-left: 1.2rem; color: var(--muted); }
 
   .site-foot { border-top: 1px solid var(--line); padding: 3rem 0 2rem; }
@@ -543,6 +546,7 @@
       <a href="#annuaire">Trouver un club</a>
       <a href="#comment">Comment ça marche</a>
       <a href="#apropos">À propos</a>
+      <a href="#soutenir">Soutenir</a>
     </nav>
     <div class="nav-actions">
       <button type="button" class="btn outline install only-desktop" hidden><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Installer l'appli</button>
@@ -703,6 +707,9 @@
         <div class="cta-cards">
           <div class="cta main"><h3>Tu es un club ?</h3><p>Fais connaître ton accueil et tes créneaux. L'ajout est gratuit et vérifié avec toi.</p><a class="btn suggest" href="#">Inscrire mon club</a></div>
           <div class="cta"><h3>Une info à corriger ?</h3><p>Un créneau a changé, un club a déménagé ? Dis-le-nous, on met la fiche à jour.</p><a class="btn outline" id="contactLink" href="#">Nous écrire</a></div>
+          <div class="cta don" id="soutenir"><h3>Soutenir Paralliance</h3><p>Paralliance est gratuit, sans publicité et développé bénévolement. Un petit don, même 1 € par mois, l'aide à rester en ligne et à s'agrandir.</p>
+            <p class="couts">Le site coûte environ 15 € par an (nom de domaine). Les dons servent aussi à ajouter et vérifier des clubs.</p>
+            <a class="btn" href="https://liberapay.com/Paralliance/donate" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Faire un don</a></div>
           <div class="cta" id="installCard"><h3>Installe l'appli</h3><p>Garde l'annuaire sur ton écran d'accueil, même sans connexion.</p>
             <button type="button" class="btn install" hidden><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Installer l'appli</button>
             <ol class="ios-steps" id="iosSteps"><li>Sur iPhone, ouvre ce site dans <strong>Safari</strong>.</li><li>Touche <strong>Partager</strong>, puis <strong>Sur l'écran d'accueil</strong>.</li></ol>
@@ -719,7 +726,7 @@
             <p class="desc">L'annuaire des clubs de France qui accueillent les sportifs en situation de handicap.</p>
           </div>
           <div><h4>Le site</h4><ul><li><a href="#annuaire" data-goto="liste">Trouver un club</a></li><li><a href="#comment">Comment ça marche</a></li><li><a href="#apropos">À propos</a></li></ul></div>
-          <div><h4>Contribuer</h4><ul><li><a class="suggest" href="#">Proposer un club</a></li><li><a class="contact" href="#">Signaler une erreur</a></li></ul></div>
+          <div><h4>Contribuer</h4><ul><li><a class="suggest" href="#">Proposer un club</a></li><li><a class="contact" href="#">Signaler une erreur</a></li><li><a href="#soutenir">Soutenir Paralliance</a></li></ul></div>
           <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.data.gouv.fr/datasets/annuaire-des-associations-et-clubs-proposant-une-activite-parasportive" target="_blank" rel="noopener">Département du Doubs, plateforme Oz (ODbL)</a></li><li><a href="https://cotesdarmor.fr/sites/default/files/2021-03/Guide_Spt_Handicaps_2019_2021_BATWeb.pdf" target="_blank" rel="noopener">Département des Côtes-d'Armor (guide 2019-2021)</a></li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
         </div>
         <p class="fine"><span>© <span id="year">2026</span> Paralliance · Projet bénévole</span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
@@ -783,6 +790,7 @@
     <a href="#apropos" data-menu="apropos" data-page="apropos"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>À propos</a>
     <hr>
     <a href="#" data-menu="proposer" class="menu-cta"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Proposer un club</a>
+    <a href="#soutenir" data-menu="soutenir"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Soutenir Paralliance</a>
     <a href="#installCard" data-menu="installer"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Installer l'appli</a>
   </nav>
 </dialog>
@@ -865,6 +873,8 @@ const CONTACT_EMAIL = "contact@paralliance.org";
 // Notification par email à chaque club proposé (service gratuit FormSubmit) : code secret fourni par FormSubmit
 // à l'activation, qui remplace l'adresse email (contact@paralliance.org n'apparaît donc pas ici)
 const NOTIF_EMAIL = "c36c096a37f9cfe6ca9cee6ebe6c0f3c";
+// Page de dons (Liberapay)
+const DON_URL = "https://liberapay.com/Paralliance/donate";
 const SUPABASE_EDITOR = "https://supabase.com/dashboard/project/aogcjrfrfdasxesntlpk/editor";
 
 // Départements et régions de France (métropole et outre-mer)
@@ -1107,7 +1117,7 @@ function gotoDirectory() {
 const PAGES = ["accueil", "clubs", "sports", "infos", "apropos"];
 const isSiteMobile = () => !isDesktop() && !document.documentElement.classList.contains("app");
 const pageDuLien = h => ({ "#main": "accueil", "#clubs": "clubs", "#annuaire": "clubs", "#sports": "sports", "#comment": "infos",
-  "#pourquoi": "infos", "#infos": "infos", "#apropos": "apropos", "#installCard": "apropos" })[h];
+  "#pourquoi": "infos", "#infos": "infos", "#apropos": "apropos", "#installCard": "apropos", "#soutenir": "apropos" })[h];
 function pageDepuisAdresse() {
   const h = location.hash.slice(1);
   return /^club-/.test(h) ? "clubs" : (PAGES.includes(h) ? h : "accueil");
@@ -1280,7 +1290,8 @@ function fillDetail(c) {
     ${c.acces ? `<div class="sec"><h3>Accès</h3><p>${esc(c.acces)}</p></div>` : ""}
     ${c.tel || c.email ? `<div class="sec"><h3>Contact</h3><p>${[c.tel ? esc(c.tel) : "", c.email ? esc(c.email) : ""].filter(Boolean).join("<br>")}</p></div>` : ""}
     ${c.verifie ? `<p class="checked">${ico("check")}Infos vérifiées le ${esc(c.verifie)}</p>` : ""}
-    <p class="report">Une info est fausse ? <a href="${esc(report)}">Signaler une correction</a></p>`;
+    <p class="report">Une info est fausse ? <a href="${esc(report)}">Signaler une correction</a></p>
+    <p class="soutien">Paralliance t'a aidé ? <a href="${DON_URL}" target="_blank" rel="noopener">Soutiens le projet</a>, même 1 € par mois.</p>`;
   $("dBody").scrollTop = 0;
 }
 function openDetail(id) {
@@ -1433,6 +1444,7 @@ async function sendPropose(e) {
     f.dataset.done = "1";
     f.innerHTML = `<div class="done"><div class="ok">${ico("check")}</div><h3 style="margin:0 0 .5rem">Merci, c'est envoyé !</h3>
       <p style="color:var(--muted);margin:0 0 1.5rem">« ${esc(base.nom)} » sera vérifié puis ajouté à l'annuaire, en général sous quelques jours.</p>
+      <p class="soutien" style="margin:0 0 1.5rem">Envie d'aider Paralliance à grandir ? <a href="${DON_URL}" target="_blank" rel="noopener">Fais un don</a>, même 1 € par mois.</p>
       <button type="button" class="btn" data-close>Fermer</button></div>`;
   } catch (err) {
     console.error(err);
@@ -1461,9 +1473,9 @@ function notifier(base, sports) {
 
 // ===== Menu burger (site sur téléphone) =====
 function menuAction(action) {
-  const pageDe = { haut: "accueil", annuaire: "clubs", carte: "clubs", favoris: "clubs", sports: "sports", comment: "infos", pourquoi: "infos", apropos: "apropos", installer: "apropos" };
+  const pageDe = { haut: "accueil", annuaire: "clubs", carte: "clubs", favoris: "clubs", sports: "sports", comment: "infos", pourquoi: "infos", apropos: "apropos", installer: "apropos", soutenir: "apropos" };
   const aller = id => isSiteMobile() && pageDe[action]
-    ? setPage(pageDe[action], { cible: ["installer", "pourquoi"].includes(action) ? id : null, haut: true })
+    ? setPage(pageDe[action], { cible: ["installer", "pourquoi", "soutenir"].includes(action) ? id : null, haut: true })
     : document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
   const vue = v => { const b = document.querySelector(`.view-toggle [data-view="${v}"]`); if (b && b.getAttribute("aria-pressed") !== "true") b.click(); };
   if (action === "haut") isSiteMobile() ? setPage("accueil", { haut: true }) : scrollTo({ top: 0, behavior: "smooth" });
@@ -1480,7 +1492,7 @@ function bindPages() {
     const page = a.dataset.page || pageDuLien(a.getAttribute("href"));
     if (!page) return;
     e.preventDefault();
-    setPage(page, { cible: a.getAttribute("href") === "#installCard" ? "installCard" : null, haut: true });
+    setPage(page, { cible: ["#installCard", "#soutenir"].includes(a.getAttribute("href")) ? a.getAttribute("href").slice(1) : null, haut: true });
   });
   setPage(pageDepuisAdresse(), { push: false });
 }

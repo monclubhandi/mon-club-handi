@@ -708,7 +708,7 @@
         <div class="cta-cards">
           <div class="cta main"><h3>Tu es un club ?</h3><p>Fais connaître ton accueil et tes créneaux. L'ajout est gratuit et vérifié avec toi.</p><a class="btn suggest" href="#">Inscrire mon club</a></div>
           <div class="cta"><h3>Une info à corriger ?</h3><p>Un créneau a changé, un club a déménagé ? Dis-le-nous, on met la fiche à jour.</p><a class="btn outline" id="contactLink" href="#">Nous écrire</a></div>
-          <div class="cta don don-only" id="soutenir"><h3>Soutenir Paralliance</h3><p>Paralliance est gratuit, sans publicité et développé bénévolement. Un petit don, même 1 € par mois, l'aide à rester en ligne et à s'agrandir.</p>
+          <div class="cta don don-only" id="soutenir"><h3>Soutenir Paralliance</h3><p>Paralliance est gratuit, sans publicité et développé bénévolement. Un petit don, même 2 €, l'aide à rester en ligne et à s'agrandir. Paiement par carte en 30 secondes, sans créer de compte.</p>
             <p class="couts">Le site coûte environ 15 € par an (nom de domaine). Les dons servent aussi à ajouter et vérifier des clubs.</p>
             <a class="btn" id="donLink" href="#" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Faire un don</a></div>
           <div class="cta" id="installCard"><h3>Installe l'appli</h3><p>Garde l'annuaire sur ton écran d'accueil, même sans connexion.</p>
@@ -874,8 +874,8 @@ const CONTACT_EMAIL = "contact@paralliance.org";
 // Notification par email à chaque club proposé (service gratuit FormSubmit) : code secret fourni par FormSubmit
 // à l'activation, qui remplace l'adresse email (contact@paralliance.org n'apparaît donc pas ici)
 const NOTIF_EMAIL = "c36c096a37f9cfe6ca9cee6ebe6c0f3c";
-// Page de dons : vide = rubrique « Soutenir » masquée partout (en attendant la plateforme de dons)
-const DON_URL = "";
+// Page de dons (Buy Me a Coffee) : vide = rubrique « Soutenir » masquée partout
+const DON_URL = "https://buymeacoffee.com/paralliance";
 if (!DON_URL) document.documentElement.classList.add("sans-dons");
 else document.getElementById("donLink").href = DON_URL;
 const SUPABASE_EDITOR = "https://supabase.com/dashboard/project/aogcjrfrfdasxesntlpk/editor";
@@ -1294,7 +1294,7 @@ function fillDetail(c) {
     ${c.tel || c.email ? `<div class="sec"><h3>Contact</h3><p>${[c.tel ? esc(c.tel) : "", c.email ? esc(c.email) : ""].filter(Boolean).join("<br>")}</p></div>` : ""}
     ${c.verifie ? `<p class="checked">${ico("check")}Infos vérifiées le ${esc(c.verifie)}</p>` : ""}
     <p class="report">Une info est fausse ? <a href="${esc(report)}">Signaler une correction</a></p>
-    ${DON_URL ? `<p class="soutien">Paralliance t'a aidé ? <a href="${DON_URL}" target="_blank" rel="noopener">Soutiens le projet</a>, même 1 € par mois.</p>` : ""}`;
+    ${DON_URL ? `<p class="soutien">Paralliance t'a aidé ? <a href="${DON_URL}" target="_blank" rel="noopener">Soutiens le projet</a>, même 2 €.</p>` : ""}`;
   $("dBody").scrollTop = 0;
 }
 function openDetail(id) {
@@ -1447,7 +1447,7 @@ async function sendPropose(e) {
     f.dataset.done = "1";
     f.innerHTML = `<div class="done"><div class="ok">${ico("check")}</div><h3 style="margin:0 0 .5rem">Merci, c'est envoyé !</h3>
       <p style="color:var(--muted);margin:0 0 1.5rem">« ${esc(base.nom)} » sera vérifié puis ajouté à l'annuaire, en général sous quelques jours.</p>
-      ${DON_URL ? `<p class="soutien" style="margin:0 0 1.5rem">Envie d'aider Paralliance à grandir ? <a href="${DON_URL}" target="_blank" rel="noopener">Fais un don</a>, même 1 € par mois.</p>` : ""}
+      ${DON_URL ? `<p class="soutien" style="margin:0 0 1.5rem">Envie d'aider Paralliance à grandir ? <a href="${DON_URL}" target="_blank" rel="noopener">Fais un don</a>, même 2 €.</p>` : ""}
       <button type="button" class="btn" data-close>Fermer</button></div>`;
   } catch (err) {
     console.error(err);

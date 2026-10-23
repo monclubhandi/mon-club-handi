@@ -12,6 +12,7 @@ Utilisation : python scripts/generer_pages.py                 (lit les clubs pub
               python scripts/generer_pages.py clubs.json      (test : lit les clubs dans un fichier)
 """
 import datetime
+import hashlib
 import html
 import json
 import os
@@ -180,7 +181,8 @@ def page_club(c, chemin, deps, voisins):
     dep = nom_dep(c["dep"], deps)
     lieu = c["ville"] + (f" · {dep}" if dep else "")
     hand = [HANDICAPS.get(h, h) for h in c["handicaps"]]
-    titre = f"{c['nom']} – {sports} à {c['ville']} | Paralliance"
+    mot = (c["pratique"] or "accueil handicap").lower()
+    titre = f"{c['nom']} – {', '.join(cap(s) for s in c['sports'][:3])} à {c['ville']}, {mot} | Paralliance"
     desc = f"{c['nom']} à {c['ville']}" + (f" ({dep})" if dep else "") + f" : {sports.lower()}"
     if hand:
         desc += f", accueil des personnes en situation de handicap {', '.join(hand)}"
@@ -217,7 +219,7 @@ def page_club(c, chemin, deps, voisins):
     if dep:
         fil += f' › <a href="/departements/{deps_slug(c["dep"], deps)}.html">{e(dep)}</a>'
     fil += "</nav>"
-    corps = (f'{fil}<h1>{e(c["nom"])}</h1><p class="lieu">{e(sports)} · {e(lieu)}</p>'
+    corps = (f'{fil}<h1>{e(c["nom"])}</h1><p class="lieu">{e(sports)} · {e(lieu)}</p><p>{e(presentation(c, dep, hand))}</p>'
              f'<p><a class="btn" href="/#club-{c["id"]}">Ouvrir la fiche sur Paralliance</a>'
              f'<a class="btn sec" href="https://www.google.com/maps/dir/?api=1&amp;destination={e(quote(adresse or c["nom"] + " " + c["ville"]))}" target="_blank" rel="noopener">Itinéraire</a></p>'
              + "".join(blocs))
@@ -242,6 +244,26 @@ def page_club(c, chemin, deps, voisins):
     return page(titre, desc, chemin, corps, [org, fil_ld])
 
 
+def liste_fr(mots):
+    return mots[0] if len(mots) == 1 else ", ".join(mots[:-1]) + " et " + mots[-1]
+
+
+def presentation(c, dep, hand):
+    """Une phrase rédigée à partir des seules données du club (rien n'est ajouté)."""
+    lieu = c["ville"] + (f" ({dep.rsplit(' (', 1)[0]})" if dep and not dep.startswith(c["ville"]) else "")
+    phrase = f"{c['nom']}, à {lieu}, propose {liste_fr(c['sports'])}"
+    if hand:
+        phrase += f" et accueille les personnes en situation de handicap {liste_fr(hand)}"
+    phrase += "."
+    if c["pratique"]:
+        phrase += f" Pratique : {c['pratique'].lower()}."
+    if c["label"]:
+        phrase += f" {c['label']}."
+    if c["essai"]:
+        phrase += " Séance d'essai possible."
+    return phrase
+
+
 def deps_slug(code, deps):
     return f"{code.lower()}-{slug(deps[code][0])}" if code in deps else "autres"
 
@@ -249,6 +271,20 @@ def deps_slug(code, deps):
 def ligne_club(c):
     e = html.escape
     return f'<li><a href="/{c["chemin"]}">{e(c["nom"])}</a><small>{e(", ".join(cap(s) for s in c["sports"][:4]))} · {e(c["ville"])}</small></li>'
+
+
+def presentation_dep(nom, liste, villes):
+    compte = {}
+    for c in liste:
+        for s in c["sports"]:
+            compte[s] = compte.get(s, 0) + 1
+    principaux = [s for s, _ in sorted(compte.items(), key=lambda x: (-x[1], x[0]))[:5]]
+    n = len(liste)
+    phrase = (f"{nom} : Paralliance recense {n} club{'s' if n > 1 else ''} de sport qui accueille{'nt' if n > 1 else ''} "
+              f"les personnes en situation de handicap")
+    if len(villes) > 1:
+        phrase += f", dans {len(villes)} communes"
+    return phrase + f". Sports les plus proposés : {liste_fr(principaux)}."
 
 
 def page_departement(code, liste, deps):
@@ -262,6 +298,7 @@ def page_departement(code, liste, deps):
     corps = (f'<nav class="fil"><a href="/">Accueil</a> › <a href="/clubs/">Clubs</a> › {e(nom)}</nav>'
              f'<h1>Clubs handisport et sport adapté – {e(nom)}</h1>'
              f'<p class="lieu">{len(liste)} club{"s" if len(liste) > 1 else ""} · {e(", ".join(villes[:8]))}{" …" if len(villes) > 8 else ""}</p>'
+             f'<p>{e(presentation_dep(nom, liste, villes))}</p>'
              f'<p><a class="btn" href="/#clubs">Rechercher sur la carte</a></p>'
              f'<div class="carte"><h2>Sports proposés</h2><div class="tags">{"".join(f"<span class=tag>{e(cap(s))}</span>" for s in sports)}</div></div>'
              f'<div class="carte"><h2>Les clubs</h2><ul class="liste">{"".join(ligne_club(c) for c in liste)}</ul></div>')
@@ -284,6 +321,19 @@ def page_index(par_dep, deps, total):
     return page("Tous les clubs handisport et sport adapté en France | Paralliance",
                 f"Liste des {total} clubs de sport qui accueillent les personnes en situation de handicap, classés par département : handisport et sport adapté.",
                 "clubs/", corps)
+
+
+def liens_departements(par_dep, deps):
+    """Met à jour la liste « Clubs par département » en bas de la page d'accueil (entre deux repères)."""
+    chemin = os.path.join(RACINE, "index.html")
+    with open(chemin, encoding="utf-8") as f:
+        accueil = f.read()
+    codes = sorted((k for k in par_dep if k in deps), key=lambda k: norm(deps[k][0]))
+    liste = "".join(f'<li><a href="departements/{deps_slug(k, deps)}.html">{html.escape(deps[k][0])}</a></li>' for k in codes)
+    nouveau = re.sub(r"(<!-- departements:debut -->).*?(<!-- departements:fin -->)", lambda m: m.group(1) + liste + m.group(2), accueil, flags=re.S)
+    if nouveau != accueil:
+        with open(chemin, "w", encoding="utf-8") as f:
+            f.write(nouveau)
 
 
 # ===== Écriture =====
@@ -320,10 +370,27 @@ def main(fichier=None):
         ecrire(f"departements/{deps_slug(code, deps)}.html", page_departement(code, liste, deps))
     ecrire("clubs/index.html", page_index(par_dep, deps, len(clubs)))
 
+    liens_departements(par_dep, deps)
+
+    # Date de mise à jour de chaque page : celle du dernier vrai changement (empreinte du contenu), pas la date du jour
     aujourdhui = datetime.date.today().isoformat()
+    fichier_dates = os.path.join(RACINE, "scripts", "dates_pages.json")
+    try:
+        anciennes = json.load(open(fichier_dates, encoding="utf-8"))
+    except (OSError, ValueError):
+        anciennes = {}
     urls = [("", "1.0"), ("clubs/", "0.8")] + [(f"departements/{deps_slug(k, deps)}.html", "0.7") for k in par_dep] + [(c["chemin"], "0.6") for c in clubs]
+    dates = {}
+    for u, _ in urls:
+        source = os.path.join(RACINE, u or "index.html", "index.html" if u.endswith("/") else "")
+        with open(source.rstrip(os.sep), "rb") as f:
+            empreinte = hashlib.sha1(f.read()).hexdigest()
+        ancien = anciennes.get(u)
+        dates[u] = ancien if ancien and ancien[0] == empreinte else [empreinte, aujourdhui]
+    with open(fichier_dates, "w", encoding="utf-8") as f:
+        f.write("{\n" + ",\n".join(f"{json.dumps(u)}: {json.dumps(dates[u])}" for u in sorted(dates)) + "\n}\n")
     ecrire("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-           + "".join(f"  <url><loc>{SITE}/{u}</loc><lastmod>{aujourdhui}</lastmod><priority>{p}</priority></url>\n" for u, p in urls)
+           + "".join(f"  <url><loc>{SITE}/{u}</loc><lastmod>{dates[u][1]}</lastmod><priority>{p}</priority></url>\n" for u, p in urls)
            + "</urlset>\n")
     print(f"{len(clubs)} pages clubs, {len(par_dep)} pages départements, sitemap de {len(urls)} adresses.")
 

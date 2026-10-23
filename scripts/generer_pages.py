@@ -97,8 +97,10 @@ def club(r, deps):
     site = texte(r, "site")
     if site and not re.match(r"^https?://", site, re.I):
         site = "https://" + site
+    dep = dep_of(cp, deps)
     return {
-        "id": r["id"], "nom": texte(r, "nom"), "adresse": texte(r, "adresse"), "cp": cp, "ville": texte(r, "ville"),
+        "id": r["id"], "nom": texte(r, "nom"), "adresse": texte(r, "adresse"), "cp": cp,
+        "ville": texte(r, "ville") or (deps[dep][0] if dep in deps else ""),   # source sans commune : le département
         "dep": dep_of(cp, deps),
         "sports": list(dict.fromkeys(s.strip().lower() for s in re.split(r"[,;]", texte(r, "sport")) if s.strip())),
         "handicaps": [h for h in (norm(x) for x in re.split(r"[,;]", texte(r, "handicaps"))) if h],

@@ -950,6 +950,7 @@ function toast(msg) {
 // Géocodage via la base d'adresses officielle (IGN / BAN), avec cache sur l'appareil
 // Texte à géocoder pour un club : son adresse, ou seulement sa commune quand la source ne donne que le département
 function geoQuery(c) {
+  if (c.sansCommune && !c.adresse && !/^\d{5}$/.test(c.cp)) return null;   // ni commune ni adresse : pas de point au hasard sur la carte
   if (/^\d{5}$/.test(c.cp) || c.adresse) return { q: [c.adresse, c.cp, c.ville].filter(Boolean).join(" ") };
   const dep = (DEPARTEMENTS[c.dep] || "").replace(/\s*\(.*\)$/, "");
   return { q: [c.ville, dep].filter(Boolean).join(" "), commune: true };
@@ -974,7 +975,7 @@ async function geocode(query, commune) {
 function toClub(r) {
   const t = k => (r[k] == null ? "" : String(r[k])).trim();
   const cp = t("code_postal");
-  return {
+  const club = {
     id: r.id, sports: [...new Set(t("sport").split(/[,;]/).map(x => x.trim().toLowerCase()).filter(Boolean))], nom: t("nom"), adresse: t("adresse"), cp, ville: t("ville"), dep: depOf(cp), region: REGION_OF[depOf(cp)] || "",
     handicaps: t("handicaps").split(/[,;]/).map(norm).filter(Boolean),
     pratique: norm(t("pratique")),
@@ -985,6 +986,9 @@ function toClub(r) {
     pos: (num(r.latitude) != null && num(r.longitude) != null) ? { lat: num(r.latitude), lon: num(r.longitude) } : null,
     dist: null
   };
+  // Certaines sources ne donnent que le département : on l'affiche à la place de la commune
+  if (!club.ville && DEPARTEMENTS[club.dep]) { club.ville = DEPARTEMENTS[club.dep].replace(/\s*\(.*\)$/, ""); club.sansCommune = true; }
+  return club;
 }
 const trust = c => (c.label ? 1 : 0) + (c.paraClub ? 1 : 0) + (c.encadrant ? 1 : 0);
 const sportLabels = {}; // "athletisme" -> "athlétisme" : on garde l'écriture de la base pour l'affichage
@@ -1637,6 +1641,7 @@ async function start() {
     while (next < todo.length) {
       const c = todo[next++];
       const g = geoQuery(c);
+      if (!g) continue;
       c.pos = await geocode(g.q, g.commune);
       if (c.pos && userPos) c.dist = km(userPos, c.pos);
     }

@@ -78,9 +78,21 @@ SPORTS = {
     "balade": "randonnée", "balade nature": "randonnée", "randonnee pedestre/": "randonnée", "echecs": "échecs",
     "decouverte de l'environnement": "découverte de la nature", "decouverte de l’environnement": "découverte de la nature",
     "natation apprentissage, perfectionnement": "natation",
+    # Annuaires 2025 (Haute-Garonne, Eure, Bouches-du-Rhône, Calvados)
+    "rugby (fauteuil)": "rugby fauteuil", "rugby xiii": "rugby", "rugby touch": "rugby", "basket-ball (fauteuil)": "basket fauteuil",
+    "basket-ball": "basket", "basket ball": "basket", "handball-fauteuil": "hand fauteuil", "volleyball (assis)": "volley assis",
+    "volleyball": "volley-ball", "foot a 11 (sourds)": "football", "foot a 7": "football", "futsal sourds": "football",
+    "cecifoot (foot a 5 dv)": "cécifoot", "athetisme": "athlétisme", "petanque (sourds)": "pétanque",
+    "sports de boules (sourds)": "boules", "plongee-sous-marine": "plongée", "plongee sous-marine": "plongée",
+    "canoe-kayak - pirogue": "canoë-kayak", "canoe-kayak": "canoë-kayak", "randonnee - joelette": "joëlette",
+    "randonnee - ftt": "randonnée", "rando - traineau - pulka": "pulka", "cyclisme handcycle": "handbike",
+    "cyclisme solo": "cyclisme", "cyclisme tricycle": "cyclisme", "foot fauteuil electrique": "foot fauteuil",
+    "ski de fond - biathlon": "ski de fond", "aviron": "aviron",
+    "foot-fauteuil": "foot fauteuil", "jujitsu-self defense": "jujitsu", "jiu-jitsu": "jujitsu", "ju-jitsu": "jujitsu",
+    "karate": "karaté",
 }
 # Ce qui n'est pas un sport
-PAS_DES_SPORTS = {"intervention a domicile", "jeux de societe", "conference", "visite culturelle", "ateliers cuisine",
+PAS_DES_SPORTS = {"sport sante", "intervention a domicile", "jeux de societe", "conference", "visite culturelle", "ateliers cuisine",
                   "chant", "plus", "fft", "12 km par sortie"}
 
 

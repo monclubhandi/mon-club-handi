@@ -1,0 +1,28 @@
+# Fabrique chaque nuit les pages que Google peut lire : une par club, une par département, la liste des clubs
+# et le sitemap.xml (voir scripts/generer_pages.py). Un club validé dans Supabase a sa page le lendemain.
+name: Pages des clubs pour Google
+
+on:
+  schedule:
+    - cron: "41 3 * * *"   # tous les jours à 3h41 (UTC)
+  workflow_dispatch:        # bouton « Run workflow » pour la lancer à la main
+
+permissions:
+  contents: write           # pour enregistrer les pages dans le dépôt
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fabriquer les pages depuis Supabase
+        run: python3 scripts/generer_pages.py
+      - name: Enregistrer les pages si quelque chose a changé
+        run: |
+          git add clubs departements sitemap.xml
+          if git diff --cached --quiet; then echo "Rien de nouveau"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Pages des clubs mises à jour"
+          git push

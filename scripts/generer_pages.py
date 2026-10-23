@@ -20,6 +20,7 @@ import shutil
 import sys
 import unicodedata
 import urllib.request
+from urllib.parse import quote
 
 SITE = "https://paralliance.org"
 SUPABASE_URL = "https://aogcjrfrfdasxesntlpk.supabase.co"
@@ -183,6 +184,7 @@ def page_club(c, chemin, deps, voisins):
         desc += f", accueil des personnes en situation de handicap {', '.join(hand)}"
     desc += ". Créneaux, accessibilité et contact sur Paralliance."
 
+    adresse = " ".join(x for x in (c["adresse"], c["cp"] if len(c["cp"]) == 5 else "", c["ville"]) if x)
     blocs = [f'<div class="carte"><h2>Sports proposés</h2><div class="tags">{"".join(f"<span class=tag>{e(cap(s))}</span>" for s in c["sports"])}</div></div>']
     accueil = ([f"<span class=tag>{e(c['pratique'])}</span>"] if c["pratique"] else []) + [f"<span class=tag>Handicap {e(h)}</span>" for h in hand]
     if accueil:
@@ -191,7 +193,6 @@ def page_club(c, chemin, deps, voisins):
         blocs.append('<div class="carte"><h2>Créneaux</h2><ul>' + "".join(f"<li>{e(s)}</li>" for s in c["creneaux"]) + "</ul></div>")
     if c["essai"]:
         blocs.append(f'<div class="carte"><h2>Séance d\'essai</h2><p>{e(c["essai"])}</p></div>')
-    adresse = " ".join(x for x in (c["adresse"], c["cp"] if len(c["cp"]) == 5 else "", c["ville"]) if x)
     blocs.append(f'<div class="carte"><h2>Adresse</h2><p>{e(adresse) or "Adresse non communiquée"}</p></div>')
     if c["acces"]:
         blocs.append(f'<div class="carte"><h2>Accès</h2><p>{e(c["acces"])}</p></div>')
@@ -204,6 +205,7 @@ def page_club(c, chemin, deps, voisins):
         contact.append(f'Site : <a href="{e(c["site"])}" rel="nofollow noopener" target="_blank">{e(c["site"])}</a>')
     if contact:
         blocs.append('<div class="carte"><h2>Contact</h2><p>' + "<br>".join(contact) + "</p></div>")
+    blocs.append(f'<p class="lieu">Une info est fausse ? <a href="mailto:contact@paralliance.org?subject={e(quote("Correction : " + c["nom"]))}">Signaler une correction</a></p>')
     if voisins:
         blocs.append(f'<div class="carte"><h2>Autres clubs – {e(dep)}</h2><ul class="liste">'
                      + "".join(f'<li><a href="/{v["chemin"]}">{e(v["nom"])}</a><small>{e(", ".join(cap(s) for s in v["sports"][:3]))} · {e(v["ville"])}</small></li>' for v in voisins)
@@ -214,8 +216,8 @@ def page_club(c, chemin, deps, voisins):
         fil += f' › <a href="/departements/{deps_slug(c["dep"], deps)}.html">{e(dep)}</a>'
     fil += "</nav>"
     corps = (f'{fil}<h1>{e(c["nom"])}</h1><p class="lieu">{e(sports)} · {e(lieu)}</p>'
-             f'<p><a class="btn" href="/#club-{c["id"]}">Voir sur la carte</a>'
-             f'<a class="btn sec" href="mailto:contact@paralliance.org?subject={e("Correction : " + c["nom"])}">Signaler une correction</a></p>'
+             f'<p><a class="btn" href="/#club-{c["id"]}">Ouvrir la fiche sur Paralliance</a>'
+             f'<a class="btn sec" href="https://www.google.com/maps/dir/?api=1&amp;destination={e(quote(adresse or c["nom"] + " " + c["ville"]))}" target="_blank" rel="noopener">Itinéraire</a></p>'
              + "".join(blocs))
 
     org = {"@context": "https://schema.org", "@type": "SportsOrganization", "name": c["nom"], "url": f"{SITE}/{chemin}",

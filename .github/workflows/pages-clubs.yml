@@ -20,7 +20,7 @@ jobs:
         run: python3 scripts/generer_pages.py
       - name: Enregistrer les pages si quelque chose a changé
         run: |
-          git add clubs departements sitemap.xml
+          git add clubs departements sitemap.xml index.html scripts/dates_pages.json
           if git diff --cached --quiet; then echo "Rien de nouveau"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

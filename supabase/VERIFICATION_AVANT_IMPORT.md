@@ -20,7 +20,7 @@ Règle : aucun import tant que cette fiche n'est pas remplie pour la source. En 
 
 - Licence ouverte, ou administration sans interdiction : on importe, on cite la source en bas de page.
 - « Reproduction interdite », « tous droits réservés » ou « sauf autorisation » : on n'importe pas sans accord écrit.
-- Association ou entreprise sans aucune mention : on demande l'accord avant d'importer.
+- Association ou entreprise sans aucune mention : on n'importe pas (pas de demande d'accord par mail).
 - Document de plus de 3 ans : on n'importe pas, même si c'est autorisé.
 
 ## 4. Dans tous les cas
@@ -36,10 +36,10 @@ Règle : aucun import tant que cette fiche n'est pas remplie pour la source. En 
 | Doubs (plateforme Oz) | Département | Licence ODbL | avant cette règle |
 | Côtes-d'Armor (guide 2019-2021) | Département | Administration (CRPA) | avant cette règle |
 | Bouches-du-Rhône (clubs labellisés) | Département | Administration (CRPA) | avant cette règle |
-| Eure (clubs labellisés, février 2025) | CDOS 27 (association), liste relayée par la préfecture | À confirmer : vérifier que la préfecture publie bien cette version, sinon demander l'accord | avant cette règle |
-| Haute-Garonne (annuaire 2025-2026) | Comité handisport 31 (association) | Aucune mention : accord à demander | avant cette règle |
-| Calvados (annuaire 2025) | CDOS 14 (association) | Aucune mention : accord à demander | avant cette règle |
-| Savoie (livret 2025-2026) | CDOS 73 (association) | Aucune mention : accord à demander avant import | octobre 2026 |
+| Eure (clubs labellisés, février 2025) | CDOS 27 (association), liste relayée par la préfecture | Gardé (décision d'octobre 2026), retrait immédiat sur demande | avant cette règle |
+| Haute-Garonne (annuaire 2025-2026) | Comité handisport 31 (association) | Aucune mention : gardé (décision d'octobre 2026), retrait immédiat sur demande | avant cette règle |
+| Calvados (annuaire 2025) | CDOS 14 (association) | Aucune mention : gardé (décision d'octobre 2026), retrait immédiat sur demande | avant cette règle |
+| Savoie (livret 2025-2026) | CDOS 73 (association) | Aucune mention et pas de demande d'accord : non importé (retiré, voir 11_retrait_savoie.sql) | octobre 2026 |
 | Nouvelle-Aquitaine (plateforme régionale) | CROS Nouvelle-Aquitaine (association) | « Reproduction interdite sauf autorisation » : refusé sans accord | octobre 2026 |
 | Lyon (réseau Sport-Santé Adapté Handicap) | Métropole de Lyon (administration) | Licence Ouverte 2.0 sur data.gouv.fr / data.grandlyon.com, fiches de 2025 | octobre 2026 |
 | Côtes-d'Armor (données ouvertes datarmor) | Département | Licence Ouverte 2.0, mais saison 2016/2017 : trop ancien, non importé | octobre 2026 |

@@ -45,6 +45,7 @@ Règle : aucun import tant que cette fiche n'est pas remplie pour la source. En 
 | Côtes-d'Armor (données ouvertes datarmor) | Département | Licence Ouverte 2.0, mais saison 2016/2017 : trop ancien, non importé | octobre 2026 |
 | Bordeaux Métropole (lieux de pratique des APA) | Bordeaux Métropole | Licence Ouverte, mais surtout résidences seniors et sport-santé, sans type de handicap : non importé | octobre 2026 |
 | Paris (réseau des clubs paraccueillants) | Ville de Paris | CGU paris.fr : « toute reproduction est conditionnée à l'accord de la Ville » : non importé | octobre 2026 |
+| Répertoire SIRENE (recherche-entreprises.api.gouv.fr) | INSEE / État | Licence Ouverte : sert seulement à découvrir des noms de clubs ; chaque fiche est remplie depuis la page officielle du club (clubs_verifies.py) | octobre 2026 |
 
 ## Méthode « club par club » (sans liste d'un tiers)
 

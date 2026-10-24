@@ -13,6 +13,7 @@ import html
 import json
 import os
 import re
+import urllib.parse
 import urllib.request
 
 from generer_pages import SUPABASE_KEY, SUPABASE_URL
@@ -39,7 +40,8 @@ NON_CONTROLABLES = ("facebook.com", "instagram.com", "helloasso.com", "linkedin.
 
 def verifier(site):
     url = site if site.startswith("http") else "https://" + site
-    if any(d in url.lower() for d in NON_CONTROLABLES):
+    domaine = urllib.parse.urlsplit(url).hostname or ""
+    if any(domaine == d or domaine.endswith("." + d) for d in NON_CONTROLABLES):
         return None
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Paralliance, verification des liens; contact@paralliance.org)"})
     try:

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://paralliance.org/</loc><lastmod>2026-10-24</lastmod><priority>1.0</priority></url>
-  <url><loc>https://paralliance.org/clubs/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://paralliance.org/clubs/</loc><lastmod>2026-10-24</lastmod><priority>0.8</priority></url>
   <url><loc>https://paralliance.org/departements/13-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/25-doubs.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/70-haute-saone.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/31-haute-garonne.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/22-cotes-d-armor.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/27-eure.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://paralliance.org/departements/69-rhone.html</loc><lastmod>2026-10-24</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/14-calvados.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://paralliance.org/departements/49-maine-et-loire.html</loc><lastmod>2026-10-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://paralliance.org/departements/45-loiret.html</loc><lastmod>2026-10-24</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/93-seine-saint-denis.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/90-territoire-de-belfort.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/56-morbihan.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://paralliance.org/departements/44-loire-atlantique.html</loc><lastmod>2026-10-24</lastmod><priority>0.7</priority></url>
+  <url><loc>https://paralliance.org/departements/01-ain.html</loc><lastmod>2026-10-24</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/05-hautes-alpes.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/39-jura.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://paralliance.org/departements/75-paris.html</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
@@ -33,6 +38,7 @@
   <url><loc>https://paralliance.org/clubs/academie-de-boxe-basso-cambo-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/access-sport-sante-pontarlier.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/actifs-dv-louviers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/action-sport-education-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aeromodelisme-cote-fleurie-manerbe.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aiki-club-saint-brieuc-saint-brieuc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aikido-aouen-perros-guirec-perros-guirec.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -49,6 +55,7 @@
   <url><loc>https://paralliance.org/clubs/ajcm-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ajiq-de-caen-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/algernon-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/algm-lyon-basket-lyon-7e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/alliance-judo-besancon-est-roche-les-beauprez.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/alliance-natation-besancon-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/alm-evreux-tennis-padel-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -57,12 +64,16 @@
   <url><loc>https://paralliance.org/clubs/ami-tomake-la-ciotat.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/amicale-athletisme-du-roumois-routot.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/amicale-des-sourds-section-sportive-de-caen-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/amicale-laique-de-caluire-caluire-et-cuire.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/amicale-laique-de-saint-michel-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/amicale-laique-de-vaise-et-de-serin-lyon-9e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/amicale-laique-venissieux-parilly-basket-venissieux.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/amicale-pongiste-de-pacy-menilles-pacy-sur-eure.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/amicale-pongiste-ouistreham-ouistreham.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/amicale-pongiste-ouistreham-ouistreham.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/amisplegiques-auzeville-tolosane.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ams-saint-martin-elan-sport-etrepagny.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/andelle-natation-romilly-sur-andelle.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/ants-lyon-7e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aones-canoe-kayak-louviers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aones-club-aviron-poses.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aots-rugby-as-omnisports-thuit-signol-rugby-le-thuit-signol.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -73,6 +84,8 @@
   <url><loc>https://paralliance.org/clubs/apt-les-momes-riders-romilly-sur-andelle.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aqs-touques-qi-gong-sante-touques.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aqua-baby-club-ebroicien-abce-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/aqua-synchro-lyon-lyon-9e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/aquatic-club-fidesien-sainte-foy-les-lyon.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/arc-club-rislois-pont-audemer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/archer-des-3-lucs-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/archer-pennois-les-pennes-mirabeau.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -106,11 +119,11 @@
   <url><loc>https://paralliance.org/clubs/aslaa-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aslr-association-sportive-la-ronce-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-caen-aeroclub-cote-de-nacre-carpiquet.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/asptt-caen-basketball-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/asptt-caen-football-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/asptt-caen-basketball-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/asptt-caen-football-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-caen-omnisports-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-caen-tennis-de-table-herouville-saint-clair.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/asptt-caen-volleyball-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/asptt-caen-volleyball-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-lannion-escrime-lannion.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-lannion-judo-lannion.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-lannion-volley-ball-lannion.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -119,6 +132,8 @@
   <url><loc>https://paralliance.org/clubs/asptt-saint-brieuc-plerin-le-sepulcre.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-toulouse-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asptt-volley-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/ass-sportive-villeurb-est-lyon-basket-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-angevine-du-sport-adapte-angers.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-cap-decouverte-binic-etables-sur-mer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-cap-sport-salon-de-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-cyclotourisme-de-pt-audemer-pont-audemer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -126,28 +141,38 @@
   <url><loc>https://paralliance.org/clubs/association-des-jeux-de-l-esprit-plan-de-cuques.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-des-sourds-de-tolosa-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-du-football-virois-vire-normandie.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-handisport-orleanais-orleans.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-hippique-de-vire-et-du-bocage-vire-normandie.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-la-passerelle-sport-adapte-caluire-et-cuire.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-loudeacienne-sport-adapte-loudeac.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-nautique-omnisport-istreenne-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-pennoise-de-randonnee-la-penne-sur-huveaune.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-phenix-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sport-adapte-briochine-saint-brieuc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-sport-fitness-lyon-3e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sport-mouvement-ensemble-93-pantin.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sportice-de-cavaliers-du-club-hippique-d-aix-marseille-asc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sportive-begarroise-asb-begard.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/association-sportive-de-bondy-bondy.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-sportive-casa-sports-lyon-lyon-3e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-sportive-de-bondy-bondy.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sportive-d-halterophilie-et-musculation-de-giberville-gibe.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sportive-et-culturelle-des-sourds-de-saint-brieuc-saint-br.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-sportive-lyon-caluire-handball-caluire-et-cuire.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sportive-midi-toulousain-handisport-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/association-sportive-universitaire-lyonnaise-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/association-sports-et-loisirs-du-chemin-vert-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/asspa-arles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/astt-miramas.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/astt-dozuleenne-dozule.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/asul-lyon-volley-ball-lyon-7e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/asul-vaulx-en-velin-aviron-vaulx-en-velin.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/asvel-omnisports-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ateliers-choregraphiques-evreux-eja-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/athletic-club-chatenois-chatenois-les-forges.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/athletic-club-miramas-miramas.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/athletic-club-penvenan-judo-penvenan.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/athletic-club-phoceen-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/athletic-club-tassin-tassin-la-demi-lune.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/athletic-vallee-d-avre-ava-la-madeleine-de-nonancourt.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/athletique-sambo-combat-marseille-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/attitude-taekwondo-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -156,28 +181,35 @@
   <url><loc>https://paralliance.org/clubs/auc-badminton-aix-en-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/auc-sport-sante-aix-en-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/authentik-aventure-romilly-sur-andelle.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-basketball-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-basketball-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-echecs-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-judo-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-karate-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-tennis-de-table-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-karate-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/avant-garde-caennaise-tennis-de-table-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/avenir-de-vernon-vernon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/avenir-ebroicien-gymnastique-ae-gym-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aventur-eure-ecardenville-sur-eure.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/aviron-caen-calvados-mondeville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/avinkha-club-d-echecs-vaulx-en-velin.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/aviron-caen-calvados-mondeville.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aviron-club-andelys-tosny-tosny.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/aviron-club-orleans-olivet-olivet.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/aviron-decinois-decines-charpieu.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/aviron-pontissalien-malbuisson.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/azura-club-silencieux-acs-de-marseille-les-pennes-mirabeau.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/badminton-club-d-oullins-oullins-pierre-benite.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/badminton-club-de-castanet-castanet-tolosan.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/badminton-club-de-fos-sur-mer-fos-sur-mer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/badminton-club-du-pays-d-auge-dozuleen-dozule.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/badminton-club-de-lyon-lyon-9e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/badminton-club-du-pays-d-auge-dozuleen-dozule.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/badminton-club-salonais-salon-de-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/badminton-ic-pordic.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/badmint-ifs-ifs.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/baila-corazon-lyon-6e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/balise25-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/base-departementale-de-plein-air-de-guerledan-guerledan.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/base-nautique-et-nature-de-tremargat-tremargat.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/basket-club-archepontain-pont-de-l-arche.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/basket-cro-lyon-lyon-1er.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/baskin-arc-et-senans.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/bayeux-bessin-judo-bayeux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/bayeux-football-club-bayeux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -195,12 +227,13 @@
   <url><loc>https://paralliance.org/clubs/billard-club-la-saussaye-la-saussaye.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/bim-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/bmc-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/bondy-academie-sport-escrime-bondy.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/bondy-academie-sport-escrime-bondy.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/bondy-cecifoot-club-bondy.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/boule-venoisienne-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/boules-bernayennes-bernay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/boxe-evenements-13-la-fare-les-oliviers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/boxing-club-vernolien-verneuil-d-avre-et-d-iton.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/boxing-lyon-united-lyon-3e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/breizh-petanque-22-ploufragan.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ca-gombertois-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ca-lisieux-handball-lisieux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -210,14 +243,16 @@
   <url><loc>https://paralliance.org/clubs/caen-basket-handisport-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/caen-calvados-halterophilie-musculation-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/caen-handball-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/caen-judo-gym-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/caen-sud-basket-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/caen-judo-gym-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/caen-sud-basket-caen.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/caen-tennis-de-table-club-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/caen-volley-ball-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/caen-yacht-club-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/canalhandivelo-pontivy.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/canoe-kayac-decines-meyzieu-decines-charpieu.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/capa-tennis-de-table-pont-audemer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/cap-sport-herouville-saint-clair.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/cap-sport-herouville-saint-clair.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/cargo-lyon-7e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/casdn-equitation-vernon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cassis-echecs-cassis.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cassis-rugby-club-cassis.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -234,7 +269,8 @@
   <url><loc>https://paralliance.org/clubs/cdsc13-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/centre-culturel-danjoutin-danjoutin.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/centre-d-equitation-dung-dung.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/centre-de-loisirs-nautiques-d-asnelles-asnelles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/centre-de-loisirs-nautiques-d-asnelles-asnelles.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/centre-de-recherche-et-d-education-sport-et-sante-venissieux.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/centre-equestre-de-la-vallee-des-bois-nonancourt.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/centre-equestre-de-verneuil-sur-avre-verneuil-sur-avre.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/centre-equestre-departemental-ucpa-georges-valbon-la-courneuve.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -253,9 +289,11 @@
   <url><loc>https://paralliance.org/clubs/cercle-de-judo-de-vesoul-vesoul.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cercle-de-l-epee-saint-brieuc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cercle-de-voile-de-malbuisson-malbuisson.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/cercle-laique-antoine-remond-lyon-6e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cercle-nautique-de-rognac-rognac.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cercle-sportif-marseille-tennis-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/chance-pour-tous-hericourt.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/chassieu-basket-chassieu.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cl-colombelles-handball-colombelles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/clip-eure-la-bonneville-sur-iton.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-aeromodeliste-region-etang-de-berre-careb-berre-l-etang.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -267,16 +305,18 @@
   <url><loc>https://paralliance.org/clubs/club-d-escrime-muretain-muret.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-de-boxe-francaise-savate-fabre-evrecy.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-de-judo-csadn-vernon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/club-de-l-esperance-angers.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-de-tir-d-orbec-la-vespiere-orbec.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-de-tir-salonais-salon-de-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-de-tir-sportif-d-herouville-herouville-saint-clair.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/club-de-tir-sportif-lisieux-lexovii-tir-lisieux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/club-de-tir-sportif-lisieux-lexovii-tir-lisieux.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-des-falaises-plouha.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-des-nageurs-guingampais-guingamp.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-des-sports-de-glace-d-armor-langueux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/club-d-arts-martiaux-de-vassy-rully-vassy-valdalliere.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/club-d-arts-martiaux-de-vassy-rully-vassy-valdalliere.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-d-escalade-des-portes-de-l-eure-cepe-tourny.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-handi-loisirs-et-handisport-d-aubervilliers-aubervilliers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/club-handisport-adapte-de-la-metropole-orleanaise-orleans.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-handisport-aixois-aix-en-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-loudeac-handisport-loudeac.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-marignanais-des-sports-d-aviron-marignane.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -287,11 +327,13 @@
   <url><loc>https://paralliance.org/clubs/club-occitan-des-sports-subaquatiques-balma.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-omnisport-chateaurenard-chateaurenard.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-omnisport-de-lanrodec-lanrodec.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/club-omnisport-de-lyon-lyon-5e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-pugiliste-bisontin-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-sportif-arkema-serquigny.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-sportif-association-valentin-hauy-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/club-sportif-des-sourds-de-nantes-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/club-sportif-montolivet-bois-luzy-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/club-sportif-noisy-le-grand-tennis-de-table-noisy-le-grand.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/club-sportif-noisy-le-grand-tennis-de-table-noisy-le-grand.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/co-berre-xv-berre-l-etang.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/collectif-porte-avions-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/colomiers-handisport-colomiers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -301,6 +343,7 @@
   <url><loc>https://paralliance.org/clubs/comite-departemental-sport-adapte-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/comite-fsgt-13-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/comite-ufolep-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/comme-les-autres-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/compagnie-archers-alm-evreux-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/compagnie-des-archers-de-pordic-pordic.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/compagnie-des-archers-du-penthievre-lamballe-armor.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -317,6 +360,8 @@
   <url><loc>https://paralliance.org/clubs/cyclo-conchois-sainte-marthe.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/cyclo-d-oye-loisir-valdoie.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/de-barros-karate-club-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/decines-handball-club-decines-charpieu.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/decines-rugby-league-decines-charpieu.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/defi-sport-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/dinhandisport-dinan.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/district-boules-lyonnaises-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -341,13 +386,15 @@
   <url><loc>https://paralliance.org/clubs/educal-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ejt-csa-andelys-judo-club-les-andelys.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/elan-pontarlier.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/elan-sport-adapte-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/elancia-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/elisea-pirey.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ems-athletisme-gaillon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/emulation-nautique-de-vernon-vernon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/ensemble-pour-le-sport-handisport-44-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ensemble-sport-carpiquet.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/entente-athletique-mondeville-herouville-mondeville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/entente-gabinienne-de-judo-gagny.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/entente-athletique-mondeville-herouville-mondeville.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/entente-gabinienne-de-judo-gagny.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/entente-nautique-caennaise-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/entre-temps-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/epave-club-de-plongee-saint-brieuc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -363,7 +410,7 @@
   <url><loc>https://paralliance.org/clubs/es-falaise-judo-falaise.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/es-falaise-petanque-falaise.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/es-falaise-sports-boules-falaise.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/es-falaise-tennis-de-table-falaise.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/es-falaise-tennis-de-table-falaise.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/es-fos-fos-sur-mer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/es-troarn-handball-troarn.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/escalade-neubourg-club-nec-le-neubourg.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -381,9 +428,11 @@
   <url><loc>https://paralliance.org/clubs/evreux-judo-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/evreux-savate-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/extravadanse-aubagne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/fc-lyon-lyon-8e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/fc-rousset-svo-rousset.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/fc-saint-mitre-les-remparts-saint-mitre-les-remparts.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/fc-septemes-consolat-septemes-les-vallons.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/fc-vaulx-en-velin-vaulx-en-velin.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/fcse-football-club-seine-eure-pont-de-l-arche-et-louviers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/fcsmo-montbeliard.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/fepg-guichainville-guichainville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -396,22 +445,30 @@
   <url><loc>https://paralliance.org/clubs/football-club-d-hericourt-hericourt.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/football-club-gisors-vexin-normand-gisors.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/france-avc-22-plerin.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/francheville-basket-francheville.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/francs-archers-de-saint-sebastien-de-morsent-saint-sebastien-de-morsen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/frehel-multisports-frehel.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/galathea-club-saint-gaudens.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/galathee-club-de-muret-muret.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/generation-sport-academie-pierrefitte-pierrefitte-sur-seine.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/generation-sport-academie-pierrefitte-pierrefitte-sur-seine.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/gisors-athletic-club-gisors.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/golf-club-de-lery-poses-poses.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/golf-de-caen-la-mer-ecole-handi-kids-bieville-beuville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/gones-basket-fauteuil-academy-lyon-8e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/gp-circuit-lamballe-lamballe-armor.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/grand-ouest-association-lyonnaise-champagne-au-mont-d-or.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/grc-salon-grans-salon-de-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/groupe-athletique-haut-saonois-vesoul.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/groupe-athletique-noisy-le-grand-noisy-le-grand.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/groupe-athletique-noisy-le-grand-noisy-le-grand.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/groupe-speleo-de-dardilly-dardilly.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/gueules-d-amour-production-venissieux.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/gym-alsl-lambesc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/gym-lyon-metropole-chassieu-lyon-lyon-6e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/gymargot-domicile-meyzieu.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/gymnastique-volontaire-de-brionne-brionne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/halterophile-club-marseille-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/hand-ensemble-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/handball-club-de-lyon-lyon-9e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handball-club-noiseen-noisy-le-sec.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handball-cote-bleue-ensues-la-redonne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handball-pelemois-saint-nicolas-du-pelem.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -420,13 +477,17 @@
   <url><loc>https://paralliance.org/clubs/handi-capable-bavans.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handi-evasion-mpt-bavans-bavans.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handi-bike-nature-bolandoz.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/handiboost-bougezcommevousetes-villars-les-dombes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/handicap-education-inclusion-innovation-vaulx-en-velin.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handicap-et-solidarite-au-mene-le-mene.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handicap-inclusion-performance-la-salle-les-alpes.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handicomtois-seloncourt.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handipetanque-moteur-et-visuel-oiselay-et-grachaux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handisport-2-0-bobigny.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handisport-actions-le-val-d-hazey.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/handisport-angers-angers.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handisport-loisirs-aucaleuc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/handisport-lyonnais-lyon-8e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handisport-marseille-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handisport-pontarlier-maiche-morteau-pontarlier.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/handisport-salisien-salies-du-salat.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -440,7 +501,9 @@
   <url><loc>https://paralliance.org/clubs/ice-skating-club-louviers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ideehaut-mesnay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/iks-karate-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/initiactiv-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/innae-taekwondo-les-andelys.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/inter-omnisports-des-sourds-d-orleans-orleans.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/istres-sport-tennis-istres.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/istres-sport-vtt-istres.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/istres-sports-athletisme-istres.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -448,7 +511,8 @@
   <url><loc>https://paralliance.org/clubs/jae-escrime-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/jazzclaq-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/jeanne-d-arc-maiche.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/jeanne-d-arc-de-drancy-natation-drancy.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/jeanne-d-arc-alouettes-caluire-caluire-et-cuire.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/jeanne-d-arc-de-drancy-natation-drancy.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/jeunesse-athletique-de-montrouge-jam-paris.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/jeunesse-sportive-cugnaux-omnisports-cugnaux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/joyfull-dancer-miramas.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -456,6 +520,7 @@
   <url><loc>https://paralliance.org/clubs/judo-club-bernay-bernay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/judo-club-champagney-champagney.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/judo-club-champagnolais-champagnole.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/judo-club-de-l-est-lyonnais-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/judo-club-de-la-saussaye-la-saussaye.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/judo-club-de-lieurey-lieurey.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/judo-club-de-saint-sebastien-de-morsent-saint-sebastien-de-morsent.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -478,6 +543,8 @@
   <url><loc>https://paralliance.org/clubs/kung-fu-le-neubourg-kfln-le-neubourg.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/kyokushin-karate-dojo-kkd-vitrolles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/l-ecurie-de-vernon-vernon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/l-etape-solognote-orleans.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/l-ilot-familles-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/l-union-club-athletique-l-union.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/la-boule-de-l-elysee-salon-de-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/la-boule-etoilee-des-sourds-de-ramonville-ramonville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -485,6 +552,7 @@
   <url><loc>https://paralliance.org/clubs/la-ciotat-longe-cote-la-ciotat.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/la-cita-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/la-decoche-bisontine-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/la-degaine-escalade-et-montagne-asmc-dardilly.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/la-fleche-arbouanaise-arbouans.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/la-fleche-boroillotte-valentigney.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/la-francaise-de-besancon-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -524,7 +592,8 @@
   <url><loc>https://paralliance.org/clubs/les-goelands-d-armor-plerin.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/les-guidons-a-crampons-aubevoye.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/les-lions-st-marcel-triathlon-saint-marcel.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/les-montes-en-l-air-giberville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/les-loups-d-angers-tennis-de-table-le-plessis-grammoire.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/les-montes-en-l-air-giberville.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/les-pieds-tanques-miramas-miramas.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/les-pingouins-castins-saint-cast-le-guildo.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/les-rameurs-de-l-olivier-istres.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -537,6 +606,12 @@
   <url><loc>https://paralliance.org/clubs/louviers-volley-ball-louviers.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ludens-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/luynes-sport-luynes.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/lyon-athletisme-lyon-7e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/lyon-basket-fauteuil-lyon-3e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/lyon-gr-lyon-9e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/lyon-la-duchere-lyon-9e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/lyon-natation-metropole-lyon-6e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/lyon-olympique-universitaire-lou-rugby-lyon-7e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/l-avi-sourire-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/l-extraordinaire-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/maison-peche-et-nature-des-cotes-d-armor-broons.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -557,31 +632,38 @@
   <url><loc>https://paralliance.org/clubs/mjc-salon-salon-de-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/mjc-section-speleologie-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/model-air-club-d-aix-en-provence-aix-en-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/monqui-pong-curis-au-mont-d-or.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/montreuil-basket-93-montreuil.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/moveos-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/muay-thai-lumpini-saint-denis.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/multiploufs-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/nantes-foot-fauteuil-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/nantes-sports-de-glace-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/natation-vesoul-noidans-noidans-les-vesoul.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/nautic-club-arlesien-arles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/neubourg-quittebeuf-tennis-de-table-le-neubourg.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/neuilly-sur-marne-athletisme-neuilly-sur-marne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/neuville-sports-neuville-aux-bois.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ninja-park-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/nord-franche-comte-handball-pont-de-roide.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/norm-handis-sport-herouville-saint-clair.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/office-cantonal-des-sports-de-montauban-de-bretagne-boisgervilly.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/office-des-sports-d-arles-arles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/olympic-club-des-sourd-de-villeurbanne-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/olympic-gym-gardanne-gardanne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/olympic-taekwondo-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/om-athletisme-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/oms-aubagnais-aubagne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/oms-istres-istres.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/one-leg-for-all-fuveau.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/orleans-metropole-academie-orleans.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/oustaou-esterel-aubagne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/pagaie-passion-val-de-reuil-val-de-reuil.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/palente-besancon-handball-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/paris-basket-fauteuil-paris.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/paris-universite-club-puc-paris.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/passe-muraille-cirque-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/patronage-laique-d-oullins-oullins-pierre-benite.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/pays-d-aubagne-handball-aubagne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/pentathlon-pennois-les-pennes-mirabeau.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/penthievre-handisport-lamballe-armor.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -607,10 +689,14 @@
   <url><loc>https://paralliance.org/clubs/pont-d-ouilly-loisirs-pont-d-ouilly.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/provence-sport-taekwondo-salon-de-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/racing-besancon-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/racing-club-bron-decines-natation-bron.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/racing-club-mermoz-lyon-8e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/racing-club-nantais-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/resine-et-silex-alizay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ride-n-roll-sausset-les-pins.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/ritmo-de-capoeira-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/robertgritkartinghandisport-martigues.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/rollers-bongo-nantes-nantes.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/rowing-club-de-marseille-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/rugby-club-chateaurenardais-chateaurenard.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/rugby-club-de-baume-les-dames-baume-les-dames.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -626,12 +712,15 @@
   <url><loc>https://paralliance.org/clubs/saint-martin-xiii-saint-martin-de-crau.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/saint-sebastien-football-club-saint-sebastien-de-morsent.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/saint-brieuc-handisport-saint-brieuc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/saint-denis-emotion-saint-denis.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/saint-denis-emotion-saint-denis.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/saint-denis-tennis-de-table-93-saint-denis.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/saint-denis-union-sports-verts-sentiers-saint-denis.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/saint-marcel-vernon-handball-vernon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/saint-ouen-handibasket-saint-ouen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/saint-priest-rugby-saint-priest.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/sainte-foy-echecs-sainte-foy-les-lyon.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sante-mouvement-equilibre-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/saone-mont-d-or-football-club-saint-germain-au-mont-d-or.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/saone-tennis-club-saone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sauvegarde-13-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sauvegarde-de-besancon-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -639,11 +728,13 @@
   <url><loc>https://paralliance.org/clubs/sc-bernay-athletisme-bernay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sc-bernay-tir-bernay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sc-tennis-club-bernay-bernay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/sco-escrime-angers-angers.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/second-souffle-hericourt.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/section-athletisme-toulouse-universite-club-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/section-sportive-torball-costarmoricain-lamballe-armor.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/section-tandem-des-auxiliaires-des-aveugles-staarp-montreuil.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/shuc-centre-equestre-de-caen-saint-contest.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/section-tandem-des-auxiliaires-des-aveugles-staarp-montreuil.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/sens-et-savoirs-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/shuc-centre-equestre-de-caen-saint-contest.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/siam-boxing-verneuil-d-avre-et-d-iton.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/siel-bleu-dammartin-martin.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sinaps-handisport-belfort.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -667,6 +758,7 @@
   <url><loc>https://paralliance.org/clubs/spn-vernon-ck-vernon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sport-et-signes-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sport-nautique-de-st-quay-portrieux-saint-quay-portrieux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/sport-s-handifferences-vaulx-en-velin.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sport-sante-saint-vit-saint-vit.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sport-union-divais-dives-sur-mer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/sportera-handicap-les-rousses.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -682,7 +774,7 @@
   <url><loc>https://paralliance.org/clubs/sports-loisirs-culture-miramas.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/stade-briochin-saint-brieuc.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/stade-caennais-rugby-club-caen.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/stade-de-l-est-pavillonnais-tennis-de-table-les-pavillons-sous-bois.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/stade-de-l-est-pavillonnais-tennis-de-table-les-pavillons-sous-bois.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/stade-toulousain-athletisme-cugnaux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/stade-toulousain-rugby-handisport-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/stade-vernolien-basket-saint-christophe-sur-avre.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -694,12 +786,14 @@
   <url><loc>https://paralliance.org/clubs/studio-dance-attitude-evreux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/subaquatic-club-guingampais-guingamp.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/surfing-locquirec-locquirec.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/tandem-club-rhodanien-lyon-6e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tc-pennes-mirabeau-les-pennes-mirabeau.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tc-sochaux-sochaux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/team-epee-decines-decines-charpieu.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/teamcolas-pugil-istres-boxing-club-istres.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-chateau-gombert-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-conde-sur-noireau-conde-en-normandie.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/tennis-club-courseulles-bernieres-sur-mer-courseulles-sur-mer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/tennis-club-courseulles-bernieres-sur-mer-courseulles-sur-mer.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-de-carry-le-rouet-carry-le-rouet.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-de-gisors-gisors.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-de-loudeac-loudeac.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -715,6 +809,7 @@
   <url><loc>https://paralliance.org/clubs/tennis-club-handi-montmorency-herouville-saint-clair.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-la-fourragere-marseille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-miramas-miramas.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/tennis-club-municipal-5eme-lyon-5e.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-pays-d-ouche-tpo-conches-en-ouche.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-roquefort-la-bedoule-roquefort-la-bedoule.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tennis-club-velaux-velaux.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -742,7 +837,7 @@
   <url><loc>https://paralliance.org/clubs/tournefeuille-altitude-grimpe-tag-tournefeuille.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tregor-goelo-athletisme-guingamp.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/tregor-sarbacane-guerlesquin.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/tremblay-athletic-club-section-handisport-tremblay-en-france.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/tremblay-athletic-club-section-handisport-tremblay-en-france.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/twirling-baton-beaumont-le-roger-beaumont-le-roger.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/unadev-toulouse-toulouse.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/une-chance-pour-tous-hericourt.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -750,6 +845,7 @@
   <url><loc>https://paralliance.org/clubs/union-cycliste-de-luynes-aix-en-provence.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/union-sportive-d-etrepagny-section-tennis-etrepagny.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/union-sportive-de-rugles-rugles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/union-sportive-orleanaise-tennis-de-table-orleans.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/union-sportive-ramonville-football-ramonville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/univers-montagne-esprit-nature-ramonville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/unss-des-bouches-du-rhone-gardanne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
@@ -763,25 +859,30 @@
   <url><loc>https://paralliance.org/clubs/uso-mondeville-tennis-mondeville.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/usr-tennis-rugles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/utopiarbre-tregastel.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/vacances-handicap-atout-sportif-international-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/val-de-reuil-athletic-club-val-de-reuil.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/val-de-reuil-lutte-olympique-incarville-vdr.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/val-de-reuil-tennis-squash-val-de-reuil.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/val-form-villers-le-lac.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/vaulx-en-velin-natation-vaulx-en-velin.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/velo-club-de-pont-audemer-vcpa-pont-audemer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/velo-club-fosseen-fos-sur-mer.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/velo-club-la-pomme-bouches-du-rhone.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/velo-club-paceen-pacy-sur-eure.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/velo-loisirs-nancray-nancray.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/venelles-basket-club-venelles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/venissieux-boxe-francaise-venissieux.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/vertical-cite-bernay.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/village-equestre-de-conches-conches-en-ouche.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
-  <url><loc>https://paralliance.org/clubs/villemomble-sports-escrime-villemomble.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/villemomble-sports-escrime-villemomble.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/villeurbanne-handball-association-villeurbanne.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/vis-ton-sport-fleury-sur-orne.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/vitrolles-badminton-vitrolles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/voiles-au-large-marseille-la-ciotat.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/voir-ensemble-besancon.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/vol-libre-mont-d-or-remoray.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/volley-ball-arlesien-arles.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://paralliance.org/clubs/volley-val-de-saone-montanay.html</loc><lastmod>2026-10-24</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/waterform-montbeliard.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/yoga-pour-tous-amancey.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>
   <url><loc>https://paralliance.org/clubs/yole-27-poses.html</loc><lastmod>2026-10-23</lastmod><priority>0.6</priority></url>

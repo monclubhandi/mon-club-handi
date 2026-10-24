@@ -3,6 +3,7 @@
 Un lien est signalé quand le site ne répond plus, renvoie une erreur (404…), ou affiche un contenu suspect :
 un nom de domaine abandonné est souvent racheté par un site de casino ou de paris en ligne.
 Le fichier est réécrit à chaque passage ; il est vide de signalements quand tout va bien.
+Les pages Facebook, Instagram et HelloAsso ne sont pas contrôlées : elles bloquent les robots (fausses alertes).
 
 Utilisation : python3 scripts/verifier_liens.py
 """
@@ -12,6 +13,7 @@ import html
 import json
 import os
 import re
+import urllib.parse
 import urllib.request
 
 from generer_pages import SUPABASE_KEY, SUPABASE_URL
@@ -32,8 +34,15 @@ def clubs():
             return [c for c in lignes if (c.get("site") or "").strip()]
 
 
+# Ces sites bloquent les robots : ils répondent « erreur » même quand la page existe. On ne peut pas les contrôler ainsi.
+NON_CONTROLABLES = ("facebook.com", "instagram.com", "helloasso.com", "linkedin.com", "x.com", "twitter.com")
+
+
 def verifier(site):
     url = site if site.startswith("http") else "https://" + site
+    domaine = urllib.parse.urlsplit(url).hostname or ""
+    if any(domaine == d or domaine.endswith("." + d) for d in NON_CONTROLABLES):
+        return None
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Paralliance, verification des liens; contact@paralliance.org)"})
     try:
         with urllib.request.urlopen(req, timeout=25) as r:

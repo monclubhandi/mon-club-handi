@@ -336,6 +336,9 @@
   .grabber { width: 2.75rem; height: .3rem; border-radius: 999px; background: var(--line); margin: 0 auto .6rem; }
   .sheet-title { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
   .sheet-title h2 { margin: 0; font-size: 1.25rem; }
+  .legal h3 { margin: 1.1rem 0 .3rem; font-size: 1rem; }
+  .legal p { margin: 0 0 .6rem; line-height: 1.5; }
+  .legal-date, .fine .legal-link { color: var(--muted); }
   .sheet-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 0 1rem 1rem; }
   .sheet-foot { flex: none; display: flex; gap: .6rem; padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: var(--panel); }
   .group { margin: 0 0 1.4rem; padding: 0; border: 0; }
@@ -755,7 +758,7 @@
           <div><h4>Sources</h4><ul><li><a href="https://www.handiguide.sports.gouv.fr/" target="_blank" rel="noopener">Handiguide des sports</a></li><li><a href="https://www.data.gouv.fr/datasets/annuaire-des-associations-et-clubs-proposant-une-activite-parasportive" target="_blank" rel="noopener">Département du Doubs, plateforme Oz (ODbL)</a></li><li><a href="https://cotesdarmor.fr/sites/default/files/2021-03/Guide_Spt_Handicaps_2019_2021_BATWeb.pdf" target="_blank" rel="noopener">Département des Côtes-d'Armor (guide 2019-2021)</a></li><li>Comité Handisport de la Haute-Garonne (annuaire 2025-2026)</li><li>CDOS de l'Eure (clubs labellisés, 2025)</li><li>Clubs labellisés Sport et Handicap des Bouches-du-Rhône</li><li>CDOS du Calvados (annuaire Sport &amp; Handicap 2025)</li><li>CDOS de la Savoie (livret Sport et handicap 2025-2026)</li><li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></li><li><a href="https://adresse.data.gouv.fr/" target="_blank" rel="noopener">Base Adresse Nationale</a></li></ul></div>
           <div class="foot-deps"><h4>Clubs par département</h4><ul><!-- departements:debut --><!-- departements:fin --></ul></div>
         </div>
-        <p class="fine"><span>© <span id="year">2026</span> Paralliance · Projet bénévole</span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
+        <p class="fine"><span>© <span id="year">2026</span> Paralliance · Projet bénévole · <a class="legal-link" href="#mentions">Mentions légales et confidentialité</a></span><span>Infos vérifiées à la date indiquée sur chaque fiche. Appelle le club avant ta première séance.</span></p>
       </div>
     </footer>
   </div>
@@ -822,6 +825,34 @@
 </dialog>
 
 <!-- Inscrire / proposer un club -->
+<dialog class="sheet" id="legal" aria-labelledby="legalTitle">
+  <div class="sheet-head">
+    <div class="grabber"></div>
+    <div class="sheet-title">
+      <h2 id="legalTitle" tabindex="-1" autofocus>Mentions légales et confidentialité</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Fermer"><svg class="icon"><use href="#i-close"/></svg></button>
+    </div>
+  </div>
+  <div class="sheet-body legal">
+    <h3>Éditeur</h3>
+    <p>Paralliance est un projet bénévole et non commercial, édité par un particulier à titre non professionnel. Conformément à l'article 6, III, 2 de la loi n° 2004-575 du 21 juin 2004 (LCEN), l'éditeur a choisi de rester anonyme ; ses coordonnées sont connues de l'hébergeur. Contact : <a class="mail-contact" href="#">contact@paralliance.org</a>.</p>
+    <h3>Hébergement</h3>
+    <p>Site : GitHub Pages, GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Base de données des clubs : Supabase, Inc.</p>
+    <h3>Informations sur les clubs</h3>
+    <p>Les fiches sont établies à partir de sources publiques (annuaires et listes publiés par des collectivités, des services de l'État, des comités sportifs et des données ouvertes), citées en bas de page (rubrique « Sources »), et des propositions envoyées par les visiteurs. Elles sont données à titre indicatif, sans garantie d'exactitude ni d'exhaustivité : appelle toujours le club avant de te déplacer. Paralliance ne peut être tenu responsable d'une information inexacte, d'un changement non signalé ou du contenu des sites externes vers lesquels il renvoie.</p>
+    <p><strong>Tu gères un club ou une fiche te concerne ?</strong> Tu peux demander à tout moment la correction ou le retrait d'une information en écrivant à <a class="mail-contact" href="#">contact@paralliance.org</a>. La demande est traitée dans un délai d'un mois au plus.</p>
+    <h3>Données personnelles</h3>
+    <p>Paralliance ne reprend pas le nom des personnes indiqué dans ses sources, ni leurs adresses mail personnelles. Certaines fiches affichent le téléphone de contact publié par la source, pour permettre de joindre le club (intérêt légitime : faciliter l'accès au sport des personnes en situation de handicap).</p>
+    <p>Quand tu proposes un club, les informations saisies (et ton adresse mail si tu la donnes) sont enregistrées dans la base de données et transmises par mail à l'éditeur via le service FormSubmit, uniquement pour traiter ta proposition. Quand tu signales une erreur, ton message arrive simplement par mail. Ces données ne sont ni vendues ni cédées, et sont supprimées au plus tard 12 mois après traitement.</p>
+    <p>Conformément au RGPD et à la loi Informatique et Libertés, tu disposes d'un droit d'accès, de rectification, d'effacement et d'opposition sur les données te concernant : écris à <a class="mail-contact" href="#">contact@paralliance.org</a>. Tu peux aussi adresser une réclamation à la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
+    <h3>Cookies et mesure d'audience</h3>
+    <p>Paralliance n'utilise ni cookie publicitaire, ni outil de mesure d'audience, ni publicité. Tes favoris et tes préférences sont enregistrés uniquement sur ton appareil. La position utilisée par « Autour de moi » n'est demandée que si tu cliques sur ce bouton et n'est jamais enregistrée. Pour fonctionner, le site charge des ressources de services tiers (police de caractères Google Fonts, fonds de carte OpenStreetMap, bibliothèques cdnjs, Géoplateforme de l'IGN et Base Adresse Nationale pour situer les clubs), qui reçoivent ton adresse IP comme pour toute page web. Les dons passent par Buy Me a Coffee, selon ses propres conditions.</p>
+    <h3>Propriété intellectuelle</h3>
+    <p>Le design et le code du site appartiennent à l'éditeur. Les informations sur les clubs restent la propriété de leurs sources ; les données du Département du Doubs sont réutilisées sous licence ODbL.</p>
+    <p class="legal-date">Dernière mise à jour : octobre 2026.</p>
+  </div>
+</dialog>
+
 <dialog class="sheet" id="propose" aria-labelledby="proposeTitle">
   <div class="sheet-head">
     <div class="grabber"></div>
@@ -1563,6 +1594,8 @@ function bind() {
     a.addEventListener("click", e => { e.preventDefault(); openPropose(); });
   });
   document.querySelectorAll(".contact, #contactLink").forEach(a => a.href = contact);
+  document.querySelectorAll(".mail-contact").forEach(a => a.href = "mailto:" + CONTACT_EMAIL);
+  document.querySelectorAll(".legal-link").forEach(a => a.addEventListener("click", e => { e.preventDefault(); openSheet($("legal"), "#mentions"); }));
   $("year").textContent = new Date().getFullYear();
   if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) $("installCard").hidden = true;
 
@@ -1658,6 +1691,7 @@ async function start() {
   const m = /^#club-(.+)$/.exec(location.hash);
   if (m && byId(m[1])) { fillDetail(byId(m[1])); $("detail").showModal(); }
   else if (location.hash === "#propose") openPropose();   // lien « Inscrire un club » des pages clubs
+  else if (location.hash === "#mentions") openSheet($("legal"));
 
   // Les clubs sans latitude/longitude dans la base sont géocodés, 6 à la fois
   const todo = clubs.filter(c => !c.pos);

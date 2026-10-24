@@ -1,0 +1,28 @@
+# Le 1er de chaque mois : contrôle des liens vers les sites des clubs (voir scripts/verifier_liens.py).
+# Le résultat est dans le fichier LIENS_A_VERIFIER.md à la racine du dépôt.
+name: Vérification des liens des clubs
+
+on:
+  schedule:
+    - cron: "23 5 1 * *"    # le 1er du mois à 5h23 (UTC)
+  workflow_dispatch:        # bouton « Run workflow » pour la lancer à la main
+
+permissions:
+  contents: write           # pour enregistrer LIENS_A_VERIFIER.md
+
+jobs:
+  liens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Contrôler les liens
+        run: python3 scripts/verifier_liens.py
+      - name: Enregistrer le résultat
+        run: |
+          git add LIENS_A_VERIFIER.md
+          if git diff --cached --quiet; then echo "Rien de nouveau"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Contrôle mensuel des liens des clubs"
+          git push

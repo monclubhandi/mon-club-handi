@@ -1,5 +1,0 @@
--- 2 clubs depuis Vérifié sur la page officielle du club (découvert via le répertoire SIRENE) (les clubs déjà présents sont ignorés)
-insert into public.clubs (nom, sport, adresse, code_postal, ville, handicaps, pratique, accessibilite, telephone, email, site, verifie_le, source) values
-  ('SASEP – Sport Adapté du Sud-Est de Paris', 'natation', 'Piscine de la Butte-aux-Cailles', '75013', 'Paris 13e', 'mental', 'sport adapte', 'Jeunes de 6 à 21 ans, encadrés par des psychomotriciens et des bénévoles', '07 83 90 56 62', 'associationsasep@gmail.com', 'https://www.jeveuxaider.gouv.fr/organisations/18654-sasep-sport-adapte-du-sud-est-de-paris', '2026-10-24', 'Vérifié sur la page officielle du club (découvert via le répertoire SIRENE)'),
-  ('Club Sportif des Sourds-Muets de Paris – Football', 'football', null, '75019', 'Paris 19e', 'auditif', 'handisport', null, null, null, 'https://www.helloasso.com/associations/club-sportif-des-sourds-muets-de-paris-section-football', '2026-10-24', 'Vérifié sur la page officielle du club (découvert via le répertoire SIRENE)')
-on conflict ((regexp_replace(lower(nom), '[^a-z0-9]', '', 'g')), (coalesce(code_postal, ''))) do nothing;

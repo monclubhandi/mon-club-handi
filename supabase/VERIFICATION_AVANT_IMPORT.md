@@ -41,3 +41,13 @@ Règle : aucun import tant que cette fiche n'est pas remplie pour la source. En 
 | Calvados (annuaire 2025) | CDOS 14 (association) | Aucune mention : accord à demander | avant cette règle |
 | Savoie (livret 2025-2026) | CDOS 73 (association) | Aucune mention : accord à demander avant import | octobre 2026 |
 | Nouvelle-Aquitaine (plateforme régionale) | CROS Nouvelle-Aquitaine (association) | « Reproduction interdite sauf autorisation » : refusé sans accord | octobre 2026 |
+| Lyon (réseau Sport-Santé Adapté Handicap) | Métropole de Lyon (administration) | Licence Ouverte 2.0 sur data.gouv.fr / data.grandlyon.com, fiches de 2025 | octobre 2026 |
+| Côtes-d'Armor (données ouvertes datarmor) | Département | Licence Ouverte 2.0, mais saison 2016/2017 : trop ancien, non importé | octobre 2026 |
+| Bordeaux Métropole (lieux de pratique des APA) | Bordeaux Métropole | Licence Ouverte, mais surtout résidences seniors et sport-santé, sans type de handicap : non importé | octobre 2026 |
+| Paris (réseau des clubs paraccueillants) | Ville de Paris | CGU paris.fr : « toute reproduction est conditionnée à l'accord de la Ville » : non importé | octobre 2026 |
+
+## Méthode « club par club » (sans liste d'un tiers)
+
+On peut ajouter un club trouvé par nous-mêmes si ses informations viennent de son propre site ou de sa page officielle,
+et seulement s'il y dit lui-même accueillir des personnes en situation de handicap. On ne suit jamais la liste d'un tiers
+ligne par ligne (cela revient à copier sa base de données). Google Maps peut aider à découvrir un club, jamais servir de source.
